@@ -1753,11 +1753,21 @@ function DbInvestment() {
                      textAlign: "left",}}
                   >
                     장기 대비 단기 중요도의 변화 정도는 아래와 같습니다.  <br />
-                    <ul>중요도 변화
-                      <ol>
-                        &#183; 양수: 중요도의 순위가 올라간 변수
-                      </ol> 
-                      <ol>
+                    <ul style={{
+                     fontSize: responsiveValue(16, 14, 12),
+                     fontWeight: "510",
+                     textAlign: "left",
+                     paddingLeft:"10px"}}> <span>&#8277; 중요도 변화 설명</span>
+                     <ol style={{
+                     fontSize: responsiveValue(16, 14, 12),
+                     fontWeight: "500",
+                     textAlign: "left",}}>
+                        &#183; 양수: 중요도의 순위가 올라간 변수</ol>
+                   
+                      <ol style={{
+                     fontSize: responsiveValue(16, 14, 12),
+                     fontWeight: "500",
+                     textAlign: "left",}}>
                         &#183; 음수: 중요도의 순위가 내려간 변수
                       </ol>
                     </ul>
