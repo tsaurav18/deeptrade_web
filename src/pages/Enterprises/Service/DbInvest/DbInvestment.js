@@ -651,6 +651,7 @@ function DbInvestment() {
 
       if (res.status === 200) {
         console.log("fetchLimeMacro data", res.data);
+        setLimeMacroPastDate(res.data.data[0].date)
         setLimeMacroResult([res.data.data[0]]);
         setLimeMacroResult2([res.data.data[1]]);
         setLimeMacroAvgVar(res.data.avg_var);
@@ -2181,7 +2182,7 @@ function DbInvestment() {
                       textAlign: "left",
                     }}
                   >
-                    최근 6개월 간 경제 상황을 종합적으로 분석해보았을 때, {limeMacroResult[0].date}{" "}
+                    최근 6개월 간 경제 상황을 종합적으로 분석해보았을 때, {limeMacroPastDate && limeMacroPastDate}{" "}
                     기간과 경제상황이 유사했고, 이 시점에 가장 중요했던 변수는{" "}
                     <span style={{ color: "#990000" }}>
                       {limeMacroSimVar[0]}, {limeMacroSimVar[1]}
