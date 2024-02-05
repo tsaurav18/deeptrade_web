@@ -49,7 +49,7 @@ function Solution(props) {
       <div className="col-12">
      
       <div className="row" style={{}}>
-        <div className="col-12 col-md-4"> 
+        <div className="col-12 col-md-4 xpercent_service_con_margin" > 
         <div
           style={{
             textAlign: "center",
@@ -62,7 +62,7 @@ function Solution(props) {
         >
              Stock Shannon
                   </div>
-        <div className="row" style={{ marginTop: 10, height:"73px" }}>
+        <div className="row" style={{ marginTop: 10, height:"78px" }}>
           <div
             className="col-3"
             style={{ display: "flex", alignItems: "center" }}
@@ -82,16 +82,16 @@ function Solution(props) {
             />
           </div>
         </div>
-     {/* <div
+     <div
                         className="service_button"
                         onClick={() => {
                           window.open("/stockportfolio", "_blank");
                         }}
                       >
                         서비스 상세 보기
-                      </div>  */}
+                      </div> 
         </div>
-          <div className="col-12 col-md-4" style={{}}>
+          <div className="col-12 col-md-4 xpercent_service_con_margin" style={{}}>
           <div
                     className="signal_class"
                     style={{
@@ -105,7 +105,7 @@ function Solution(props) {
                   >
                     EMP Shannon
                   </div>
-            <div className="row" style={{ marginTop: 10 }}>
+            <div className="row" style={{ marginTop: 10,height:"78px" }}>
               <div
                 className="col-3"
                 style={{ display: "flex", alignItems: "center" }}
@@ -130,14 +130,14 @@ function Solution(props) {
                 />
               </div>
             </div>
-        {/* <div
+        <div
                         className="service_button"
                         onClick={() => {
                           window.open("/emp", "_blank");
                         }}
                       >
                         서비스 상세 보기
-                      </div>  */}
+                      </div> 
           </div>
           <div className="col-12 col-md-4">
           <div
@@ -153,7 +153,7 @@ function Solution(props) {
                   >
                     Index Shannon 
                   </div>
-            <div className="row" style={{ marginTop: 10 , }}>
+            <div className="row" style={{ marginTop: 10 ,height:"78px" }}>
               <div
                 className="col-3"
                 style={{ display: "flex", alignItems: "center" }}
@@ -177,14 +177,14 @@ function Solution(props) {
                 />
               </div>
             </div>
-             {/* <div
+             <div
                         className="service_button"
                         onClick={() => {
                           window.open("/riskmanagement", "_blank");
                         }}
                       >
                         서비스 상세 보기
-                      </div>  */}
+                      </div> 
           </div>
         </div>
       </div>

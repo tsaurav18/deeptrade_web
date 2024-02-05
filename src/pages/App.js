@@ -102,8 +102,8 @@ function App() {
       <Mission refProp={missionRef} />
       <What refProp={whatRef} />
       <Technology refProp={technologyRef} />
-      <XPercent refProp={xpercentRef} />
       <Solution refProp={solutionRef} />
+      <XPercent refProp={xpercentRef} />
       <VideoSection />
       {/* <Recruitment /> */}
       <News refProp={newsRef} />

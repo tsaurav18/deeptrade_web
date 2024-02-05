@@ -46,7 +46,7 @@ function XPercent(props) {
               ref={contentOneRef}
             >
               <div className="row">
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-4 xpercent_service_con_margin">
                   <div
                     style={{
                       textAlign: "center",
@@ -59,9 +59,9 @@ function XPercent(props) {
                   >
                     모델 포트폴리오형 자문서비스
                   </div>
-                  <div className="row" style={{ marginTop: 10,height:"73px" }}>
+                  <div className="row" style={{ marginTop: 10,height:"78px"}}>
                     <div
-                      className="col-3"
+                      className="col-3 xpercent_small_logo"
                       style={{ display: "flex", alignItems: "center" }}
                     >
                       <img
@@ -107,11 +107,11 @@ function XPercent(props) {
                   >
                     시그널형 자문서비스
                   </div>
-                  <div className="row">
+                  <div className="row" style={{height:"78px"}}>
                     <div className="col-12 col-md-6">
-                      <div className="row" style={{ marginTop: 10 }}>
+                      <div className="row" style={{ marginTop: 10,height:"78px"}}>
                         <div
-                          className="col-3"
+                          className="col-3 xpercent_small_logo"
                           style={{ display: "flex", alignItems: "center" }}
                         >
                           <img
@@ -145,9 +145,9 @@ function XPercent(props) {
                       </div>
                     </div>
                     <div className="col-12 col-md-6">
-                      <div className="row" style={{ marginTop: 10 }}>
+                      <div className="row" style={{ marginTop: 10 ,height:"78px"}}>
                         <div
-                          className="col-3"
+                          className="col-3 xpercent_small_logo"
                           style={{ display: "flex", alignItems: "center" }}
                         >
                           <img

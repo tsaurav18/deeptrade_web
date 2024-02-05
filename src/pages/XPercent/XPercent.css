@@ -72,7 +72,11 @@
 }
 
 .xpercent_text {
-    font-size: 15px;
+    font-size: 14px;
+    color: black !important;;
+    height: 80%;
+    margin-bottom: 10px!important;
+    width: "100%";
 }
 
 .service_button {
@@ -133,8 +137,17 @@
 
 @media only screen and (max-width: 770px) {
     .xpercent_text {
-        font-size: 12px;
+        font-size: 14px;
     }
+    .video_containter {
+        margin-top: 413px!important;
+    }
+.xpercent_small_logo{
+    width: 15%!important
+}
+.xpercent_service_con_margin{
+    margin-bottom: 16px;
+}
 }
 
 @media only screen and (max-width: 720px) {

@@ -181,7 +181,7 @@ function RiskManagement() {
         <div className="row gx-0 tech_icon_container">
           
         <div className="register_normal_text" style={{marginBottom:"20px", marginTop:"20px"}}>
-     <div style={{color:"#FFF",fontSize: "1.2vw"}}> <ul><li> 코스피 대비 111.5% 수익 달성 (지난 10년 기준)</li><li>-25.57 MDD 달성 (지난 10년 기준)</li></ul></div>
+     <div style={{color:"#FFF",fontSize: "1.2vw"}}> <ul><li> 코스피 대비 111.5% 수익 달성 (지난 10년 기준)</li><li>-25.57% MDD 달성 (지난 10년 기준)</li></ul></div>
 <br/>
 {/* <div style={{color:"#FFF", fontSize: "1.2vw"}}>* Y% MDD 달성 (지난 10년 기준)</div> */}
 
