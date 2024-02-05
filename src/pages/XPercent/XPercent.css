@@ -27,7 +27,7 @@
 }
 
 .xpercent_content {
-    font-weight: 300;
+   
     font-size: 20px;
     opacity: 0;
     transform: translateY(20px);
@@ -131,7 +131,7 @@
 
 @media only screen and (max-width: 860px) {
     .xpercent_text {
-        font-size: 14px;
+        font-size: 13px;
     }
 }
 

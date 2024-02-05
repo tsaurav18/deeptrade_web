@@ -177,11 +177,11 @@ function RiskManagement() {
     className={"spop_container"}
     style={{ flexDirection: "column", backgroundColor: "#394350" }}
   >
-        <div className="service_intro">Index Shannon의 성과</div>
+        <div className="service_intro">테스트 성과</div>
         <div className="row gx-0 tech_icon_container">
           
         <div className="register_normal_text" style={{marginBottom:"20px", marginTop:"20px"}}>
-     <div style={{color:"#FFF",fontSize: "1.2vw"}}> <ul><li> 코스피 대비 111.5% 수익 달성 (지난 10년 기준)</li><li>-25.57% MDD 달성 (지난 10년 기준)</li></ul></div>
+     <div style={{color:"#FFF",fontSize: "1.2vw"}}> <ul><li> 코스피 대비 111.5% 수익 달성 (지난 10년 기준)</li><li>25.57% MDD 달성 (지난 10년 기준)</li><li>상기 성과는 실제 고객에게 제공한 종목으로 계산한 테스트 결과이고 실제수익률과 다를 수 있습니다.</li></ul></div>
 <br/>
 {/* <div style={{color:"#FFF", fontSize: "1.2vw"}}>* Y% MDD 달성 (지난 10년 기준)</div> */}
 

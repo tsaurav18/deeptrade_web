@@ -171,7 +171,7 @@ function Solution(props) {
             <div className="row" style={{ marginTop: 10,padding:"0px 10px"}}>
               <div className="col-12" style={{textAlign:"center",backgroundColor:"#e7e7e7", borderRadius:4}}>
                 <img
-                  src="assets/product/riskmang_logo1.png"
+                  src="assets/product/riskmang_logo2.png"
                   alt="riskmang_logo"
                   style={{ width: "100%"}}
                 />
