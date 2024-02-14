@@ -72,7 +72,7 @@
 }
 
 .xpercent_text {
-    font-size: 14px;
+    font-size: 14px!important;
     color: black !important;;
     height: 80%;
     margin-bottom: 10px!important;
@@ -91,6 +91,18 @@
     cursor: pointer;
 }
 
+.solution_small_logo{
+    width: 72px!important;
+ 
+   
+}
+
+.solution_small_logo_bigger{
+    width: 90px!important;
+    text-align: center;
+
+}
+
 @media only screen and (max-width: 1055px) {
 
     .xpercent_text {
@@ -105,10 +117,13 @@
     }
 }
 
+
 @media only screen and (max-width: 990px) {
     .xpercent_text {
         font-size: 12px;
     }
+
+    
 }
 
 @media only screen and (max-width: 900px) {
@@ -129,6 +144,29 @@
     }
 }
 
+
+@media screen and (min-width: 768px) and (max-width: 1096px) and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+
+    .solution_small_logo_bigger {
+        width: 86px!important;
+    }
+    .solution_small_logo{
+        width: 68px!important;
+    }
+    .service_con_height{
+        /* height: 100px!important; */
+        flex-direction: column!important;
+        
+    }
+    .solution_img_margin_top{
+        margin-top: 10px !important;
+    }
+    
+  
+  
+  }
+
+
 @media only screen and (max-width: 860px) {
     .xpercent_text {
         font-size: 13px;
@@ -142,9 +180,9 @@
     .video_containter {
         margin-top: 413px!important;
     }
-.xpercent_small_logo{
+/* .xpercent_small_logo{
     width: 15%!important
-}
+} */
 .xpercent_service_con_margin{
     margin-bottom: 16px;
 }

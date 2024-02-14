@@ -38,6 +38,7 @@ import StockPortfolio from "./pages/Solution/SubPages/StockPortfolio";
 
 import EMP from "./pages/Solution/SubPages/EMP";
 import RiskManagement from "./pages/Solution/SubPages/RiskManagement";
+import NoticeBoardDetails from "./pages/NoticeBoard/NoticeBoardDetails";
 
 const store = configureStore({
   reducer: persistedReducers,
@@ -68,6 +69,7 @@ ReactDOM.render(
             <Route path="portfolio_list" element={<PortfolioList />} />
             <Route path="rebalancing_status" element={<RebalancingStatus />} />
             <Route path="survey" element={<Survey />} />
+            <Route path="noticedetails/:id" element={<NoticeBoardDetails/>} />
             <Route
               path="enterprise"
               exact={true}
