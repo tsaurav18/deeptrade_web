@@ -13,6 +13,7 @@ function NoticeBoardDetails(props) {
   const { data } = location.state;
 
   const notice_reducer = useSelector((state) => state.noticeReducer);
+  console.log("notice_reducer",notice_reducer)
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -63,9 +64,12 @@ function NoticeBoardDetails(props) {
               </div>
               <div className="notice_details_file_box">
                 <div className="notice_details_file_btn_txt">첨부파일</div>
-                <div className="notice_details_file">
-                  {notice_reducer.data.data_file}
-                </div>
+                <a className="notice_details_file"  href={notice_reducer.data.data_file}
+        download
+        target="_blank"
+        rel="noreferrer">
+                  {notice_reducer.data.file_name}
+                </a>
               </div>
             </div>
           </div>
