@@ -186,7 +186,7 @@ function StockPortfolio() {
      </ul></div>
      {/* <div style={{color:"#FFF",fontSize: "1.2vw"}}>  * 22년 하락장에서 지수대비 50% 수익</div> */}
             </div>
-       <img src='../../../assets/solution/stockportfolio_img.png'/>
+       <img src='../../../assets/solution/stockportfolio_img_new.png'/>
 
             </div>
       

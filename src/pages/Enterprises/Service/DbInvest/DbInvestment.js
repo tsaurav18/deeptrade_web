@@ -578,7 +578,7 @@ function DbInvestment() {
   //Get Past Data Table-1
   const getDbInvestmentSignal = async () => {
     setLoader(true);
-    try {
+
       const res = await getDtData.getDBInvestData(
         user_info_reducer.company_name,
         currentYear
@@ -588,14 +588,19 @@ function DbInvestment() {
         // const first_row = res.data[0]["buying_date"];
 
         setDbSignalData(res.data);
-      } else {
+      } else if(res.status === 500) {
+        const _res = await getDtData.getDBInvestData(
+          user_info_reducer.company_name,
+          currentYear
+        );
+        if(_res.status===200){
+          setDbSignalData(_res.data);
+        }
+      }else{
         setDbSignalData([]);
         console.log(" getDbInvestmentSignal res.status", res.status);
       }
-    } catch (error) {
-      console.log("getDbInvestmentSignal catch error", error);
-      toast("서버 접속 에러 관리자에게 문의해주세요.");
-    }
+    
     setLoader(false);
   };
   useEffect(() => {
