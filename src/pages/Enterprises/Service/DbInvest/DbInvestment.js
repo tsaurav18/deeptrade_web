@@ -319,7 +319,7 @@ const MacroSimVarTwoLineChart = ({ data ,isMobile, simLabel}) => {
           min:minYValue,
           max: maxYValue,
           callback: function (value, index, values) {
-            return (value / 1000000000).toLocaleString('en-US'); 
+            return (value).toLocaleString('en-US'); 
           },
         },
         grid: {
