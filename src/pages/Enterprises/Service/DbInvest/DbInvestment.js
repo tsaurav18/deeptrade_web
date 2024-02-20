@@ -187,7 +187,7 @@ const MacroSimVarOneLineChart = ({ data ,isMobile, simLabel}) => {
   let chart_data;
 
   chart_data = {
-    labels: [1, 2,3,4,5,6], // You can use either daily or weekly dates here
+    labels: [1, 2,3,4,5,6, 7, 8], // You can use either daily or weekly dates here
     datasets: [
       {
         label: data[0].label.past,
@@ -261,7 +261,7 @@ const MacroSimVarTwoLineChart = ({ data ,isMobile, simLabel}) => {
   let chart_data;
 
   chart_data = {
-    labels: [1, 2,3,4,5,6], // You can use either daily or weekly dates here
+    labels: [1, 2,3,4,5,6, 7, 8], // You can use either daily or weekly dates here
     datasets: [
       {
         label: data[1].label.past,
