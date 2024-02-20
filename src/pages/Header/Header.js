@@ -40,12 +40,12 @@ function Header(props) {
             Service
           </div>
          
-          {/* <div
+          <div
             className="menu_item"
             onClick={() => props.noticeRef.current.scrollIntoView()}
           >
             Notice
-          </div> */}
+          </div>
 
           <div
             className="menu_item"
@@ -106,12 +106,12 @@ function Header(props) {
             Service
           </div>
           
-          {/* <div
-            className="menu_item"
+          <div
+            className="nav-item"
             onClick={() => props.noticeRef.current.scrollIntoView()}
           >
             Notice
-          </div> */}
+          </div>
 
           <div
             className="nav-item"

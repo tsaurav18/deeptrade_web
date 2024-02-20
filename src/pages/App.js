@@ -109,7 +109,7 @@ function App() {
       <XPercent refProp={xpercentRef} />
       <VideoSection />
       {/* <Recruitment /> */}
-      {/* <NoticeBoard refProp={noticeRef}/> */}
+      <NoticeBoard refProp={noticeRef}/>
       <News refProp={newsRef} />
       <Partnership mainRef={mainRef} />
       <Newsletter refProp={newsletterRef} mainRef={mainRef} />
