@@ -416,7 +416,7 @@ function DbInvestment() {
   const tdStyleBlue = {
     // backgroundColor: "#00b0f0",
   };
-  
+  const [limeMacroPastDate, setLimeMacroPastDate] = useState('');
   const [pastEMPTextDate, setPastEMPTextDate] = useState(options[0].label);
   const [currentEMPTextDate, setCurrentEMPTextDate] = useState("");
   const [limeResultVar, setLimeResultVar] = useState([]);
@@ -578,7 +578,7 @@ function DbInvestment() {
   //Get Past Data Table-1
   const getDbInvestmentSignal = async () => {
     setLoader(true);
-    try {
+
       const res = await getDtData.getDBInvestData(
         user_info_reducer.company_name,
         currentYear
@@ -588,14 +588,19 @@ function DbInvestment() {
         // const first_row = res.data[0]["buying_date"];
 
         setDbSignalData(res.data);
-      } else {
+      } else if(res.status === 500) {
+        const _res = await getDtData.getDBInvestData(
+          user_info_reducer.company_name,
+          currentYear
+        );
+        if(_res.status===200){
+          setDbSignalData(_res.data);
+        }
+      }else{
         setDbSignalData([]);
         console.log(" getDbInvestmentSignal res.status", res.status);
       }
-    } catch (error) {
-      console.log("getDbInvestmentSignal catch error", error);
-      toast("서버 접속 에러 관리자에게 문의해주세요.");
-    }
+    
     setLoader(false);
   };
   useEffect(() => {
@@ -651,6 +656,7 @@ function DbInvestment() {
 
       if (res.status === 200) {
         console.log("fetchLimeMacro data", res.data);
+        setLimeMacroPastDate(res.data.data[0].date)
         setLimeMacroResult([res.data.data[0]]);
         setLimeMacroResult2([res.data.data[1]]);
         setLimeMacroAvgVar(res.data.avg_var);
@@ -1761,11 +1767,21 @@ function DbInvestment() {
                      textAlign: "left",}}
                   >
                     장기 대비 단기 중요도의 변화 정도는 아래와 같습니다.  <br />
-                    <ul>중요도 변화
-                      <ol>
-                        &#183; 양수: 중요도의 순위가 올라간 변수
-                      </ol> 
-                      <ol>
+                    <ul style={{
+                     fontSize: responsiveValue(16, 14, 12),
+                     fontWeight: "510",
+                     textAlign: "left",
+                     paddingLeft:"10px"}}> <span>&#8277; 중요도 변화 설명</span>
+                     <ol style={{
+                     fontSize: responsiveValue(16, 14, 12),
+                     fontWeight: "500",
+                     textAlign: "left",}}>
+                        &#183; 양수: 중요도의 순위가 올라간 변수</ol>
+                   
+                      <ol style={{
+                     fontSize: responsiveValue(16, 14, 12),
+                     fontWeight: "500",
+                     textAlign: "left",}}>
                         &#183; 음수: 중요도의 순위가 내려간 변수
                       </ol>
                     </ul>
@@ -2190,7 +2206,7 @@ function DbInvestment() {
                       textAlign: "left",
                     }}
                   >
-                    최근 6개월 간 경제 상황을 종합적으로 분석해보았을 때, {}{" "}
+                    최근 6개월 간 경제 상황을 종합적으로 분석해보았을 때, {limeMacroPastDate && limeMacroPastDate}{" "}
                     기간과 경제상황이 유사했고, 이 시점에 가장 중요했던 변수는{" "}
                     <span style={{ color: "#990000" }}>
                       {limeMacroSimVar[0]}, {limeMacroSimVar[1]}

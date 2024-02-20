@@ -21,6 +21,7 @@ import AOS from "aos";
 import { useSearchParams } from "react-router-dom";
 import VideoSection from "./VideoSection/VideoSection";
 import Solution from "./Solution/Solution";
+import NoticeBoard from "./NoticeBoard/NoticeBoard";
 
 ReactGA.initialize("UA-177879135-2");
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -39,7 +40,8 @@ function App() {
   const technologyRef = useRef(null);
   const newsRef = useRef(null);
   const newsletterRef = useRef(null);
-  
+  const noticeRef = useRef(null);
+
   const solutionRef = useRef(null);
   const cookies = new Cookies();
 
@@ -94,6 +96,7 @@ function App() {
         missionRef={missionRef}
         xpercentRef={xpercentRef}
         technologyRef={technologyRef}
+        noticeRef={noticeRef}
         newsRef={newsRef}
         newsletterRef={newsletterRef}
         solutionRef={solutionRef}
@@ -102,10 +105,11 @@ function App() {
       <Mission refProp={missionRef} />
       <What refProp={whatRef} />
       <Technology refProp={technologyRef} />
-      <XPercent refProp={xpercentRef} />
       <Solution refProp={solutionRef} />
+      <XPercent refProp={xpercentRef} />
       <VideoSection />
-      <Recruitment />
+      {/* <Recruitment /> */}
+      <NoticeBoard refProp={noticeRef}/>
       <News refProp={newsRef} />
       <Partnership mainRef={mainRef} />
       <Newsletter refProp={newsletterRef} mainRef={mainRef} />

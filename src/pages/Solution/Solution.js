@@ -49,7 +49,7 @@ function Solution(props) {
       <div className="col-12">
      
       <div className="row" style={{}}>
-        <div className="col-12 col-md-4"> 
+        <div className="col-12 col-md-4 xpercent_service_con_margin" > 
         <div
           style={{
             textAlign: "center",
@@ -62,19 +62,22 @@ function Solution(props) {
         >
              Stock Shannon
                   </div>
-        <div className="row" style={{ marginTop: 10, height:"73px" }}>
+        <div className="row service_con_height" style={{ marginTop: 10,height:"78px",  display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around"}}>
           <div
-            className="col-3"
-            style={{ display: "flex", alignItems: "center" }}
+            className="col-3 xpercent_small_logo solution_small_logo"
+            style={{ alignItems: "center" ,  
+          }}
           >
-            <img src="assets/deeptrade_logo.png" alt="deeptrade" style={{width:"100%"}}/>
+            <img src="assets/product/stockPortfolio2.png" alt="deeptrade" style={{width:"100%"}} />
           </div>
           <div className="col-9 xpercent_text">
         장단기 시장 전체 개별 종목 예측 시그널을 토대로 고객 맞춤형 포트폴리오 구성이 가능합니다.  
           </div>
         </div>
         <div className="row" style={{ marginTop: 10, padding:"0px 10px"}}>
-          <div className="col-12" style={{textAlign:"center",backgroundColor:"#e7e7e7",borderRadius:4}}>
+          <div className="col-12 solution_img_margin_top" style={{textAlign:"center",backgroundColor:"#e7e7e7",borderRadius:4}}>
             <img
               src="assets/product/stockPortfolio1.png"
               alt="image"
@@ -82,16 +85,16 @@ function Solution(props) {
             />
           </div>
         </div>
-     {/* <div
+     <div
                         className="service_button"
                         onClick={() => {
                           window.open("/stockportfolio", "_blank");
                         }}
                       >
-                        서비스 상세 보기
-                      </div>  */}
+                        솔루션 상세 보기
+                      </div> 
         </div>
-          <div className="col-12 col-md-4" style={{}}>
+          <div className="col-12 col-md-4 xpercent_service_con_margin" style={{}}>
           <div
                     className="signal_class"
                     style={{
@@ -105,13 +108,15 @@ function Solution(props) {
                   >
                     EMP Shannon
                   </div>
-            <div className="row" style={{ marginTop: 10 }}>
+            <div className="row service_con_height" style={{ marginTop: 10,height:"78px",  display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around"}}>
               <div
-                className="col-3"
-                style={{ display: "flex", alignItems: "center" }}
+                className="col-3 xpercent_small_logo solution_small_logo"
+                style={{  alignItems: "center" }}
               >
                <img
-                  src="assets/deeptrade_logo.png"
+                  src="assets/product/etfport_logo2.png"
                   alt="deeptrade_logo"
                   style={{ width: "100%" }}
                 />
@@ -122,7 +127,7 @@ function Solution(props) {
               </div>
             </div>
             <div className="row" style={{ marginTop: 10 ,padding:"0px 10px"}}>
-              <div className="col-12"style={{textAlign:"center", backgroundColor:"#e7e7e7",borderRadius:4}}>
+              <div className="col-12 solution_img_margin_top"style={{textAlign:"center", backgroundColor:"#e7e7e7",borderRadius:4}}>
                 <img
                   src="assets/product/etfport_logo1.png"
                   alt="etf_image"
@@ -130,14 +135,14 @@ function Solution(props) {
                 />
               </div>
             </div>
-        {/* <div
+        <div
                         className="service_button"
                         onClick={() => {
                           window.open("/emp", "_blank");
                         }}
                       >
-                        서비스 상세 보기
-                      </div>  */}
+                        솔루션 상세 보기
+                      </div> 
           </div>
           <div className="col-12 col-md-4">
           <div
@@ -153,13 +158,15 @@ function Solution(props) {
                   >
                     Index Shannon 
                   </div>
-            <div className="row" style={{ marginTop: 10 , }}>
+            <div className="row service_con_height" style={{marginTop: 10,height:"78px",  display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around"}}>
               <div
-                className="col-3"
-                style={{ display: "flex", alignItems: "center" }}
+                className="col-3 xpercent_small_logo solution_small_logo"
+                style={{  alignItems: "center" }}
               >
               <img
-                  src="assets/deeptrade_logo.png"
+                  src="assets/product/riskmang_logo2.png"
                   alt="deeptrade_logo"
                   style={{ width: "100%" }}
                 />
@@ -169,7 +176,7 @@ function Solution(props) {
               </div>
             </div>
             <div className="row" style={{ marginTop: 10,padding:"0px 10px"}}>
-              <div className="col-12" style={{textAlign:"center",backgroundColor:"#e7e7e7", borderRadius:4}}>
+              <div className="col-12 solution_img_margin_top" style={{textAlign:"center",backgroundColor:"#e7e7e7", borderRadius:4}}>
                 <img
                   src="assets/product/riskmang_logo1.png"
                   alt="riskmang_logo"
@@ -177,14 +184,14 @@ function Solution(props) {
                 />
               </div>
             </div>
-             {/* <div
+             <div
                         className="service_button"
                         onClick={() => {
                           window.open("/riskmanagement", "_blank");
                         }}
                       >
-                        서비스 상세 보기
-                      </div>  */}
+                        솔루션 상세 보기
+                      </div> 
           </div>
         </div>
       </div>

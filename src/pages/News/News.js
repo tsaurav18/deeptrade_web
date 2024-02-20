@@ -117,7 +117,7 @@ function News(props) {
                 <div style={{border:"1px solid #990000", padding:5, marginBottom:10, borderRadius:4}}>
               <div className="headlines" style={{display:"flex", alignItems:"flex-start", justifyContent:"space-between"}}> <span style={{fontWeight:700, fontSize:"13px"}}>
                 
-              연금 투자를 위한 변동성 최소화 기반 포트폴리오 관리 방법 및 장치
+              연금 투자를 위한 변동성 최소화 기반 포트폴리오 관리 방법 및 장치 (등록 완료)
                 </span>
                 <span>2023/01</span></div>
                 <p style={{fontSize:"12px"}}>
@@ -252,7 +252,7 @@ function News(props) {
                 <div style={{border:"1px solid #990000", padding:5, marginBottom:10, borderRadius:4}}>
               <div className="headlines" style={{display:"flex", alignItems:"flex-start", justifyContent:"space-between"}}> <span style={{fontWeight:700, fontSize:"13px"}}>
                 
-              연금 투자를 위한 변동성 최소화 기반 포트폴리오 관리 방법 및 장치
+              연금 투자를 위한 변동성 최소화 기반 포트폴리오 관리 방법 및 장치 (등록 완료)
                 </span>
                 <span>2023/01</span></div>
                 <p style={{fontSize:"12px"}}>

@@ -411,6 +411,9 @@ const HomePage = ({ scrollbarHandler }) => {
     setShowFilterToggle(!showFilterToggle);
     setMrktCapCheckBoxStatus(true);
   };
+const addColon=(tradeVol)=>{
+ return tradeVol.toLocaleString('ko-KR')
+}
 
   const convertIntoKoreanSys =(marketCap)=>{
     // Define the unit values
@@ -422,9 +425,16 @@ const HomePage = ({ scrollbarHandler }) => {
     if (marketCap_ < 1) {
       // Convert market cap into 만 unit
       let marketCap_ = marketCap_ / maan;
-      return marketCap_.toFixed(0) + ' 만';  // Return in 만 unit format
+      let final_capvalue = marketCap_.toLocaleString('ko-KR')
+      let splitted_val = final_capvalue.split(".")[0]+ '만'
+
+      return splitted_val;
+      // return marketCap_.toFixed(0) + '만';  // Return in 만 unit format
   } else {
-      return marketCap_.toFixed(0) + ' 억';  // Return in 억 unit format
+    let final_capvalue = marketCap_.toLocaleString('ko-KR')
+    let splitted_val = final_capvalue.split(".")[0]+ '억'
+    return splitted_val;
+      // return marketCap_.toFixed(0) + '억';  // Return in 억 unit format
   }
    
   }
@@ -1207,7 +1217,7 @@ if(res.status===200){
 
     return () => {};
   }, [asideButtonState]);
-
+  // console.log(tableDataList)
   // const state = {
   //   series: [
   //     {
@@ -1389,6 +1399,7 @@ if(res.status===200){
                       setSelected(res);
                     }}
                     style={{
+                      fontSize:14,
                       borderRadius: 5,
                       width: "152px",
                       marginBottom: "10px",
@@ -1417,8 +1428,9 @@ if(res.status===200){
                       }
                     }}
                     style={{
+                      fontSize:14,
                       borderRadius: 5,
-                      width: "145px",
+                      width: "152px",
                       marginBottom: "10px",
                       color: "#FFF",
                       backgroundColor:
@@ -2554,7 +2566,7 @@ if(res.status===200){
                                     transition: "all 0.3s ease-in-out",
                                   }}
                                 >
-                                  {list.accTradeVolume}
+                                  {addColon(list.accTradeVolume)}주
                                 </div>
                               </Row>
                             );

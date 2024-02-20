@@ -46,7 +46,7 @@ function XPercent(props) {
               ref={contentOneRef}
             >
               <div className="row">
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-4 xpercent_service_con_margin">
                   <div
                     style={{
                       textAlign: "center",
@@ -59,13 +59,15 @@ function XPercent(props) {
                   >
                     모델 포트폴리오형 자문서비스
                   </div>
-                  <div className="row" style={{ marginTop: 10,height:"73px" }}>
+                  <div className="row service_con_height" style={{ marginTop: 10,height:"78px",  display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around"}}>
                     <div
-                      className="col-3"
-                      style={{ display: "flex", alignItems: "center" }}
+                      className="col-3 xpercent_small_logo solution_small_logo_bigger"
+                      style={{  alignItems: "center" }}
                     >
                       <img
-                        src="assets/product/samsung_logo.png"
+                        src="assets/product/samsung_small_logo.png"
                         alt="samsung_logo"
                         style={{ width: "100%" }}
                       />
@@ -76,7 +78,7 @@ function XPercent(props) {
                     </div>
                   </div>
                   <div className="row" style={{ marginTop: 10 }}>
-                    <div className="col-12">
+                    <div className="col-12 solution_img_margin_top">
                       <img
                         src="assets/product/mpop.png"
                         alt="monimo"
@@ -107,15 +109,17 @@ function XPercent(props) {
                   >
                     시그널형 자문서비스
                   </div>
-                  <div className="row">
+                  <div className="row " style={{height:"78px"}}>
                     <div className="col-12 col-md-6">
-                      <div className="row" style={{ marginTop: 10 }}>
+                      <div className="row service_con_height" style={{ marginTop: 10,height:"78px",  display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around"}}>
                         <div
-                          className="col-3"
-                          style={{ display: "flex", alignItems: "center" }}
+                          className="col-3 xpercent_small_logo solution_small_logo"
+                          style={{ alignItems: "center" }}
                         >
                           <img
-                            src="assets/deeptrade_logo.png"
+                            src="assets/product/xpercent_small_logo.png"
                             alt="deeptrade_logo"
                             style={{ width: "100%" }}
                           />
@@ -127,7 +131,7 @@ function XPercent(props) {
                         </div>
                       </div>
                       <div className="row" style={{ marginTop: 10 }}>
-                        <div className="col-12">
+                        <div className="col-12 solution_img_margin_top">
                           <img
                             src="assets/product/xpct_logo.png"
                             alt="xpct_logo"
@@ -145,13 +149,15 @@ function XPercent(props) {
                       </div>
                     </div>
                     <div className="col-12 col-md-6">
-                      <div className="row" style={{ marginTop: 10 }}>
+                      <div className="row service_con_height" style={{ marginTop: 10 ,height:"78px",    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around"}}>
                         <div
-                          className="col-3"
-                          style={{ display: "flex", alignItems: "center" }}
+                          className="col-3 xpercent_small_logo solution_small_logo_bigger"
+                          style={{ alignItems: "center" }}
                         >
                           <img
-                            src="assets/product/eugene_logo.png"
+                            src="assets/product/eugene_small_logo.png"
                             alt="eugene_logo"
                             style={{ width: "100%" }}
                           />
@@ -162,7 +168,7 @@ function XPercent(props) {
                         </div>
                       </div>
                       <div className="row" style={{ marginTop: 10 }}>
-                        <div className="col-12">
+                        <div className="col-12 solution_img_margin_top">
                           <img
                             src="assets/product/champion_logo.png"
                             alt="champion_logo"

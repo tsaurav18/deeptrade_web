@@ -78,7 +78,7 @@ function StockPortfolio() {
   >
     <div className={"portfolio_container"} style={{paddingBottom:"3vw"}}>
       <div className="text_title" style={{ color: "#394350" }}>
- 딥트레이드 Stock Shannon기술의 특징
+ 딥트레이드 Stock Shannon 기술의 특징
       </div>
       {/* <div className="spop_portfolio_center_text">
         서울대학교 주가 예측 스타트업 DeepTrade Technologies가 최신 개발한
@@ -133,7 +133,7 @@ function StockPortfolio() {
               <li>고객 리스크 컴플라이언스에 맞춘 종목 제공 가능</li>
               <li>거시적, 미시적 경제 상황을 개인이 아니라 고도의 인공지능이 결정하여 운용자의 종목 선택에 대한 부담감 경감</li>
               <li>소규모 고객부터, 대규모 기업 고객 대상 모두 활용 가능</li>
-              <li>현재 활발한 B2B2C 세일즈 중 (서비스 월 평균 거래 대금 50억원)현재 활발한 B2B2C 세일즈 중 (서비스 월 평균 거래 대금 50억원)</li>
+              <li>현재 활발한 B2B2C 세일즈 중 (서비스 월 평균 거래 대금 50억원)</li>
      </ul>
 
           </div>
@@ -177,14 +177,16 @@ function StockPortfolio() {
     className={"spop_container"}
     style={{ flexDirection: "column", backgroundColor: "#394350"}}
   >
-        <div className="service_intro"> Stock Shannon의 성과</div>
+        <div className="service_intro">테스트 성과</div>
         <div className="row gx-0 tech_icon_container">
           
         <div className="register_normal_text" style={{marginBottom:"20px", marginTop:"20px"}}>
-     <div style={{color:"#FFF",fontSize: "1.2vw"}}>  <ul><li>해당 기술 기반 서비스 유진투자증권 2년 이상 제공 중</li><li>22년 하락장에서 지수대비 50% 수익</li></ul></div>
+     <div style={{color:"#FFF",fontSize: "1.2vw"}}>  <ul><li>해당 기술 기반 서비스 유진투자증권 2년 이상 제공 중</li><li>22년 하락장에서 지수대비 50% 수익</li>
+     <li>상기 성과는 실제 고객에게 제공한 종목으로 계산한 테스트 결과이고 실제수익률과 다를 수 있습니다.</li>
+     </ul></div>
      {/* <div style={{color:"#FFF",fontSize: "1.2vw"}}>  * 22년 하락장에서 지수대비 50% 수익</div> */}
             </div>
-       <img src='../../../assets/solution/stockportfolio_img.png'/>
+       <img src='../../../assets/solution/stockportfolio_img_new.png'/>
 
             </div>
       

@@ -29,15 +29,22 @@ function Header(props) {
           </div>
           <div
             className="menu_item"
+            onClick={() => props.solutionRef.current.scrollIntoView()}
+          >
+            Solution
+          </div>
+          <div
+            className="menu_item"
             onClick={() => props.xpercentRef.current.scrollIntoView()}
           >
             Service
           </div>
+         
           <div
             className="menu_item"
-            onClick={() => props.solutionRef.current.scrollIntoView()}
+            onClick={() => props.noticeRef.current.scrollIntoView()}
           >
-            Solution
+            Notice
           </div>
 
           <div
@@ -46,6 +53,7 @@ function Header(props) {
           >
             News
           </div>
+
 
           <div
             className="menu_item"
@@ -87,15 +95,22 @@ function Header(props) {
           </div>
           <div
             className="nav-item"
+            onClick={() => props.solutionRef.current.scrollIntoView()}
+          >
+            Solution
+          </div>
+          <div
+            className="nav-item"
             onClick={() => props.xpercentRef.current.scrollIntoView()}
           >
             Service
           </div>
+          
           <div
             className="nav-item"
-            onClick={() => props.solutionRef.current.scrollIntoView()}
+            onClick={() => props.noticeRef.current.scrollIntoView()}
           >
-            Solution
+            Notice
           </div>
 
           <div

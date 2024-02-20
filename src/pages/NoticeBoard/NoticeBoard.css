@@ -1,0 +1,24 @@
+.noticeborad_container{
+    background-color: transparent;
+    z-index: 2;
+    position: relative;
+    height: "auto";
+    /* margin-top: -450px; */
+    margin-bottom: 100px;
+}
+.notice_board_title{
+    text-align: center;
+    color: #990000;
+    font-size: 25px;
+    font-weight: 700;
+    position: relative;
+    width: auto !important;
+    margin: 100px 0 0 0 !important;
+  
+}
+.notice_board_list_content{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+  
+}

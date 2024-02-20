@@ -32,7 +32,7 @@
 }
 
 .menu_item {
-  padding: 0 20px;
+  padding: 0 14px;
   color: #FBFBFD;
   font-size: 16px;
   cursor: pointer;
@@ -97,7 +97,7 @@
     padding: 40px 5px;
     display: flex;
     justify-content: space-between;
-    width: 772px;
+    width: 726px;
     float: right;
   }
   .logo {

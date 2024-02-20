@@ -42,33 +42,38 @@ const EnterprisesService = () => {
   function scrollbarHandler(value) {
     setActiveScrollbar(value);
   }
-  const getDbInvestmentSignal =async()=>{
-    setLoader(true)
-    try {
-      const res = await getDtData.getDBInvestData(user_info_reducer.company_name)
-      if(res.status===200){
-        console.log(res.data)
-        setDbSignalData(res.data)
-      }else{
-        setDbSignalData([])
-        console.log("res.status",res.status)
-      }
-    } catch (error) {
-      toast("서버 접속 에러 관리자에게 문의해주세요.");
-    }
-    setLoader(false)
-  }
-useEffect(() => {
-  let isComponentRender = true
-  if(isComponentRender===true){
-    getDbInvestmentSignal()
-  }
+//   const getDbInvestmentSignal =async()=>{
+//     setLoader(true)
+//     try {
+//       const res = await getDtData.getDBInvestData(user_info_reducer.company_name)
+//       if(res.status===200){
+//         console.log(res.data)
+//         setDbSignalData(res.data)
+//       }else if(res.status===500){
+//         const res = await getDtData.getDBInvestData(user_info_reducer.company_name)
+//         setDbSignalData(res.data)
+        
+//       }
+//       else{
+//         setDbSignalData([])
+//         console.log("res.status",res.status)
+//       }
+//     } catch (error) {
+//       toast("서버 접속 에러 관리자에게 문의해주세요.");
+//     }
+//     setLoader(false)
+//   }
+// useEffect(() => {
+//   let isComponentRender = true
+//   if(isComponentRender===true){
+//     getDbInvestmentSignal()
+//   }
 
 
-  return () => {
-    isComponentRender = false
-  }
-}, [])
+//   return () => {
+//     isComponentRender = false
+//   }
+// }, [])
 
 
 
