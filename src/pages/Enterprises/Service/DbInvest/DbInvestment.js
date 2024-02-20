@@ -1581,14 +1581,14 @@ function DbInvestment() {
                               <td style={tdStyle}>{list.date}</td>
                               <td style={tdStyle}>{list.lime_var}</td>
                               <td style={tdStyle}>{list.lime_imp}</td>
-                              <td style={tdStyle}>{list.cash}</td>
-                              <td style={tdStyle}>{list.all_stocks}</td>
-                              <td style={tdStyle}>{list.large_cap}</td>
-                              <td style={tdStyle}>{list.esg}</td>
-                              <td style={tdStyle}>{list.growth}</td>
-                              <td style={tdStyle}>{list.value}</td>
-                              <td style={tdStyle}>{list.mid_small}</td>
-                              <td style={tdStyle}>{list.dividend}</td>
+                              <td style={tdStyle}>{list.cash.toFixed(3)}</td>
+                              <td style={tdStyle}>{list.all_stocks.toFixed(3)}</td>
+                              <td style={tdStyle}>{list.large_cap.toFixed(3)}</td>
+                              <td style={tdStyle}>{list.esg.toFixed(3)}</td>
+                              <td style={tdStyle}>{list.growth.toFixed(3)}</td>
+                              <td style={tdStyle}>{list.value.toFixed(3)}</td>
+                              <td style={tdStyle}>{list.mid_small.toFixed(3)}</td>
+                              <td style={tdStyle}>{list.dividend.toFixed(3)}</td>
                             </tr>
                           );
                         })}
@@ -1644,11 +1644,11 @@ function DbInvestment() {
                     <tbody>
                     <tr>
                         <td style={tdStyle}>{"2024-02-20"}</td>
-                        <td style={tdStyle}>NASDAQ<br />119</td>
-                        <td style={tdStyle}>S&P500<br />111 </td>
-                        <td style={tdStyle}>USDKRW<br />108</td>
-                        <td style={tdStyle}>DOW JONES<br />119</td>
-                        <td style={tdStyle}>KOSPI<br />119</td>
+                        <td style={tdStyle}>OIL<br />134</td>
+                        <td style={tdStyle}>KOSPI200 TV<br />124</td>
+                        <td style={tdStyle}>NASDAQ<br />115</td>
+                        <td style={tdStyle}>S&P500<br />107</td>
+                        <td style={tdStyle}>KOSDAQ<br />103</td>
                       </tr>
 
                       <tr>
@@ -1723,6 +1723,15 @@ function DbInvestment() {
                   <tbody>
                     <tr>
                       <td style={tdStyle}>2024-01-19 ~ 2024-02-20</td>
+                      <td style={tdStyleUp}>NASDAQ<br />119</td>
+                      <td style={tdStyleUp}>OIL<br />110</td>
+                      <td style={tdStyleUp}>GOLD<br />109</td>
+                      <td style={tdStyleUp}>S&P500<br />105</td>
+                      <td style={tdStyleUp}>DOW JONES<br />102</td>
+                    </tr>
+
+                    <tr>
+                      <td style={tdStyle}>2023-12-19 ~ 2024-01-19</td>
                       <td style={tdStyleUp}>NASDAQ<br />121</td>
                       <td style={tdStyleUp}>S&P500<br />119</td>
                       <td style={tdStyleUp}>USDKRW<br />117</td>
@@ -1767,21 +1776,11 @@ function DbInvestment() {
                      textAlign: "left",}}
                   >
                     장기 대비 단기 중요도의 변화 정도는 아래와 같습니다.  <br />
-                    <ul style={{
-                     fontSize: responsiveValue(16, 14, 12),
-                     fontWeight: "510",
-                     textAlign: "left",
-                     paddingLeft:"10px"}}> <span>&#8277; 중요도 변화 설명</span>
-                     <ol style={{
-                     fontSize: responsiveValue(16, 14, 12),
-                     fontWeight: "500",
-                     textAlign: "left",}}>
-                        &#183; 양수: 중요도의 순위가 올라간 변수</ol>
-                   
-                      <ol style={{
-                     fontSize: responsiveValue(16, 14, 12),
-                     fontWeight: "500",
-                     textAlign: "left",}}>
+                    <ul>중요도 변화
+                      <ol>
+                        &#183; 양수: 중요도의 순위가 올라간 변수
+                      </ol> 
+                      <ol>
                         &#183; 음수: 중요도의 순위가 내려간 변수
                       </ol>
                     </ul>
