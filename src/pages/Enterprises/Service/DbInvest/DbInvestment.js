@@ -1636,13 +1636,22 @@ function DbInvestment() {
                       </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td style={tdStyle}>{"2024-02-20"}</td>
+                        <td style={tdStyle}>NASDAQ<br />119</td>
+                        <td style={tdStyle}>S&P500<br />111 </td>
+                        <td style={tdStyle}>USDKRW<br />108</td>
+                        <td style={tdStyle}>DOW JONES<br />119</td>
+                        <td style={tdStyle}>KOSPI<br />119</td>
+                      </tr>
+
                       <tr>
                         <td style={tdStyle}>{"2024-01-19"}</td>
                         <td style={tdStyle}>NASDAQ<br />119</td>
-                        <td style={tdStyle}>S&P500<br />119 </td>
-                        <td style={tdStyle}>USDKRW<br />119</td>
-                        <td style={tdStyle}>DOW JONES<br />119</td>
-                        <td style={tdStyle}>KOSPI<br />119</td>
+                        <td style={tdStyle}>S&P500<br />111</td>
+                        <td style={tdStyle}>USDKRW<br />108</td>
+                        <td style={tdStyle}>DOW JONES<br />107</td>
+                        <td style={tdStyle}>KOSPI<br />104</td>
                       </tr>
 
                       <tr>
@@ -1707,7 +1716,7 @@ function DbInvestment() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td style={tdStyle}>2023-12-19 ~ 2024-01-19</td>
+                      <td style={tdStyle}>2024-01-19 ~ 2024-02-20</td>
                       <td style={tdStyleUp}>NASDAQ<br />121</td>
                       <td style={tdStyleUp}>S&P500<br />119</td>
                       <td style={tdStyleUp}>USDKRW<br />117</td>
@@ -1797,29 +1806,29 @@ function DbInvestment() {
                   <tbody>
                     <tr>
                       <td style={tdStyle}>3개월 전 ~ 5일 전 </td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>OIL<br />6</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KOSDAQ<br />6</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>USDKRW<br />-6</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>S&P500<br />-3</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>DOW JONES<br />-3</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KOSPI200 TV<br />6</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>GOLD<br />-5</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>USDKRW<br />-5</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>NASDAQ<br />-3</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>KOSPI200<br />2</td>
                     </tr>
 
                     <tr>
                       <td style={tdStyle}>3개월 전 ~ 1개월 전</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>OIL<br />4</td> 
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>USDKRW<br />-3</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>KOSPI<br />-3</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KOSPI200<br />2</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>DOW JONES<br />-2</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>GOLD<br />-5</td> 
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>KR RATE SPREAD<br />3</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>USDKRW<br />3</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>OIL<br />-3</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>KOSPI200 TV<br />-3</td>
                     </tr>
 
                     <tr>
                       <td style={tdStyle}>6개월 전 ~ 1개월 전</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>GOLD<br />5</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>OIL<br />4</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>USDKRW<br />-4</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>KOSPI<br />-4</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>DOW JONES<br />-4</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>USDKRW<br />1</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KOPSI200<br />1</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KR RATE SPREAD<br />1</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>GOLD<br />-1</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>DOw JONES<br />-1</td>
                     </tr>
                     <tr>
                       <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
