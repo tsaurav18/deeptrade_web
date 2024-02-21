@@ -336,3 +336,6 @@
     }
 }
 
+.ReactModal__Overlay{
+    z-index: 1000000
+}

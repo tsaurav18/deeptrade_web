@@ -1,7 +1,39 @@
 import "./Header.css";
-import React from "react";
+import React, {useState} from "react";
+import Modal from 'react-modal';
+import NoticeBoard from "../NoticeBoard/NoticeBoard";
+import { useMediaQuery } from "react-responsive";
+Modal.setAppElement('#root');
+
 
 function Header(props) {
+  const isMobile = useMediaQuery({
+    query: "(max-width:767px)",
+  });
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: isMobile?"397px":"635px" , 
+      height:isMobile?"48rem":'',
+      zIndex: 10000
+    },
+  };
+  let subtitle;
+  const [showNoticeBoard, setShowNoticeBoard] = useState(false)
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setShowNoticeBoard(false);
+  }
+
   return (
     <div className="header">
       <div className="col-2 logo">
@@ -42,7 +74,8 @@ function Header(props) {
          
           <div
             className="menu_item"
-            onClick={() => props.noticeRef.current.scrollIntoView()}
+            // onClick={() => props.noticeRef.current.scrollIntoView()}
+            onClick={() => {setShowNoticeBoard(!showNoticeBoard)}}
           >
             Notice
           </div>
@@ -108,7 +141,8 @@ function Header(props) {
           
           <div
             className="nav-item"
-            onClick={() => props.noticeRef.current.scrollIntoView()}
+            // onClick={() => props.noticeRef.current.scrollIntoView()}
+            onClick={() => {setShowNoticeBoard(!showNoticeBoard)}}
           >
             Notice
           </div>
@@ -127,6 +161,18 @@ function Header(props) {
           </div>
         </nav>
       </div>
+
+      { showNoticeBoard && <Modal
+      
+        isOpen={showNoticeBoard}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+        
+      >
+              <NoticeBoard/>
+      </Modal> }
     </div>
   );
 }

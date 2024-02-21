@@ -106,7 +106,7 @@ function NoticeBoard(props) {
   const [dataList, setDataList] = useState(TableData);
   console.log("datalist", dataList);
   return (
-    <div className="noticeborad_container" ref={props.refProp}>
+    <div className="noticeborad_container" ref={props.refProp} style={{zIndex:10000}}> 
       <div
         className="row gx-0"
         style={{ justifyContent: "center", marginBottom: "60px" }}

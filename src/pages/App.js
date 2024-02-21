@@ -40,7 +40,7 @@ function App() {
   const technologyRef = useRef(null);
   const newsRef = useRef(null);
   const newsletterRef = useRef(null);
-  const noticeRef = useRef(null);
+  // const noticeRef = useRef(null);
 
   const solutionRef = useRef(null);
   const cookies = new Cookies();
@@ -96,7 +96,7 @@ function App() {
         missionRef={missionRef}
         xpercentRef={xpercentRef}
         technologyRef={technologyRef}
-        noticeRef={noticeRef}
+        // noticeRef={noticeRef}
         newsRef={newsRef}
         newsletterRef={newsletterRef}
         solutionRef={solutionRef}
@@ -109,7 +109,7 @@ function App() {
       <XPercent refProp={xpercentRef} />
       <VideoSection />
       {/* <Recruitment /> */}
-      <NoticeBoard refProp={noticeRef}/>
+      {/* <NoticeBoard refProp={noticeRef}/> */}
       <News refProp={newsRef} />
       <Partnership mainRef={mainRef} />
       <Newsletter refProp={newsletterRef} mainRef={mainRef} />
