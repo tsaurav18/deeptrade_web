@@ -2107,14 +2107,14 @@ const HomePage = ({ scrollbarHandler }) => {
 
               {/* Filtering */}
               <WhiteSpace height={10} />
-              {asideButtonState === "SHANNON_STOCK" &&
+             {/*    {asideButtonState === "SHANNON_STOCK" &&
                 user_info_reducer.company_name === "DTT" && (
                   <Col
                     style={{ justifyContent: "flex-end", flexDirection: "row" }}
                   >
                     <Row
                       onClick={() => {
-                        OnFilterToggle();
+                        OnFilterToggle()
                       }}
                       style={{
                         alignItems: "center",
@@ -2131,7 +2131,7 @@ const HomePage = ({ scrollbarHandler }) => {
                       <span style={{ fontWeight: "700" }}>조건별 선택</span>
                     </Row>
                   </Col>
-                )}
+                )}*/}
               <WhiteSpace height={10} />
               {asideButtonState === "SHANNON_STOCK" && showFilterToggle && (
                 <ShadowCol
@@ -2803,7 +2803,7 @@ const HomePage = ({ scrollbarHandler }) => {
                       >
                         Market Cap.
                       </div>
-                      <div
+                      {/* <div
                         style={{
                           width: 110,
                           display: "table-cell",
@@ -2812,7 +2812,7 @@ const HomePage = ({ scrollbarHandler }) => {
                         }}
                       >
                         Trading Vol.
-                      </div>
+                      </div> */}
                     </Row>
                     <Row
                       style={{
@@ -2934,7 +2934,7 @@ const HomePage = ({ scrollbarHandler }) => {
                                     >
                                       {convertIntoKoreanSys(list.marketCap)}
                                     </div>
-                                    <div
+                                    {/* <div
                                       style={{
                                         width: 110,
                                         height: "auto",
@@ -2945,7 +2945,7 @@ const HomePage = ({ scrollbarHandler }) => {
                                       }}
                                     >
                                       {addColon(list.accTradeVolume)}주
-                                    </div>
+                                    </div> */}
                                   </Row>
                                 );
                               })}
