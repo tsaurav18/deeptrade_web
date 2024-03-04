@@ -72,7 +72,7 @@ const LineChart = ({ data ,isMobile}) => {
     labels: data.dates, // You can use either daily or weekly dates here
     datasets: [
       {
-        label: "DT-EMP 적용 기술",
+        label: "EMP Shannon 적용 기술",
         data: data.cum_pv,
         borderColor: "rgba(255, 0, 0, 1)",
         backgroundColor: "rgba(255, 0, 0, 0.5)",
@@ -1260,7 +1260,7 @@ function DbInvestment() {
               />
             ) : (
               <>
-                {dbSignalData &&
+                {dbSignalData ?
                   dbSignalData
                     .slice(0, open ? dbSignalData.length : 5)
                     .map((list, index) => {
@@ -1415,7 +1415,21 @@ function DbInvestment() {
                           </div>
                         </Row>
                       );
-                    })}
+                    }):<Oval
+                    height={50}
+                    width={50}
+                    color="#4fa94d"
+                    wrapperStyle={{
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel="oval-loading"
+                    secondaryColor="#4fa94d"
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                  />}
               </>
             )}
           </Row>
@@ -2840,7 +2854,7 @@ function DbInvestment() {
                   }}
                 >
                   {" "}
-                  DeeptradeTechnologies EMP Management (DT-EMP) 기술의 월단위
+                  DeeptradeTechnologies EMP Management (EMP Shannon) 기술의 월단위
                   성능과 시장 지표 (코스피 지수) 비교
                 </p>
                 <br />
