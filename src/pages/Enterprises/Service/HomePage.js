@@ -55,6 +55,7 @@ ChartJS.register(
   Legend,
   zoomPlugin
 );
+Modal.setAppElement("#root");
 
 const LineChart = ({ DailyData, WeeklyData, activeFlag, selected }) => {
 
@@ -255,7 +256,7 @@ const LineChart = ({ DailyData, WeeklyData, activeFlag, selected }) => {
       },
       title: {
         display: true,
-        text: selected==="KR_Weekly"?"한국-Weekly":"미국-Weekly",
+        text: selected==="KR_Weekly"?"한국-4주 비중 추이":"미국-4주 비중 추이",
         fontSize: 20,
       },
     },
@@ -274,7 +275,112 @@ const LineChart = ({ DailyData, WeeklyData, activeFlag, selected }) => {
     </div>
   );
 };
-Modal.setAppElement("#root");
+
+// const LineChartPV = ({ WeeklyDataPV, activeFlag, selected }) => {
+//   const weeklyDataPV = WeeklyDataPV;
+
+//   // Extracting dates and values for each category
+//   let weeklyPVDates;
+//   let weeklyPVValues;
+
+//   let WeeklyPVchart_data;
+  
+//   if (weeklyDataPV != undefined) {
+//     if(selected==="KR_Weekly")  {
+//       if (weeklyDataPV.KR_Weekly != undefined){
+//         weeklyPVDates = weeklyDataPV.KR_Weekly.map((entry) => entry.date);
+//         weeklyPVValues = weeklyDataPV.KR_Weekly.map((entry) => entry.pv);
+     
+//         WeeklyPVchart_data = {
+//           labels: weeklyPVDates, // You can use either daily or weekly dates here
+//           datasets: [
+//             {
+//               label: "PV",
+//               data: weeklyPVValues,
+//               borderColor: "rgb(255, 159, 64)",
+//               backgroundColor: "rgba(255, 159, 64, 0.5)",
+//               borderWidth: 1,
+//               fill: false,
+//               pointLabelFontColor: "rgba(0, 0, 0, 0)",
+//             },
+//             // Repeat the same structure for weekly data if needed
+//           ],
+//         };
+//       }
+      
+//     }
+//     else if(selected==="US_Weekly"){
+//       if (weeklyDataPV.US_Weekly != undefined) {
+      
+//         weeklyPVDates = weeklyDataPV.US_Weekly.map((entry) => entry.date);
+//         weeklyPVValues = weeklyDataPV.US_Weekly.map((entry) => entry.pv);
+       
+//         WeeklyPVchart_data = {
+//           labels: weeklyPVDates, // You can use either daily or weekly dates here
+//           datasets: [
+//             {
+//               label: "PV",
+//               data: weeklyPVValues,
+//               borderColor: "rgb(255, 159, 64)",
+//               backgroundColor: "rgba(255, 159, 64, 0.5)",
+//               borderWidth: 1,
+//               fill: false,
+//               pointLabelFontColor: "rgba(0, 0, 0, 0)",
+//             },
+           
+//             // Repeat the same structure for weekly data if needed
+//           ],
+//         };
+//       }
+     
+//     }
+//   }
+
+
+//   const optionsWeekly = {
+//     responsive: true,
+//     plugins: {
+//       // datalabels: {
+//       //   display: false, // Set to false to remove data labels
+//       // },
+//       zoom: {
+//         pan: {
+//           enabled: true,
+//           mode: "x",
+//         },
+//         zoom: {
+//           pinch: {
+//             enabled: true, // Enable pinch zooming
+//           },
+//           wheel: {
+//             enabled: true, // Enable wheel zooming
+//           },
+//           mode: "x",
+//         },
+//       },
+//       legend: {
+//         position: "top",
+//       },
+//       title: {
+//         display: true,
+//         text: selected==="KR_Weekly"?"한국-4주":"미국-4주",
+//         fontSize: 20,
+//       },
+//     },
+//   };
+//   return (
+//     <div className="chart-container" style={{ width: "100%" }}>
+    
+//       {activeFlag == "KR_Weekly" && weeklyDataPV != undefined && (
+//         <Line data={WeeklyPVchart_data} options={optionsWeekly} />
+//       )}
+//        {activeFlag == "US_Weekly" && weeklyDataPV != undefined && (
+//         <Line data={WeeklyPVchart_data} options={optionsWeekly} />
+//       )}
+//     </div>
+//   );
+// };
+
 
 const HomePage = ({ scrollbarHandler }) => {
   const { responsiveValue } = useResponsive();
@@ -299,7 +405,7 @@ const HomePage = ({ scrollbarHandler }) => {
     (dateString) => new Date(dateString)
   );
   const data_reducer = useSelector((state) => state.dataReducer);
-  // console.log("data_reducer", data_reducer);
+  console.log("data_reducer", data_reducer);
   const initializeSelected = () => {
     let result;
 
@@ -1519,10 +1625,10 @@ const HomePage = ({ scrollbarHandler }) => {
 
     if (res_summary.status == 200) {
       setMarketCapNews(res_summary.data.market_cap_news);
-      setTradingVolNews(res_summary.data.trading_vol_news);
+      // setTradingVolNews(res_summary.data.trading_vol_news);
     } else {
       setMarketCapNews([]);
-      setTradingVolNews([]);
+      // setTradingVolNews([]);
     }
     setSummaryLoading(false);
   };
@@ -1902,7 +2008,7 @@ const HomePage = ({ scrollbarHandler }) => {
                 }}
               >
                 {asideButtonState === "SHANNON_STOCK"
-                  ? "딥트레이드테크놀로지스에서 개발한 주가 예측 모델, Shannon으로 예측하여 전체 주가 방향성을 산출하고 이를 바탕으로한 추천하는 상위 종목들을 보여줍니다."
+                  ? "딥트레이드테크놀로지스에서 개발한 개별 종목 예측 기술에 기반하여, 상승 확률이 가장 큰 종목을 보여줍니다."
                   : "딥트레이드테크놀로지스에서 개발한 위험 관리 시스템으로 시장 움직임을 예측하여 롱숏 포트폴리오 비중을 산출하여 투자 방향성을 보여줍니다."}
               </div>
             </Row>
@@ -2090,7 +2196,7 @@ const HomePage = ({ scrollbarHandler }) => {
                                 setModelType(el);
                               }}
                             >
-                              {el==="KR_Weekly"?"한국-Weekly":"미국-Weekly"}
+                              {el==="KR_Weekly"?"한국-4주":"미국-4주"}
                             </Button>
                           ));
                         }
@@ -3189,7 +3295,7 @@ const HomePage = ({ scrollbarHandler }) => {
               </>
             )}
             {/* if shannon index is active then show the news summary  */}
-            {asideButtonState === "SHANNON_INDEX" && (
+            {(asideButtonState === "SHANNON_INDEX" && selected==="KR_Weekly" )&&(
               <>
                 <Col
                   style={{
@@ -3217,7 +3323,7 @@ const HomePage = ({ scrollbarHandler }) => {
                         textAlign: "center",
                       }}
                     >
-                      섀넌의 한국 증시 요약
+                     오늘 섀넌의 한국 증시 요약
                     </div>
                     <WhiteSpace height={20} />
                     {summaryLoading ? (
@@ -3304,14 +3410,14 @@ const HomePage = ({ scrollbarHandler }) => {
                           }
                         })}
                         <WhiteSpace height={20} />
-                        <div
+                        {/* <div
                           style={{
                             width: "100%",
                             border: "0.5px solid #A3A1FF",
                           }}
-                        ></div>
-                        <WhiteSpace height={20} />
-                        <div
+                        ></div> */}
+                        {/* <WhiteSpace height={20} /> */}
+                        {/* <div
                           style={{
                             fontSize: 15,
                             fontWeight: "bold",
@@ -3321,8 +3427,8 @@ const HomePage = ({ scrollbarHandler }) => {
                           }}
                         >
                           거래 금액 기준
-                        </div>
-                        <WhiteSpace height={20} />
+                        </div> */}
+                        {/* <WhiteSpace height={20} />
                         {tradingVolNews.map((item, index) => {
                           if (item.top_summary_flag != 1) {
                             return (
@@ -3377,7 +3483,7 @@ const HomePage = ({ scrollbarHandler }) => {
                               </Row>
                             );
                           }
-                        })}
+                        })} */}
                       </>
                     )}
                   </ShadowCol>
@@ -3448,7 +3554,7 @@ const HomePage = ({ scrollbarHandler }) => {
                         textAlign: "left",
                       }}
                     >
-                      기간별 수익률
+                      지난 기간 수익률
                     </div>
                     {stockPriceLoader ? (
                       <Col>
@@ -3570,7 +3676,7 @@ const HomePage = ({ scrollbarHandler }) => {
                         textAlign: "left",
                       }}
                     >
-                      종목 뉴스
+                    종목 뉴스
                     </div>
                     <WhiteSpace height={15} />
                     {newsLoding ? (
