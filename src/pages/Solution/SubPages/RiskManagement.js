@@ -186,7 +186,7 @@ function RiskManagement() {
 {/* <div style={{color:"#FFF", fontSize: "1.2vw"}}>* Y% MDD 달성 (지난 10년 기준)</div> */}
 
             </div>
-       <img src='../../../assets/solution/riskchart_new.png'/>
+       <img src='../../../assets/solution/riskchart_new2.png'/>
 
             </div>
       
