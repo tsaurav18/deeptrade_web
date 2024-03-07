@@ -182,7 +182,7 @@ function StockPortfolio() {
           
         <div className="register_normal_text" style={{marginBottom:"20px", marginTop:"20px"}}>
      <div style={{color:"#FFF",fontSize: "1.2vw"}}>  <ul><li>해당 기술 기반 서비스 유진투자증권 2년 이상 제공 중</li><li>22년 하락장에서 지수대비 50% 수익</li>
-     <li>상기 성과는 실제 고객에게 제공한 종목으로 계산한 테스트 결과이고 실제수익률과 다를 수 있습니다.</li>
+     
      </ul></div>
      {/* <div style={{color:"#FFF",fontSize: "1.2vw"}}>  * 22년 하락장에서 지수대비 50% 수익</div> */}
             </div>
