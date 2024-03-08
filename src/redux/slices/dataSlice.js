@@ -6,6 +6,7 @@ const initialState = {
   shannon_top20: {},
   Daily: [],
   Weekly: [],
+  chart_data:[]
 };
 
 export const dataSlice = createSlice({
@@ -20,6 +21,7 @@ export const dataSlice = createSlice({
       state.Weekly = action.payload.Weekly;
       state.shannon_stock = action.payload.shannon_stock;
       state.shannon_index = action.payload.shannon_index;
+      state.chart_data = action.payload.chart_data
     },
     resetDataState: (state) => {
       return initialState; // Reset the state to the initial state

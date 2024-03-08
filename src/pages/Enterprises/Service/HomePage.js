@@ -276,110 +276,113 @@ const LineChart = ({ DailyData, WeeklyData, activeFlag, selected }) => {
   );
 };
 
-// const LineChartPV = ({ WeeklyDataPV, activeFlag, selected }) => {
-//   const weeklyDataPV = WeeklyDataPV;
-
-//   // Extracting dates and values for each category
-//   let weeklyPVDates;
-//   let weeklyPVValues;
-
-//   let WeeklyPVchart_data;
+const LineChartPV = ({ WeeklyDataPV, activeFlag, selected }) => {
   
-//   if (weeklyDataPV != undefined) {
-//     if(selected==="KR_Weekly")  {
-//       if (weeklyDataPV.KR_Weekly != undefined){
-//         weeklyPVDates = weeklyDataPV.KR_Weekly.map((entry) => entry.date);
-//         weeklyPVValues = weeklyDataPV.KR_Weekly.map((entry) => entry.pv);
+  const weeklyDataPV = WeeklyDataPV;
+  
+  // Extracting dates and values for each category
+  let weeklyPVDates;
+  let weeklyPVValues;
+
+  let WeeklyPVchart_data;
+  
+  if (weeklyDataPV != undefined) {
+    if(selected==="KR_Weekly")  {
+      if (weeklyDataPV.kr_pv != undefined){
+        weeklyPVDates = weeklyDataPV.kr_pv.date;
+        weeklyPVValues = weeklyDataPV.kr_pv.pv;
      
-//         WeeklyPVchart_data = {
-//           labels: weeklyPVDates, // You can use either daily or weekly dates here
-//           datasets: [
-//             {
-//               label: "PV",
-//               data: weeklyPVValues,
-//               borderColor: "rgb(255, 159, 64)",
-//               backgroundColor: "rgba(255, 159, 64, 0.5)",
-//               borderWidth: 1,
-//               fill: false,
-//               pointLabelFontColor: "rgba(0, 0, 0, 0)",
-//             },
-//             // Repeat the same structure for weekly data if needed
-//           ],
-//         };
-//       }
+        WeeklyPVchart_data = {
+          labels: weeklyPVDates, // You can use either daily or weekly dates here
+          datasets: [
+            {
+              label: "PV",
+              data: weeklyPVValues,
+              borderColor: "rgb(255, 159, 64)",
+              backgroundColor: "rgba(255, 159, 64, 0.5)",
+              borderWidth: 1,
+              fill: false,
+              pointLabelFontColor: "rgba(0, 0, 0, 0)",
+            },
+            // Repeat the same structure for weekly data if needed
+          ],
+        };
+      }
       
-//     }
-//     else if(selected==="US_Weekly"){
-//       if (weeklyDataPV.US_Weekly != undefined) {
+    }
+    else if(selected==="US_Weekly"){
+      if (weeklyDataPV.us_pv != undefined) {
       
-//         weeklyPVDates = weeklyDataPV.US_Weekly.map((entry) => entry.date);
-//         weeklyPVValues = weeklyDataPV.US_Weekly.map((entry) => entry.pv);
+        weeklyPVDates = weeklyDataPV.us_pv.date
+        weeklyPVValues = weeklyDataPV.us_pv.pv
        
-//         WeeklyPVchart_data = {
-//           labels: weeklyPVDates, // You can use either daily or weekly dates here
-//           datasets: [
-//             {
-//               label: "PV",
-//               data: weeklyPVValues,
-//               borderColor: "rgb(255, 159, 64)",
-//               backgroundColor: "rgba(255, 159, 64, 0.5)",
-//               borderWidth: 1,
-//               fill: false,
-//               pointLabelFontColor: "rgba(0, 0, 0, 0)",
-//             },
+        WeeklyPVchart_data = {
+          labels: weeklyPVDates, // You can use either daily or weekly dates here
+          datasets: [
+            {
+              label: "PV",
+              data: weeklyPVValues,
+              borderColor: "rgb(255, 159, 64)",
+              backgroundColor: "rgba(255, 159, 64, 0.5)",
+              borderWidth: 1,
+              fill: false,
+              pointLabelFontColor: "rgba(0, 0, 0, 0)",
+            },
            
-//             // Repeat the same structure for weekly data if needed
-//           ],
-//         };
-//       }
+            // Repeat the same structure for weekly data if needed
+          ],
+        };
+      }
      
-//     }
-//   }
+    }
+  }
 
 
-//   const optionsWeekly = {
-//     responsive: true,
-//     plugins: {
-//       // datalabels: {
-//       //   display: false, // Set to false to remove data labels
-//       // },
-//       zoom: {
-//         pan: {
-//           enabled: true,
-//           mode: "x",
-//         },
-//         zoom: {
-//           pinch: {
-//             enabled: true, // Enable pinch zooming
-//           },
-//           wheel: {
-//             enabled: true, // Enable wheel zooming
-//           },
-//           mode: "x",
-//         },
-//       },
-//       legend: {
-//         position: "top",
-//       },
-//       title: {
-//         display: true,
-//         text: selected==="KR_Weekly"?"한국-4주":"미국-4주",
-//         fontSize: 20,
-//       },
-//     },
-//   };
-//   return (
-//     <div className="chart-container" style={{ width: "100%" }}>
+  const optionsWeekly = {
+    responsive: true,
+    plugins: {
+      // datalabels: {
+      //   display: false, // Set to false to remove data labels
+      // },
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: "x",
+        },
+        zoom: {
+          pinch: {
+            enabled: true, // Enable pinch zooming
+          },
+          wheel: {
+            enabled: true, // Enable wheel zooming
+          },
+          mode: "x",
+        },
+      },
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: selected==="KR_Weekly"?"한국-4주":"미국-4주",
+        fontSize: 20,
+      },
     
-//       {activeFlag == "KR_Weekly" && weeklyDataPV != undefined && (
-//         <Line data={WeeklyPVchart_data} options={optionsWeekly} />
-//       )}
-//        {activeFlag == "US_Weekly" && weeklyDataPV != undefined && (
-//         <Line data={WeeklyPVchart_data} options={optionsWeekly} />
-//       )}
-//     </div>
-//   );
-// };
+    },
+  
+  };
+  return (
+    <div className="chart-container" style={{ width: "100%" }}>
+    
+      {activeFlag == "KR_Weekly" && weeklyDataPV != undefined && (
+        <Line data={WeeklyPVchart_data} options={optionsWeekly} />
+      )}
+       {activeFlag == "US_Weekly" && weeklyDataPV != undefined && (
+        <Line data={WeeklyPVchart_data} options={optionsWeekly} />
+      )}
+    </div>
+  );
+};
 
 
 const HomePage = ({ scrollbarHandler }) => {
@@ -3264,7 +3267,33 @@ const HomePage = ({ scrollbarHandler }) => {
             {/* Stock Page */}
             {/* Chart for shannon index */}
             {asideButtonState === "SHANNON_INDEX" && (
-              <>
+              <Col>
+                 {/* <Col
+                  style={{
+                    // width: 840,
+                    justifyContent: "flex-start",
+                    paddingBottom: 20,
+                    height: "auto",
+                  }}
+                >
+                  <ShadowCol
+                    style={{
+                      // width: 840,
+                      height: "auto",
+                      padding: 10,
+                      paddingTop: 15,
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    {data_reducer && (
+                      <LineChartPV
+                      WeeklyDataPV={data_reducer.chart_data}
+                        activeFlag={modelType}
+                        selected ={selected}
+                      />
+                    )}
+                  </ShadowCol>
+                </Col> */}
                 <Col
                   style={{
                     // width: 840,
@@ -3292,7 +3321,9 @@ const HomePage = ({ scrollbarHandler }) => {
                     )}
                   </ShadowCol>
                 </Col>
-              </>
+                {/* PV Chart Rendering */}
+             
+              </Col>
             )}
             {/* if shannon index is active then show the news summary  */}
             {(asideButtonState === "SHANNON_INDEX" && selected==="KR_Weekly" )&&(

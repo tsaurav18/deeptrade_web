@@ -88,7 +88,7 @@
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    width: 40vw;
+    width: 56vw;
     align-items: center;
 }
 
@@ -117,7 +117,7 @@
 .port_bottom_title {
     background-color: #394350;
     color: white;
-    width: 8vw;
+    width: 8vw!important;
     height: 1.5vw;
     display: flex;
     justify-content: center;
@@ -129,7 +129,9 @@
 .port_bottom_body {
     padding: 10px;
     text-align: left;
-    font-size: 0.7vw;
+    font-size: 0.7vw!important;
+    width: 507px
+   
 }
 
 .port_top_title {
@@ -243,7 +245,7 @@
     }
 
     .spop_portfolio_inner_container {
-        width: 50vw;
+        width: 50vw!important;
     }
 
     .portfolio_img {
@@ -266,7 +268,8 @@
     }
 
     .port_bottom_body {
-        font-size: 0.9vw;
+        font-size: 0.9vw!important;
+        width: 320px!important;
     }
 
     .download_icon {
@@ -277,9 +280,11 @@
 
 @media only screen and (max-width: 1000px) {
     .spop_portfolio_inner_container {
-        width: 60vw;
+        width: 60vw!important;;
     }
-
+    .port_bottom_body{
+        width: -webkit-fill-available;
+    }
     .spop_top_title_img {
         top: 9vw;
         width: 64vw;
@@ -413,7 +418,7 @@
 
 @media only screen and (max-width: 850px) {
     .spop_portfolio_inner_container {
-        width: 70vw;
+        width: 70vw!important;
     }
 }
 
@@ -453,7 +458,7 @@
     }
 
     .spop_portfolio_inner_container {
-        width: 90vw;
+        width: 90vw!important;
     }
 
     .portfolio_img {
@@ -487,7 +492,7 @@
     }
 
     .port_bottom_body {
-        font-size: 4vw;
+        font-size: 2vw!important;
     }
 
     .text_title {

@@ -67,10 +67,7 @@ export default function Spop() {
           className="spop_center_text spop_service_body"
           style={{ color: "white" }}
         >
-          딥트레이드테크놀로지스는 삼성증권 플랫폼을 통해 정기적으로 AI
-          포트폴리오를 제공해주는 투자 자문 서비스를 제공하고 있습니다. 매달
-          전송해드리는 포트폴리오를 수락만 하면 자동으로 리밸런싱 해주는 최적의
-          편의성을 갖춘 상품입니다.
+       딥트레이드테크놀로지스는 삼성증권 플랫폼을 통해 정기적으로 AI 포트폴리오를 제공해 주는 투자 자문 서비스를 제공하고 있습니다. 주기적으로 전송하는 포트폴리오 리밸런싱 상품과 상시 포트폴리오를 정보로 제공하는 상품 두 종류가 있습니다.
         </div>
       </div>
       <div
@@ -94,19 +91,16 @@ export default function Spop() {
             </div>
             <div className="spop_portfolio_right_container">
               <div className="port_top">
-                <div className="port_top_title">딥트레이드 알파</div>
+                <div className="port_top_title">딥트레이드 인덱스 알파</div>
                 <div className="port_top_body">
-                  딥트레이드테크놀로지스 AI 엔진이 구성한 주식 포트폴리오와
-                  수익률 상위권 주식형 및 채권형 펀드 및 MMF에 투자하는 액티브
-                  로보어드바이저
+                딥트레이드테크놀로지스 Index Shannon AI 엔진이 분석한 시장 방향을 바탕으로 지수 ETF에 투자하는 액티브 로보어드바이저
                 </div>
               </div>
               <div className="port_bottom">
                 <div className="port_bottom_title">가입 대상</div>
                 <div className="port_bottom_body">
-                  딥트레이드테크놀로지스의 주가 예측 AI가 포트폴리오 개별 종목을
-                  선정하는 포트폴리오를 통해 지수보다 월등히 높은 투자 성과를
-                  기대하는 투자자
+                딥트레이드테크놀로지스의 Index Shannon AI가 예측한 시장방향을 바탕으로 한 포트폴리오를 통해 지수보다 높고 안정적인 투자 성과를 기대하는 투자자
+
                 </div>
               </div>
             </div>
@@ -120,18 +114,17 @@ export default function Spop() {
             </div>
             <div className="spop_portfolio_right_container">
               <div className="port_top">
-                <div className="port_top_title">딥트레이드 루비 (IRP/DC)</div>
+                <div className="port_top_title">딥트레이드 인덱스 알파 (IRP/DC, 연금저축)</div>
                 <div className="port_top_body">
-                  딥트레이드테크놀로지스 AI 엔진이 추천하는 국내 및 해외 주식형
-                  펀드와 안정성 높은 채권형 펀드 및 MMF에 투자하는 안정적인
-                  퇴직연금 관리 서비스
+                딥트레이드테크놀로지스 Index Shannon AI 엔진이 분석한 국내 및 미국 시장 방향을 바탕으로 지수 ETF 및 MMF에 투자하는 안정적인 퇴직연금 및 연금저축 관리 서비스
+
                 </div>
               </div>
               <div className="port_bottom">
                 <div className="port_bottom_title">가입 대상</div>
                 <div className="port_bottom_body">
-                  지속적으로 적립되는 퇴직연금 계좌에서 지수보다 높고 안정적인
-                  투자 성과를 기대하는 투자자
+                지속적으로 적립되는 퇴직연금 및 연금저축 계좌에서 지수보다 높고 매우 안정적인 투자 성과를 기대하는 투자자
+
                 </div>
               </div>
             </div>
@@ -145,18 +138,16 @@ export default function Spop() {
             </div>
             <div className="spop_portfolio_right_container">
               <div className="port_top">
-                <div className="port_top_title">딥트레이드 루비 (연금저축)</div>
+                <div className="port_top_title">딥트레이드 AI 종목 실시간 추천</div>
                 <div className="port_top_body">
-                  딥트레이드테크놀로지스 AI 엔진이 추천하는 국내 및 해외 주식형
-                  펀드와 안정성 높은 채권형 펀드 및 MMF에 투자하는 안정적인
-                  연금저축 관리 서비스
+                딥트레이드테크놀로지스 Stock Shannon AI 엔진이 향후 시장의 움직임을 예측하며 이를 바탕으로 다양한 포트폴리오를 구성할 수 있는 서비스 
                 </div>
               </div>
               <div className="port_bottom">
                 <div className="port_bottom_title">가입 대상</div>
                 <div className="port_bottom_body">
-                  연간 최대 400만원 한도의 세액 공제 혜택과 더불어 지수보다 높고
-                  안정적인 투자 성과를 기대하는 투자자
+                딥트레이드테크놀로지스의 Stock Shannon AI가 선정한 추천 개별 종목을 바탕으로 한 포트폴리오를 통해 지수보다 월등히 높은 투자  성과를 기대하는 투자자
+
                 </div>
               </div>
             </div>
