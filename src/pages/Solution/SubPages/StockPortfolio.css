@@ -839,6 +839,7 @@
 
 .tech_icon_container {
     padding: 72px 212px !important;
+    justify-content: center;
 }
 
 
@@ -1717,4 +1718,8 @@
     .instructions_body {
         font-size: 4vw;
     }
+}
+
+.imgDesign {
+    max-width: 1200px;
 }
