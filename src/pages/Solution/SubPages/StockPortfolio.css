@@ -1723,3 +1723,9 @@
 .imgDesign {
     max-width: 1200px;
 }
+
+@media only screen and (max-width: 1200px) {
+    .imgDesign {
+        max-width: 900px;
+    }
+}
