@@ -1588,6 +1588,7 @@ const HomePage = ({ scrollbarHandler }) => {
     }
     setNewsLoding(false);
   };
+ 
   //간접적인 관련 뉴스
   const fetchRelatedNewslist = async () => {
     setRelNewsLoding(true);
@@ -1815,7 +1816,7 @@ const HomePage = ({ scrollbarHandler }) => {
             <>
               <ShadowCol
                 style={{
-                  width: "17vw",
+                  width: "242px",
                   // height: 120,
                   height: "auto",
                   padding: 10,
@@ -1825,7 +1826,7 @@ const HomePage = ({ scrollbarHandler }) => {
               >
                 <Row
                   style={{
-                    width: "100%",
+                    // width: "100%",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
@@ -1893,7 +1894,7 @@ const HomePage = ({ scrollbarHandler }) => {
                           fontSize: 14,
                           borderRadius: 5,
                           width: "152px",
-                          marginBottom: "10px",
+                          // marginBottom: "10px",
                           color: "#FFF",
                           backgroundColor:
                             asideButtonState === "SHANNON_INDEX"
