@@ -3268,7 +3268,7 @@ const HomePage = ({ scrollbarHandler }) => {
             {/* Chart for shannon index */}
             {asideButtonState === "SHANNON_INDEX" && (
               <Col>
-                 {/* <Col
+                 <Col
                   style={{
                     // width: 840,
                     justifyContent: "flex-start",
@@ -3293,7 +3293,7 @@ const HomePage = ({ scrollbarHandler }) => {
                       />
                     )}
                   </ShadowCol>
-                </Col> */}
+                </Col>
                 <Col
                   style={{
                     // width: 840,
