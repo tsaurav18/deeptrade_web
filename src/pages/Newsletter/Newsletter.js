@@ -15,7 +15,7 @@ function Newsletter(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email }),
     };
-    fetch("https://xpct.net/api/unsubscribe_email", requestOptions)
+    fetch("https://xpercent.io/api/unsubscribe_email", requestOptions)
       .then((response) => response.json())
       .then((data) => setSuccess(true));
   };
@@ -29,7 +29,7 @@ function Newsletter(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email }),
       };
-      fetch("https://xpct.net/api/auth/register_newsletter/", requestOptions)
+      fetch("https://xpercent.io/api/auth/register_newsletter/", requestOptions)
         .then((response) => response.json())
         .then((response) => {
           console.log(">>>", response.code, response.msg);
