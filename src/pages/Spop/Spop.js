@@ -48,7 +48,7 @@ export default function Spop() {
             />
             <div className="spop_top_title_text">
               딥트레이드테크놀로지스의 주식 예측 AI 엔진의 정기적인 포트폴리오
-              구성 서비스를 삼성증권 mPop 서비스에서 제공을 시작하였습니다.
+              구성 서비스를 삼성증권 mPOP 서비스에서 제공을 시작하였습니다.
               간편하게 딥트레이드테크놀로지스의 AI 엔진을 이용한 자산 관리가
               가능합니다.
             </div>

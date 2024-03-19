@@ -79,7 +79,7 @@ function Solution(props) {
         <div className="row" style={{ marginTop: 10, padding:"0px 10px"}}>
           <div className="col-12 solution_img_margin_top" style={{textAlign:"center",backgroundColor:"#e7e7e7",borderRadius:4}}>
             <img
-              src="assets/product/stockPortfolio1.png"
+              src="assets/product/stockShannon_new.png"
               alt="image"
               style={{ width: "100%" }}
             />
@@ -129,7 +129,7 @@ function Solution(props) {
             <div className="row" style={{ marginTop: 10 ,padding:"0px 10px"}}>
               <div className="col-12 solution_img_margin_top"style={{textAlign:"center", backgroundColor:"#e7e7e7",borderRadius:4}}>
                 <img
-                  src="assets/product/etfport_logo1.png"
+                  src="assets/product/etfport_logo_new.png"
                   alt="etf_image"
                   style={{ width: "100%" }}
                 />
@@ -178,7 +178,7 @@ function Solution(props) {
             <div className="row" style={{ marginTop: 10,padding:"0px 10px"}}>
               <div className="col-12 solution_img_margin_top" style={{textAlign:"center",backgroundColor:"#e7e7e7", borderRadius:4}}>
                 <img
-                  src="assets/product/riskmang_logo1.png"
+                  src="assets/product/riskmang_logo_new.png"
                   alt="riskmang_logo"
                   style={{ width: "100%"}}
                 />
