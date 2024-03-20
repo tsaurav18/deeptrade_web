@@ -416,6 +416,7 @@ function DbInvestment() {
   const tdStyleBlue = {
     // backgroundColor: "#00b0f0",
   };
+
   const [limeMacroPastDate, setLimeMacroPastDate] = useState('');
   const [pastEMPTextDate, setPastEMPTextDate] = useState(options[0].label);
   const [currentEMPTextDate, setCurrentEMPTextDate] = useState("");
@@ -621,20 +622,43 @@ function DbInvestment() {
       const res = await getDtData.getLimeResult(selectedStockDate);
 
       if (res.status === 200) {
-        console.log("fetchLimeResult data", res.data);
+        console.log("fetchLimeResult XAI 적용 결과값", res.data);
         setLimeResult(res.data.data);
         setLimeResultVar(res.data.lime_var);
         setLimeResultImp(res.data.lime_imp);
       } else {
         setLimeResult([]);
-        console.log(" Lime result res.status", res.status);
+        console.log(" XAI 적용 결과값 fetchLimeResult res.status", res.status);
       }
     } catch (error) {
-      console.log("fetchLimeResult catch error", error);
+      console.log("XAI 적용 결과값 fetchLimeResult catch error", error);
       toast("서버 접속 에러 관리자에게 문의해주세요.");
     }
     setLimeResultLoader(false);
   };
+
+    // // Get LIME Result
+    // const getXAIImportantFeatures = async () => {
+    //   try {
+    //     setLimeResultLoader(true);
+  
+    //     const res = await getDtData.getLimeResult(selectedStockDate);
+  
+    //     if (res.status === 200) {
+    //       console.log("fetchLimeResult XAI 적용 결과값", res.data);
+    //       setLimeResult(res.data.data);
+    //       setLimeResultVar(res.data.lime_var);
+    //       setLimeResultImp(res.data.lime_imp);
+    //     } else {
+    //       setLimeResult([]);
+    //       console.log(" XAI 적용 결과값 fetchLimeResult res.status", res.status);
+    //     }
+    //   } catch (error) {
+    //     console.log("XAI 적용 결과값 fetchLimeResult catch error", error);
+    //     toast("서버 접속 에러 관리자에게 문의해주세요.");
+    //   }
+    //   setLimeResultLoader(false);
+    // };
 
   useEffect(() => {
     let isComponentRender = true;
@@ -1595,14 +1619,14 @@ function DbInvestment() {
                               <td style={tdStyle}>{list.date}</td>
                               <td style={tdStyle}>{list.lime_var}</td>
                               <td style={tdStyle}>{list.lime_imp}</td>
-                              <td style={tdStyle}>{list.cash.toFixed(3)}</td>
-                              <td style={tdStyle}>{list.all_stocks.toFixed(3)}</td>
-                              <td style={tdStyle}>{list.large_cap.toFixed(3)}</td>
-                              <td style={tdStyle}>{list.esg.toFixed(3)}</td>
-                              <td style={tdStyle}>{list.growth.toFixed(3)}</td>
-                              <td style={tdStyle}>{list.value.toFixed(3)}</td>
-                              <td style={tdStyle}>{list.mid_small.toFixed(3)}</td>
-                              <td style={tdStyle}>{list.dividend.toFixed(3)}</td>
+                              <td style={tdStyle}>{list.cash?list.cash.toFixed(3):list.cash}</td>
+                              <td style={tdStyle}>{list.all_stocks?list.all_stocks.toFixed(3):list.all_stocks}</td>
+                              <td style={tdStyle}>{list.large_cap?list.large_cap.toFixed(3):list.large_cap}</td>
+                              <td style={tdStyle}>{list.esg?list.esg.toFixed(3):list.esg}</td>
+                              <td style={tdStyle}>{list.growth?list.growth.toFixed(3):list.growth}</td>
+                              <td style={tdStyle}>{list.value?list.value.toFixed(3):list.value}</td>
+                              <td style={tdStyle}>{list.mid_small?list.mid_small.toFixed(3):list.mid_small}</td>
+                              <td style={tdStyle}>{list.dividend?list.dividend.toFixed(3):list.dividend}</td>
                             </tr>
                           );
                         })}
@@ -1657,6 +1681,14 @@ function DbInvestment() {
                     </thead>
                     <tbody>
                     <tr>
+                      <td style={tdStyle}>{"2024-03-20"}</td>
+                        <td style={tdStyle}>KS11<br />130</td>
+                        <td style={tdStyle}>KQ11<br />115</td>
+                        <td style={tdStyle}>NDX<br />111</td>
+                        <td style={tdStyle}>KS200_TV<br />109</td>
+                        <td style={tdStyle}>US_RATE_SPREAD<br />107</td>
+                      </tr>
+                    <tr>
                         <td style={tdStyle}>{"2024-02-20"}</td>
                         <td style={tdStyle}>OIL<br />155</td>
                         <td style={tdStyle}>KS200 거래대금<br />134</td>
@@ -1671,7 +1703,7 @@ function DbInvestment() {
                         <td style={tdStyle}>S&P500<br />111</td>
                         <td style={tdStyle}>USDKRW<br />108</td>
                         <td style={tdStyle}>DOW JONES<br />107</td>
-                        <td style={tdStyle}>KOSPI<br />104</td>
+                        <td style={tdStyle}>KS11<br />104</td>
                       </tr>
 
                       <tr>
@@ -1680,17 +1712,17 @@ function DbInvestment() {
                         <td style={tdStyle}>USDKRW<br />119</td>
                         <td style={tdStyle}>S&P500<br />117</td>
                         <td style={tdStyle}>DOW JONES<br />114</td>
-                        <td style={tdStyle}>KOSPI<br />107</td>
+                        <td style={tdStyle}>KS11<br />107</td>
                       </tr>
 
-                      <tr>
+                      {/* <tr>
                       <td style={tdStyle}>{"2023-11-20"}</td>
                         <td style={tdStyle}>NASDAQ<br />123</td>
                         <td style={tdStyle}>S&P500<br />122</td>
                         <td style={tdStyle}>USDKRW<br />121</td>
                         <td style={tdStyle}>DOW JONES<br />116</td>
                         <td style={tdStyle}>KOSPI<br />108</td>
-                      </tr>
+                      </tr> */}
                       <tr>
                         <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
                       </tr>
@@ -1735,41 +1767,49 @@ function DbInvestment() {
                     </tr>
                   </thead>
                   <tbody>
+                  <tr>
+                      <td style={tdStyle}>2024-02-20 ~ 2024-03-20</td>
+                      <td style={tdStyleUp}>NDX<br />114</td>
+                      <td style={tdStyleUp}>KS11<br />109</td>
+                      <td style={tdStyleUp}>KS200_TV<br />108</td>
+                      <td style={tdStyleUp}>OIL<br />108</td>
+                      <td style={tdStyleUp}>SPX<br />107</td>
+                    </tr>
                     <tr>
                       <td style={tdStyle}>2024-01-19 ~ 2024-02-20</td>
-                      <td style={tdStyleUp}>NASDAQ<br />119</td>
-                      <td style={tdStyleUp}>OIL<br />110</td>
-                      <td style={tdStyleUp}>GOLD<br />109</td>
-                      <td style={tdStyleUp}>S&P500<br />105</td>
-                      <td style={tdStyleUp}>DOW JONES<br />102</td>
+                      <td style={tdStyleUp}>OIL<br />134</td>
+                      <td style={tdStyleUp}>KS200_TV<br />124</td>
+                      <td style={tdStyleUp}>NDX<br />114</td>
+                      <td style={tdStyleUp}>SPX<br />106</td>
+                      <td style={tdStyleUp}>DJI<br />101</td>
                     </tr>
 
                     <tr>
                       <td style={tdStyle}>2023-12-19 ~ 2024-01-19</td>
-                      <td style={tdStyleUp}>NASDAQ<br />121</td>
-                      <td style={tdStyleUp}>S&P500<br />119</td>
-                      <td style={tdStyleUp}>USDKRW<br />117</td>
-                      <td style={tdStyleUp}>DOW JONES<br />114</td>
-                      <td style={tdStyleUp}>KOSPI<br />107</td>
+                      <td style={tdStyleUp}>NDX<br />123</td>
+                      <td style={tdStyleUp}>GOLD<br />118</td>
+                      <td style={tdStyleUp}>SPX<br />104</td>
+                      <td style={tdStyleUp}>OIL<br />103</td>
+                      <td style={tdStyleUp}>DJI<br />102</td>
                     </tr>
 
                     <tr>
                       <td style={tdStyle}>2023-11-20 ~ 2023-12-19</td>
-                      <td style={tdStyleUp}>NASDAQ<br />121</td>
-                      <td style={tdStyleUp}>USDKRW<br />119</td>
-                      <td style={tdStyleUp}>S&P500<br />117</td>
-                      <td style={tdStyleUp}>DOW JONES<br />114</td>
-                      <td style={tdStyleUp}>KOSPI<br />107</td>
+                      <td style={tdStyleUp}>NDX<br />122</td>
+                      <td style={tdStyleUp}>GOLD<br />116</td>
+                      <td style={tdStyleUp}>USDKRW<br />113</td>
+                      <td style={tdStyleUp}>SPX<br />106</td>
+                      <td style={tdStyleUp}>DJI<br />105</td>
                     </tr>
 
-                    <tr>
+                    {/* <tr>
                       <td style={tdStyle}>2023-10-20 ~ 2023-11-20</td>
                       <td style={tdStyleUp}>NASDAQ<br />121</td>
                       <td style={tdStyleUp}>S&P500<br />119</td>
                       <td style={tdStyleUp}>USDKRW<br />117</td>
                       <td style={tdStyleUp}>DOW JONES<br />114</td>
                       <td style={tdStyleUp}>KOSPI<br />107</td>
-                    </tr>
+                    </tr> */}
                     <tr>
                       <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
                     </tr>
@@ -1835,29 +1875,29 @@ function DbInvestment() {
                   <tbody>
                     <tr>
                       <td style={tdStyle}>3개월 전 ~ 5일 전 </td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KS200 거래대금<br />6</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>GOLD<br />-5</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>USDKRW<br />-5</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>NASDAQ<br />-3</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>KOSPI200<br />2</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>OIL<br />5</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KS11<br />-4</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>DJI<br />3</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>USDKRW<br />-2</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>US_RATE_SPREAD<br />-2</td>
                     </tr>
 
                     <tr>
                       <td style={tdStyle}>3개월 전 ~ 1개월 전</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>GOLD<br />-5</td> 
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>KR RATE SPREAD<br />3</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>USDKRW<br />3</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>OIL<br />-3</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>KS200 거래대금<br />-3</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KS11<br />-4</td> 
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>DJI<br />2</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>SPX<br />2</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>GOLD<br />2</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>OIL<br />1</td>
                     </tr>
 
                     <tr>
                       <td style={tdStyle}>6개월 전 ~ 1개월 전</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>USDKRW<br />1</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KOPSI200<br />1</td>
-                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KR RATE SPREAD<br />1</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>GOLD<br />-1</td>
-                      <td style={{...tdStyleUp, ...tdStyleRed}}>DOW JONES<br />-1</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>KS200_TV<br />-6</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>DJI<br />4</td>
+                      <td style={{...tdStyleUp, ...tdStyleBlue}}>USDKRW<br />4</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>SPX<br />3</td>
+                      <td style={{...tdStyleUp, ...tdStyleRed}}>KS11<br />-3</td>
                     </tr>
                     <tr>
                       <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
