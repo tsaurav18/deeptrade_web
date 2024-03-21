@@ -145,7 +145,7 @@ const EnterprisesService = () => {
           }}
         > 
 
-        {user_info_reducer.company_name ==="DB"?   
+        {user_info_reducer.company_name ==="DB" || user_info_reducer.company_name ==="temp"?   
      
           <DbInvestment/>
           : <Routes>
