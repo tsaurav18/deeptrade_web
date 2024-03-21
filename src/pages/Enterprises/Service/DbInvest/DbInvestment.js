@@ -914,7 +914,7 @@ function DbInvestment() {
               />
             ) : (
               <>
-                {dbSignalCurrentData &&
+                {dbSignalCurrentData && user_info_reducer.company_name!="temp"?
                   dbSignalCurrentData.map((list, index) => {
                     return (
                       <Row
@@ -957,6 +957,7 @@ function DbInvestment() {
                             transition: "all 0.3s ease-in-out",
                             overflow: "hidden",
                             fontSize:responsiveValue(18, 15, 10)
+                            
                           }}
                         >
                           {list.cash}
@@ -969,7 +970,8 @@ function DbInvestment() {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(18, 15, 10),
+                         
                           }}
                         >
                           {list.all_stocks}
@@ -1048,6 +1050,166 @@ function DbInvestment() {
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
                             fontSize:responsiveValue(18, 15, 10)
+                          }}
+                        >
+                          {list.dividend}
+                        </div>
+                        {/* <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                            }}
+                          >
+                            {list.pv_return}
+                          </div> */}
+                      </Row>
+                    );
+                  }): dbSignalCurrentData.map((list, index) => {
+                    return (
+                      <Row
+                        key={index}
+                        onClick={() => {
+                          setSelectedStockDate(list.buying_date);
+                        }}
+                        style={{
+                          backgroundColor:
+                            selectedStockDate === list.buying_date
+                              ? "#f3f3f3"
+                              : "",
+                          height: 50,
+                          justifyContent: "space-around",
+                          alignItems: "center",
+                          fontSize: responsiveValue(16, 14, 12),
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            overflow: "hidden",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(18, 15, 10)
+                          }}
+                        >
+                          {list.buying_date}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            overflow: "hidden",
+                            fontSize:responsiveValue(18, 15, 10),
+                            filter: 'blur(4px)'
+                            
+                          }}
+                        >
+                          {list.cash}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(18, 15, 10),
+                            filter:'blur(4px)'
+                          }}
+                        >
+                          {list.all_stocks}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(18, 15, 10),
+                            filter: 'blur(4px)'
+                          }}
+                        >
+                          {list.large_cap}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(18, 15, 10),
+                            filter: 'blur(4px)'
+                          }}
+                        >
+                          {list.esg}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(18, 15, 10),
+                            filter: 'blur(4px)'
+                          }}
+                        >
+                          {list.growth}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(18, 15, 10),
+                            filter: 'blur(4px)'
+                          }}
+                        >
+                          {list.value}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(18, 15, 10),
+                            filter: 'blur(4px)'
+                          }}
+                        >
+                          {list.mid_small}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(18, 15, 10),
+                            filter: 'blur(4px)'
                           }}
                         >
                           {list.dividend}
