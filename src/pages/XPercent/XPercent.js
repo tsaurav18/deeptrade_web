@@ -45,7 +45,8 @@ function XPercent(props) {
               }
               ref={contentOneRef}
             >
-              <div className="row">
+              <div className="row" style={{display: "flex",
+    justifyContent: "center"}}>
                 <div className="col-12 col-md-4 xpercent_service_con_margin">
                   <div
                     style={{
@@ -95,7 +96,7 @@ function XPercent(props) {
                     서비스 상세 보기
                   </div>
                 </div>
-                <div className="col-12 col-md-8">
+                <div className="col-12 col-md-4">
                   <div
                     className="signal_class"
                     style={{
@@ -109,8 +110,8 @@ function XPercent(props) {
                   >
                     시그널형 자문서비스
                   </div>
-                  <div className="row " style={{height:"78px"}}>
-                    <div className="col-12 col-md-6">
+                  <div className="row" style={{height:"78px",}}>
+                    <div className="col-12 col-md-12">
                       <div className="row service_con_height" style={{ marginTop: 10,height:"78px",  display: "flex",
     alignItems: "center",
     justifyContent: "space-around"}}>
@@ -148,7 +149,7 @@ function XPercent(props) {
                         서비스 상세 보기
                       </div>
                     </div>
-                    <div className="col-12 col-md-6">
+                    {/* <div className="col-12 col-md-6">
                       <div className="row service_con_height" style={{ marginTop: 10 ,height:"78px",    display: "flex",
     alignItems: "center",
     justifyContent: "space-around"}}>
@@ -184,7 +185,7 @@ function XPercent(props) {
                       >
                         서비스 상세 보기
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
