@@ -30,7 +30,7 @@ export default function SideBar({ visible, show }) {
 			  width: 150
             }}
           >
-            <img src={"assets/deeptrade_logo2.png"} alt="logo" style={{objectFit: 'contain'}}/>
+            <img src={"assets/product/stockShannon_new_ratb.png"} alt="logo" style={{objectFit: 'contain'}}/>
           </NavLink>
           <div className="links nav-ratb-top">
             <NavLink

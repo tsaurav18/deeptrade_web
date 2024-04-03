@@ -9,44 +9,6 @@ import { useMediaQuery } from 'react-responsive';
 
 const { RangePicker } = DatePicker;
 
-const columns = [
-    {
-      title: '상품명',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '분류',
-      dataIndex: 'type',
-      key: 'type',
-    },
-    {
-      title: '종목명',
-      key: 'stock_name',
-      dataIndex: 'stock_name'
-    },
-    {
-      title: '위험도',
-      key: 'danger',
-      dataIndex: 'danger'
-    },
-    {
-      title: '매수 날짜',
-      key: 'buy_date',
-      dataIndex: 'buy_date'
-    },
-    {
-      title: '매도 날짜',
-      key: 'sell_date',
-      dataIndex: 'sell_date'
-    },
-    {
-      title: '비중',
-      key: 'weight',
-      dataIndex: 'weight'
-    },
-  ];
-
 export default function PortfolioList() {
 
     const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
@@ -56,6 +18,10 @@ export default function PortfolioList() {
     const [buyDate, setBuyDate] = useState(dayjs().subtract(12, 'months'));
     const [sellDate, setSellDate] = useState(dayjs().add(1, 'months'));
     const [data, setData] = useState([]);
+    const [paginationInfo, setPaginationInfo] = useState({
+        current: 1,
+        pageSize: 10
+      });
 
     const handleChange = (value) => {
         setProduct(value)
@@ -63,9 +29,71 @@ export default function PortfolioList() {
     const handleTypeChange = (value) => {
         setType(value)
     };
+    const handlePaginationChange = pagination => {
+        setPaginationInfo(pagination);
+      };
+
+    const columns = [
+        {
+          title: '상품명',
+          dataIndex: 'name',
+          key: 'name', 
+          onCell: (value, index) => {
+            const trueIndex =
+              index + paginationInfo.pageSize * (paginationInfo.current - 1);
+            const obj = {
+              children: value.name,
+              props: {}
+            };
+            if (index >= 1 && value.name === data[trueIndex - 1].name) {
+              obj.props.rowSpan = 0;
+            } else {
+              for (
+                let i = 0;
+                trueIndex + i !== data.length &&
+                value.name === data[trueIndex + i].name;
+                i += 1
+              ) {
+                obj.props.rowSpan = i + 1;
+              }
+            }
+            return obj.props;
+          },
+        },
+        {
+          title: '분류',
+          dataIndex: 'type',
+          key: 'type',
+        },
+        {
+          title: '종목명',
+          key: 'stock_name',
+          dataIndex: 'stock_name'
+        },
+        {
+          title: '위험도',
+          key: 'danger',
+          dataIndex: 'danger'
+        },
+        {
+          title: '매수 날짜',
+          key: 'buy_date',
+          dataIndex: 'buy_date'
+        },
+        {
+          title: '매도 날짜',
+          key: 'sell_date',
+          dataIndex: 'sell_date'
+        },
+        {
+          title: '비중',
+          key: 'weight',
+          dataIndex: 'weight'
+        },
+      ];
 
     const search = () => {
-        axios.post('https://xpct.net/api/ratb/get_portfolio_list/', {
+        axios.post('https://xpercent.io/api/ratb/get_portfolio_list/', {
             buy_date: buyDate.format('YYYY-MM-DD'),
             sell_date: sellDate.format('YYYY-MM-DD'),
             name: product,
@@ -239,7 +267,7 @@ export default function PortfolioList() {
                             >
                                 포트폴리오 목록
                             </div>
-                            <Table columns={columns} dataSource={data} size={'small'} />
+                            <Table columns={columns} dataSource={data} size={'small'} onChange={handlePaginationChange} />
                         </div>
                     </div>
                 </>

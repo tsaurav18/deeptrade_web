@@ -43,6 +43,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 ChartJS.register(
@@ -53,7 +54,8 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  zoomPlugin
+  zoomPlugin,
+  Filler
 );
 Modal.setAppElement("#root");
 
@@ -61,6 +63,9 @@ const LineChart = ({ DailyData, WeeklyData, activeFlag, selected }) => {
 
   const dailyData = DailyData;
   const weeklyData = WeeklyData;
+
+  let reversedArray = weeklyData.KR_Weekly.slice().reverse();
+  let reversedUSArray = weeklyData.US_Weekly.slice().reverse();
 
   let dailyDates;
   let dailyLongValues;
@@ -116,39 +121,43 @@ const LineChart = ({ DailyData, WeeklyData, activeFlag, selected }) => {
   if (weeklyData != undefined) {
     if(selected==="KR_Weekly")  {
       if (weeklyData.KR_Weekly != undefined){
-        weeklyDates = weeklyData.KR_Weekly.map((entry) => entry.date);
-        weeklyLongValues = weeklyData.KR_Weekly.map((entry) => entry.adj_Long);
-        weeklyCashValues = weeklyData.KR_Weekly.map((entry) => entry.adj_Cash);
-        weeklyShortValues = weeklyData.KR_Weekly.map((entry) => entry.adj_Short);
+        weeklyDates = reversedArray.map((entry) => entry.date);
+        weeklyLongValues = reversedArray.map((entry) => entry.adj_Long);
+        weeklyCashValues = reversedArray.map((entry) => entry.adj_Cash);
+        weeklyShortValues = reversedArray.map((entry) => -entry.adj_Short);
         Weeklychart_data = {
           labels: weeklyDates, // You can use either daily or weekly dates here
           datasets: [
             {
               label: "Long",
               data: weeklyLongValues,
-              borderColor: "rgb(255, 159, 64)",
-              backgroundColor: "rgba(255, 159, 64, 0.5)",
+              borderColor: "#4588b6",
+              pointBackgroundColor: '#4588b6',
+              backgroundColor: "rgba(71,138,183,0.5)",
               borderWidth: 1,
-              fill: false,
               pointLabelFontColor: "rgba(0, 0, 0, 0)",
+              fill: true,
+              pointRadius: 2
             },
-            {
-              label: "Cash",
-              data: weeklyCashValues,
-              borderColor: "rgb(75, 192, 192)",
-              backgroundColor: "rgba(75, 192, 192, 0.5)",
-              borderWidth: 1,
-              fill: false,
-              pointLabelFontColor: "rgba(0, 0, 0, 0)",
-            },
+            // {
+            //   label: "Cash",
+            //   data: weeklyCashValues,
+            //   borderColor: "rgb(75, 192, 192)",
+            //   backgroundColor: "rgba(75, 192, 192, 0.5)",
+            //   borderWidth: 1,
+            //   fill: false,
+            //   pointLabelFontColor: "rgba(0, 0, 0, 0)",
+            // },
             {
               label: "Short",
               data: weeklyShortValues,
-              borderColor: "rgb(54, 162, 235)",
-              backgroundColor: "rgba(54, 162, 235, 0.5)",
+              borderColor: "#e92540",
+              pointBackgroundColor: '#e92540',
+              backgroundColor: "rgba(233,37,64,0.5)",
               borderWidth: 1,
-              fill: false,
+              fill: true,
               pointLabelFontColor: "rgba(0, 0, 0, 0)",
+              pointRadius: 2
             },
             // Repeat the same structure for weekly data if needed
           ],
@@ -159,39 +168,43 @@ const LineChart = ({ DailyData, WeeklyData, activeFlag, selected }) => {
     else if(selected==="US_Weekly"){
       if (weeklyData.US_Weekly != undefined) {
       
-        weeklyDates = weeklyData.US_Weekly.map((entry) => entry.date);
-        weeklyLongValues = weeklyData.US_Weekly.map((entry) => entry.adj_Long);
-        weeklyCashValues = weeklyData.US_Weekly.map((entry) => entry.adj_Cash);
-        weeklyShortValues = weeklyData.US_Weekly.map((entry) => entry.adj_Short);
+        weeklyDates = reversedUSArray.map((entry) => entry.date);
+        weeklyLongValues = reversedUSArray.map((entry) => entry.adj_Long);
+        weeklyCashValues = reversedUSArray.map((entry) => entry.adj_Cash);
+        weeklyShortValues = reversedUSArray.map((entry) => -entry.adj_Short);
         Weeklychart_data = {
           labels: weeklyDates, // You can use either daily or weekly dates here
           datasets: [
             {
               label: "Long",
               data: weeklyLongValues,
-              borderColor: "rgb(255, 159, 64)",
-              backgroundColor: "rgba(255, 159, 64, 0.5)",
+              borderColor: "#4588b6",
+              pointBackgroundColor: '#4588b6',
+              backgroundColor: "rgba(71,138,183,0.5)",
               borderWidth: 1,
-              fill: false,
               pointLabelFontColor: "rgba(0, 0, 0, 0)",
+              fill: true,
+              pointRadius: 2
             },
-            {
-              label: "Cash",
-              data: weeklyCashValues,
-              borderColor: "rgb(75, 192, 192)",
-              backgroundColor: "rgba(75, 192, 192, 0.5)",
-              borderWidth: 1,
-              fill: false,
-              pointLabelFontColor: "rgba(0, 0, 0, 0)",
-            },
+            // {
+            //   label: "Cash",
+            //   data: weeklyCashValues,
+            //   borderColor: "rgb(75, 192, 192)",
+            //   backgroundColor: "rgba(75, 192, 192, 0.5)",
+            //   borderWidth: 1,
+            //   fill: false,
+            //   pointLabelFontColor: "rgba(0, 0, 0, 0)",
+            // },
             {
               label: "Short",
               data: weeklyShortValues,
-              borderColor: "rgb(54, 162, 235)",
-              backgroundColor: "rgba(54, 162, 235, 0.5)",
+              borderColor: "#e92540",
+              pointBackgroundColor: '#e92540',
+              backgroundColor: "rgba(233,37,64,0.5)",
               borderWidth: 1,
-              fill: false,
+              fill: true,
               pointLabelFontColor: "rgba(0, 0, 0, 0)",
+              pointRadius: 2
             },
             // Repeat the same structure for weekly data if needed
           ],
@@ -260,6 +273,12 @@ const LineChart = ({ DailyData, WeeklyData, activeFlag, selected }) => {
         fontSize: 20,
       },
     },
+    scales: {
+      y: {
+        min: -1,
+        max: 1
+      }
+    }
   };
   return (
     <div className="chart-container" style={{ width: "100%" }}>

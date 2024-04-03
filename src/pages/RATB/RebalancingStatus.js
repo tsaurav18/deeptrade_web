@@ -96,7 +96,7 @@ export default function RebalancingStatus() {
     ];
 
     const search = () => {
-        axios.post('https://xpct.net/api/ratb/get_rebalancing_info/', {
+        axios.post('https://xpercent.io/api/ratb/get_rebalancing_info/', {
           })
           .then(function (response) {
             var data = response.data;
