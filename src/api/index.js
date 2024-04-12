@@ -165,7 +165,7 @@ async getLimeMacroResult(selectedDate) {
     let csrf = await instance.get("mobile/get_csrf/");
 
     return instance
-      .post(`dtenter/dt_service_test/`, body, {
+      .post(`dtenter/dt_service/`, body, {
         headers: {
           "Content-Type": "application/json",
           "X-CSRFToken": csrf.data["token"],
