@@ -3,7 +3,7 @@ import axios from "axios";
 const productionUrl = "https://xpercent.io/api/";
 const localUrl = "http://13.125.37.183:8888/api/";
 export const instance = axios.create({
-  baseURL: productionUrl,
+  baseURL: localUrl,
 
   headers: {},
   validateStatus: function (status) {
@@ -88,13 +88,11 @@ async fetchXAIImportantFeaturesResult(selectedDate) {
 
 //Get DT-XAI important features of four months
 
-async fetchXAIImpFeatFourMonthResult(selectedDate) {
-  let body = JSON.stringify({
-    selectedDate:selectedDate,
-  });
+async fetchXAIImpFeatFourMonthResult() {
+ 
   let csrf = await instance.get("mobile/get_csrf/");
   return instance
-    .post("dtenter/db_invest_dt_xai_imp_feat/", body, {
+    .post("dtenter/db_invest_dt_xai_imp_feat/",{
       headers: {
         "Content-Type": "application/json",
         "X-CSRFToken": csrf.data["token"],
@@ -104,6 +102,27 @@ async fetchXAIImpFeatFourMonthResult(selectedDate) {
       return res;
     });
 },
+
+//Get DT-XAI  Long Short important features of four months
+
+async fetchXAILongShortImportanceResult(selectedDate) {
+  let body = JSON.stringify({
+    selectedDate:selectedDate,
+  });
+
+  let csrf = await instance.get("mobile/get_csrf/");
+  return instance
+    .post("dtenter/db_invest_dt_long_short_imp/", body, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrf.data["token"],
+      },
+    })
+    .then((res) => {
+      return res;
+    });
+},
+
 
   //LIME result
   async getLimeResult(selectedDate) {

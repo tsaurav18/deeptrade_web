@@ -416,6 +416,9 @@ function DbInvestment() {
   const tdStyleBlue = {
     // backgroundColor: "#00b0f0",
   };
+
+const [xaiLongShortImpLoader, setXaiLongShortImpLoader] = useState(false)
+const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
   const [dTXaiImpFeat4MonthResult, setDTXaiImpFeat4MonthResult] = useState([])
   const [dtxaiImpFeat4MonthLoader, setDtxaiImpFeat4MonthLoader] = useState(false)
   const [xaiImpFeatureResultLoader, setXaiImpFeatureResultLoader] = useState(false)
@@ -681,17 +684,17 @@ const getXAIImportantFeaturesFourMonth = async () => {
   try {
     setDtxaiImpFeat4MonthLoader(true);
 
-    const res = await getDtData.fetchXAIImpFeatFourMonthResult(selectedStockDate);
+    const res = await getDtData.fetchXAIImpFeatFourMonthResult();
 
     if (res.status === 200) {
-      console.log("getXAIImportantFeaturesFourMonth",res.data )
+      // console.log("getXAIImportantFeaturesFourMonth",res.data )
       setDTXaiImpFeat4MonthResult(res.data);
       
      
     } else if(res.status === 500) {
-      const res = await getDtData.fetchXAIImpFeatFourMonthResult(selectedStockDate);
+      const res = await getDtData.fetchXAIImpFeatFourMonthResult();
       if (res.status === 200) {
-        console.log("getXAIImportantFeaturesFourMonth",res.data )
+        // console.log("getXAIImportantFeaturesFourMonth",res.data )
         setDTXaiImpFeat4MonthResult(res.data);
         
        
@@ -707,7 +710,39 @@ const getXAIImportantFeaturesFourMonth = async () => {
   }
   setDtxaiImpFeat4MonthLoader(false);
 };
-  //  console.log("Imp features", xaiImpFeatureResult)
+
+// 장기 대비 단기 중요도의 변화 정도는 아래와 같습니다. 중요도 변화
+const getXAILongShortImportance = async () => {
+  try {
+    setXaiLongShortImpLoader(true);
+    
+    const res = await getDtData.fetchXAILongShortImportanceResult(selectedStockDate);
+
+    if (res.status === 200) {
+      // console.log("fetchXAILongShortImportanceResult",res.data )
+      setXaiLongShortImpResult(res.data);
+      
+     
+    } else if(res.status === 500) {
+      const res = await getDtData.fetchXAILongShortImportanceResult(selectedStockDate);
+      if (res.status === 200) {
+        console.log("fetchXAILongShortImportanceResult",res.data )
+        setXaiLongShortImpResult(res.data);
+        
+       
+      }else{
+        setXaiLongShortImpResult([]);
+      }
+    }else{
+      setXaiLongShortImpResult([]);
+    }
+  } catch (error) {
+    console.log("getXAILongShortImportance catch error", error);
+    toast("서버 접속 에러 관리자에게 문의해주세요.");
+  }
+  setXaiLongShortImpLoader(false);
+};
+
 
   useEffect(() => {
     let isComponentRender = true;
@@ -727,6 +762,7 @@ const getXAIImportantFeaturesFourMonth = async () => {
  
       getXAIImportantFeatures()
       getXAIImportantFeaturesFourMonth()
+      getXAILongShortImportance()
     }
 
     return () => {
@@ -2130,7 +2166,32 @@ const getXAIImportantFeaturesFourMonth = async () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    {xaiLongShortImpLoader==true?<Oval
+                  height={50}
+                  width={50}
+                  color="#4fa94d"
+                  wrapperStyle={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  wrapperClass=""
+                  visible={true}
+                  ariaLabel="oval-loading"
+                  secondaryColor="#4fa94d"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />: xaiLongShortImpResult.length>0 ? xaiLongShortImpResult && xaiLongShortImpResult.map(item=>(
+                  <tr>
+                  <td style={tdStyle}>{item.index} </td>
+                  <td style={{...tdStyleUp, ...tdStyleBlue}}>{item.r1_var}<br />{item.r1_dff}</td>
+                  <td style={{...tdStyleUp, ...tdStyleBlue}}>{item.r2_var}<br />{item.r2_dff}</td>
+                  <td style={{...tdStyleUp, ...tdStyleRed}}>{item.r3_var}<br />{item.r3_dff}</td>
+                  <td style={{...tdStyleUp, ...tdStyleRed}}>{item.r4_var}<br />{item.r4_dff}</td>
+                  <td style={{...tdStyleUp, ...tdStyleRed}}>{item.r5_var}<br />{item.r5_dff}</td>
+                </tr>
+
+                )):null}
+                    {/* <tr>
                       <td style={tdStyle}>3개월 전 ~ 5일 전 </td>
                       <td style={{...tdStyleUp, ...tdStyleBlue}}>OIL<br />5</td>
                       <td style={{...tdStyleUp, ...tdStyleBlue}}>KOSPI<br />-4</td>
@@ -2155,12 +2216,25 @@ const getXAIImportantFeaturesFourMonth = async () => {
                       <td style={{...tdStyleUp, ...tdStyleBlue}}>USDKRW<br />4</td>
                       <td style={{...tdStyleUp, ...tdStyleRed}}>S&P500<br />3</td>
                       <td style={{...tdStyleUp, ...tdStyleRed}}>KOSPI<br />-3</td>
-                    </tr>
+                    </tr> */}
                     <tr>
                       <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
                     </tr>
                   </tbody>
+
                 </table>
+                {xaiLongShortImpLoader.length==0 &&  <div
+                style={{
+                  fontSize: 14,
+                  fontWeight: "bold",
+                  color: color.DarkBlue,
+                  width: "100%",
+                  textAlign: "center",
+                  alignItems:'center'
+                }}
+              >
+                데이터를 불러오지 못했습니다.
+              </div>}
                 {/* <Row
                   style={{
                     alignItems: "center",
