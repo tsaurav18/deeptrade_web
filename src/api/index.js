@@ -65,6 +65,24 @@ async getLimeMacroResult(selectedDate) {
 },
 
 
+//Get XAI important features of recent four months
+
+async fetchXAIImportantFeaturesResult(selectedDate) {
+  let body = JSON.stringify({
+    selectedDate:selectedDate,
+  });
+  let csrf = await instance.get("mobile/get_csrf/");
+  return instance
+    .post("dtenter/db_invest_xai_imp_features/", body, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrf.data["token"],
+      },
+    })
+    .then((res) => {
+      return res;
+    });
+},
   //LIME result
   async getLimeResult(selectedDate) {
     let body = JSON.stringify({
