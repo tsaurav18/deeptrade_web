@@ -416,7 +416,8 @@ function DbInvestment() {
   const tdStyleBlue = {
     // backgroundColor: "#00b0f0",
   };
-
+  const [xaiImpFeatureResultLoader, setXaiImpFeatureResultLoader] = useState(false)
+ const [xaiImpFeatureResult, setXaiImpFeatureResult] = useState([])
   const [limeMacroPastDate, setLimeMacroPastDate] = useState('');
   const [pastEMPTextDate, setPastEMPTextDate] = useState(options[0].label);
   const [currentEMPTextDate, setCurrentEMPTextDate] = useState("");
@@ -504,7 +505,7 @@ function DbInvestment() {
       const _currentYear = String(currentDate.getFullYear());
       const res = await getDtData.getDBInvestCurrentData(_currentYear);
       if (res.status === 200) {
-        console.log("getDbInvestmentCurrentSignal res.data", res.data);
+        // console.log("getDbInvestmentCurrentSignal res.data", res.data);
         const first_row = res.data.data[0]["buying_date"];
 
         setCurrentEMPTextDate(res.data.date);
@@ -548,12 +549,12 @@ function DbInvestment() {
     try {
       const res = await getDtData.getDBChartData();
       if (res.status === 200) {
-        console.log("getChartData data", res.data);
+        // console.log("getChartData data", res.data);
         setDbChartData(res.data);
       } 
       else if (res.status === 500) {
         const res = await getDtData.getDBChartData();
-        console.log("getChartData data", res.data);
+        // console.log("getChartData data", res.data);
         setDbChartData(res.data);
       } 
       else {
@@ -585,7 +586,7 @@ function DbInvestment() {
         currentYear
       );
       if (res.status === 200) {
-        console.log("getDbInvestmentSignal res.data", res.data);
+        // console.log("getDbInvestmentSignal res.data", res.data);
         // const first_row = res.data[0]["buying_date"];
 
         setDbSignalData(res.data);
@@ -622,7 +623,7 @@ function DbInvestment() {
       const res = await getDtData.getLimeResult(selectedStockDate);
 
       if (res.status === 200) {
-        console.log("fetchLimeResult XAI 적용 결과값", res.data);
+        // console.log("fetchLimeResult XAI 적용 결과값", res.data);
         setLimeResult(res.data.data);
         setLimeResultVar(res.data.lime_var);
         setLimeResultImp(res.data.lime_imp);
@@ -637,39 +638,56 @@ function DbInvestment() {
     setLimeResultLoader(false);
   };
 
-    // // Get LIME Result
-    // const getXAIImportantFeatures = async () => {
-    //   try {
-    //     setLimeResultLoader(true);
+
+    // Get LIME Important features Result
+    const getXAIImportantFeatures = async () => {
+      try {
+        setXaiImpFeatureResultLoader(true);
   
-    //     const res = await getDtData.getLimeResult(selectedStockDate);
+        const res = await getDtData.fetchXAIImportantFeaturesResult(selectedStockDate);
   
-    //     if (res.status === 200) {
-    //       console.log("fetchLimeResult XAI 적용 결과값", res.data);
-    //       setLimeResult(res.data.data);
-    //       setLimeResultVar(res.data.lime_var);
-    //       setLimeResultImp(res.data.lime_imp);
-    //     } else {
-    //       setLimeResult([]);
-    //       console.log(" XAI 적용 결과값 fetchLimeResult res.status", res.status);
-    //     }
-    //   } catch (error) {
-    //     console.log("XAI 적용 결과값 fetchLimeResult catch error", error);
-    //     toast("서버 접속 에러 관리자에게 문의해주세요.");
-    //   }
-    //   setLimeResultLoader(false);
-    // };
+        if (res.status === 200) {
+          console.log("fetchXAIImportantFeaturesResult 결과", res.data);
+          setXaiImpFeatureResult(res.data);
+          
+         
+        } else {
+          setXaiImpFeatureResult([]);
+          console.log(" fetchXAIImportantFeaturesResult res.status", res.status);
+        }
+      } catch (error) {
+        console.log("fetchXAIImportantFeaturesResult catch error", error);
+        toast("서버 접속 에러 관리자에게 문의해주세요.");
+      }
+      setXaiImpFeatureResultLoader(false);
+    };
+
+
+  //  console.log("Imp features", xaiImpFeatureResult)
 
   useEffect(() => {
     let isComponentRender = true;
     if (isComponentRender === true) {
       fetchLimeResult();
+   
     }
 
     return () => {
       isComponentRender = false;
     };
   }, [selectedStockDate]); //selectedStockDate
+
+  useEffect(() => {
+    let isComponentRender = true;
+    if (isComponentRender === true) {
+ 
+      getXAIImportantFeatures()
+    }
+
+    return () => {
+      isComponentRender = false;
+    };
+  }, []); //selectedStockDate
 
   //Get past related Macro data
   const fetchLimeMacro = async () => {
@@ -679,7 +697,7 @@ function DbInvestment() {
       const res = await getDtData.getLimeMacroResult(selectedStockDate);
 
       if (res.status === 200) {
-        console.log("fetchLimeMacro data", res.data);
+        // console.log("fetchLimeMacro data", res.data);
         setLimeMacroPastDate(res.data.data[0].date)
         setLimeMacroResult([res.data.data[0]]);
         setLimeMacroResult2([res.data.data[1]]);
@@ -1842,7 +1860,43 @@ function DbInvestment() {
                       </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    {xaiImpFeatureResultLoader==true? <Oval
+                  height={50}
+                  width={50}
+                  color="#4fa94d"
+                  wrapperStyle={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  wrapperClass=""
+                  visible={true}
+                  ariaLabel="oval-loading"
+                  secondaryColor="#4fa94d"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />:  xaiImpFeatureResult.length>0? xaiImpFeatureResult && xaiImpFeatureResult.map(impFeature=>(
+                  <tr>
+                  <td style={tdStyle}>{impFeature.date}</td>
+                    <td style={tdStyle}>{impFeature.imp1_var}<br />{impFeature.imp1_score}</td>
+                    <td style={tdStyle}>{impFeature.imp2_var}<br />{impFeature.imp2_score}</td>
+                    <td style={tdStyle}>{impFeature.imp3_var}<br />{impFeature.imp3_score}</td>
+                    <td style={tdStyle}>{impFeature.imp4_var}<br />{impFeature.imp4_score}</td>
+                    <td style={tdStyle}>{impFeature.imp5_var}<br />{impFeature.imp5_score}</td>
+                  </tr>
+                )) :  <div
+                style={{
+                  fontSize: 14,
+                  fontWeight: "bold",
+                  color: color.DarkBlue,
+                  width: "100%",
+                  textAlign: "center",
+                  alignItems:'center'
+                }}
+              >
+                데이터를 불러오지 못했습니다.
+              </div> }
+            
+                    {/* <tr>
                       <td style={tdStyle}>{"2024-03-20"}</td>
                         <td style={tdStyle}>KOSPI<br />130</td>
                         <td style={tdStyle}>KOSDAQ<br />115</td>
@@ -1875,16 +1929,9 @@ function DbInvestment() {
                         <td style={tdStyle}>S&P500<br />117</td>
                         <td style={tdStyle}>DOW JONES<br />114</td>
                         <td style={tdStyle}>KOSPI<br />107</td>
-                      </tr>
-
-                      {/* <tr>
-                      <td style={tdStyle}>{"2023-11-20"}</td>
-                        <td style={tdStyle}>NASDAQ<br />123</td>
-                        <td style={tdStyle}>S&P500<br />122</td>
-                        <td style={tdStyle}>USDKRW<br />121</td>
-                        <td style={tdStyle}>DOW JONES<br />116</td>
-                        <td style={tdStyle}>KOSPI<br />108</td>
                       </tr> */}
+
+                    
                       <tr>
                         <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
                       </tr>
