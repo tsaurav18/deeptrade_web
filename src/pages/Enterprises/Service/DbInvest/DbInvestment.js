@@ -517,7 +517,7 @@ function DbInvestment() {
         const currentDate = new Date();
       const _currentYear = String(currentDate.getFullYear());
       const res = await getDtData.getDBInvestCurrentData(_currentYear);
-        console.log("getDbInvestmentCurrentSignal res.data", res.data);
+        // console.log("getDbInvestmentCurrentSignal res.data", res.data);
         const first_row = res.data.data[0]["buying_date"];
 
         setCurrentEMPTextDate(res.data.date);
@@ -629,7 +629,7 @@ function DbInvestment() {
         setLimeResultImp(res.data.lime_imp);
       } else {
         setLimeResult([]);
-        console.log(" XAI 적용 결과값 fetchLimeResult res.status", res.status);
+      
       }
     } catch (error) {
       console.log("XAI 적용 결과값 fetchLimeResult catch error", error);
@@ -647,13 +647,13 @@ function DbInvestment() {
         const res = await getDtData.fetchXAIImportantFeaturesResult(selectedStockDate);
   
         if (res.status === 200) {
-          console.log("fetchXAIImportantFeaturesResult 결과", res.data);
+      
           setXaiImpFeatureResult(res.data);
           
          
         } else {
           setXaiImpFeatureResult([]);
-          console.log(" fetchXAIImportantFeaturesResult res.status", res.status);
+        
         }
       } catch (error) {
         console.log("fetchXAIImportantFeaturesResult catch error", error);
