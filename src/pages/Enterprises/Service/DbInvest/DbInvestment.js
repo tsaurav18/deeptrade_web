@@ -416,6 +416,8 @@ function DbInvestment() {
   const tdStyleBlue = {
     // backgroundColor: "#00b0f0",
   };
+  const [dTXaiImpFeat4MonthResult, setDTXaiImpFeat4MonthResult] = useState([])
+  const [dtxaiImpFeat4MonthLoader, setDtxaiImpFeat4MonthLoader] = useState(false)
   const [xaiImpFeatureResultLoader, setXaiImpFeatureResultLoader] = useState(false)
  const [xaiImpFeatureResult, setXaiImpFeatureResult] = useState([])
   const [limeMacroPastDate, setLimeMacroPastDate] = useState('');
@@ -639,7 +641,7 @@ function DbInvestment() {
   };
 
 
-    // Get LIME Important features Result
+    // Get XAI Important features Result
     const getXAIImportantFeatures = async () => {
       try {
         setXaiImpFeatureResultLoader(true);
@@ -651,10 +653,22 @@ function DbInvestment() {
           setXaiImpFeatureResult(res.data);
           
          
-        } else {
-          setXaiImpFeatureResult([]);
+        } else if(res.status === 500) {
+          const res = await getDtData.fetchXAIImportantFeaturesResult(selectedStockDate);
+  
+          if (res.status === 200) {
         
+            setXaiImpFeatureResult(res.data);
+            
+           
+          }else{
+          setXaiImpFeatureResult([]);
+          }
         }
+          else{
+            setXaiImpFeatureResult([]); 
+          }
+        
       } catch (error) {
         console.log("fetchXAIImportantFeaturesResult catch error", error);
         toast("서버 접속 에러 관리자에게 문의해주세요.");
@@ -662,7 +676,37 @@ function DbInvestment() {
       setXaiImpFeatureResultLoader(false);
     };
 
+// Get DT-XAI  Important features Three/four Months Result
+const getXAIImportantFeaturesFourMonth = async () => {
+  try {
+    setDtxaiImpFeat4MonthLoader(true);
 
+    const res = await getDtData.fetchXAIImpFeatFourMonthResult(selectedStockDate);
+
+    if (res.status === 200) {
+      console.log("getXAIImportantFeaturesFourMonth",res.data )
+      setDTXaiImpFeat4MonthResult(res.data);
+      
+     
+    } else if(res.status === 500) {
+      const res = await getDtData.fetchXAIImpFeatFourMonthResult(selectedStockDate);
+      if (res.status === 200) {
+        console.log("getXAIImportantFeaturesFourMonth",res.data )
+        setDTXaiImpFeat4MonthResult(res.data);
+        
+       
+      }else{
+      setDTXaiImpFeat4MonthResult([]);
+      }
+    }else{
+      setDTXaiImpFeat4MonthResult([]);
+    }
+  } catch (error) {
+    console.log("getXAIImportantFeaturesFourMonth catch error", error);
+    toast("서버 접속 에러 관리자에게 문의해주세요.");
+  }
+  setDtxaiImpFeat4MonthLoader(false);
+};
   //  console.log("Imp features", xaiImpFeatureResult)
 
   useEffect(() => {
@@ -682,12 +726,13 @@ function DbInvestment() {
     if (isComponentRender === true) {
  
       getXAIImportantFeatures()
+      getXAIImportantFeaturesFourMonth()
     }
 
     return () => {
       isComponentRender = false;
     };
-  }, []); //selectedStockDate
+  }, []); 
 
   //Get past related Macro data
   const fetchLimeMacro = async () => {
@@ -1942,7 +1987,33 @@ function DbInvestment() {
                     </tr>
                   </thead>
                   <tbody>
+                  {dtxaiImpFeat4MonthLoader==true ?  <Oval
+                  height={50}
+                  width={50}
+                  color="#4fa94d"
+                  wrapperStyle={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  wrapperClass=""
+                  visible={true}
+                  ariaLabel="oval-loading"
+                  secondaryColor="#4fa94d"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />:dTXaiImpFeat4MonthResult.length>0? dTXaiImpFeat4MonthResult && dTXaiImpFeat4MonthResult.map(item=>(
                   <tr>
+                  <td style={tdStyle}>{item.date}</td>
+                  <td style={tdStyleUp}>{item.imp1_var}<br />{item.imp1_score}</td>
+                  <td style={tdStyleUp}>{item.imp2_var}<br />{item.imp2_score}</td>
+                  <td style={tdStyleUp}>{item.imp3_var}<br />{item.imp3_score}</td>
+                  <td style={tdStyleUp}>{item.imp4_var}<br />{item.imp4_score}</td>
+                  <td style={tdStyleUp}>{item.imp5_var}<br />{item.imp5_score}</td>
+                </tr>)
+                ):null}
+                  {/* <tbody> */}
+
+                  {/* <tr>
                       <td style={tdStyle}>2024-02-20 ~ 2024-03-20</td>
                       <td style={tdStyleUp}>NASDAQ<br />114</td>
                       <td style={tdStyleUp}>KOSPI<br />109</td>
@@ -1975,7 +2046,7 @@ function DbInvestment() {
                       <td style={tdStyleUp}>USDKRW<br />113</td>
                       <td style={tdStyleUp}>S&P500<br />106</td>
                       <td style={tdStyleUp}>DOW JONES<br />105</td>
-                    </tr>
+                    </tr> */}
 
                     {/* <tr>
                       <td style={tdStyle}>2023-10-20 ~ 2023-11-20</td>
@@ -1990,7 +2061,18 @@ function DbInvestment() {
                     </tr>
                   </tbody>
                 </table>
-
+                {dTXaiImpFeat4MonthResult.length==0 &&  <div
+                style={{
+                  fontSize: 14,
+                  fontWeight: "bold",
+                  color: color.DarkBlue,
+                  width: "100%",
+                  textAlign: "center",
+                  alignItems:'center'
+                }}
+              >
+                데이터를 불러오지 못했습니다.
+              </div>}
                 <Row style={{
                   alignItems: "flex-start",
                   fontSize: "18px",
