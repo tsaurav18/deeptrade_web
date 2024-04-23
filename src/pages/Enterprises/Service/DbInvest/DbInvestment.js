@@ -49,7 +49,7 @@ import {
   Title,
   Tooltip,
   Legend,
-  
+
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 ChartJS.register(
@@ -58,14 +58,14 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
-  
+
   Title,
   Tooltip,
   Legend,
   zoomPlugin
 );
 
-const LineChart = ({ data ,isMobile}) => {
+const LineChart = ({ data, isMobile }) => {
   let chart_data;
 
   chart_data = {
@@ -144,7 +144,7 @@ const LineChart = ({ data ,isMobile}) => {
       //     stepSize:1,
       //     display: false, 
       //     beginAtZero: false,
-          
+
       //   },
       // },
       // yAxes: {
@@ -157,13 +157,13 @@ const LineChart = ({ data ,isMobile}) => {
       //     beginAtZero: false,
       //   },
       // },
-      
+
       y1: {
         type: "linear",
         position: "right",
-        ticks:{
-          stepSize:5,
-         
+        ticks: {
+          stepSize: 5,
+
         },
         grid: {
           drawOnChartArea: false,
@@ -173,21 +173,21 @@ const LineChart = ({ data ,isMobile}) => {
   };
 
   return (
-    <div className="chart-container" style={{ width: "100%" , height:isMobile?"400px":""}}>
+    <div className="chart-container" style={{ width: "100%", height: isMobile ? "400px" : "" }}>
       {chart_data != undefined && (
-        <Bar data={chart_data} options={optionsChart} height={isMobile?"400px":""}/>
+        <Bar data={chart_data} options={optionsChart} height={isMobile ? "400px" : ""} />
       )}
     </div>
   );
 };
 
 
-const MacroSimVarOneLineChart = ({ data ,isMobile, simLabel}) => {
- 
+const MacroSimVarOneLineChart = ({ data, isMobile, simLabel }) => {
+
   let chart_data;
 
   chart_data = {
-    labels: [1, 2,3,4,5,6, 7, 8], // You can use either daily or weekly dates here
+    labels: [1, 2, 3, 4, 5, 6, 7, 8], // You can use either daily or weekly dates here
     datasets: [
       {
         label: data[0].label.past,
@@ -201,7 +201,7 @@ const MacroSimVarOneLineChart = ({ data ,isMobile, simLabel}) => {
         type: "line",
       },
       {
-        label:  data[0].label.now,
+        label: data[0].label.now,
         data: data[0].now,
         borderColor: "rgb(153, 0, 0)",
         backgroundColor: "rgba(153, 0, 0, 0.5)",
@@ -211,15 +211,15 @@ const MacroSimVarOneLineChart = ({ data ,isMobile, simLabel}) => {
         yAxisID: "y",
         type: "line",
       },
-      
+
       // Repeat the same structure for weekly data if needed
     ],
   };
- 
+
   const optionsChart = {
     responsive: true,
     plugins: {
-  
+
       legend: {
         position: "top",
         labels: {
@@ -233,14 +233,14 @@ const MacroSimVarOneLineChart = ({ data ,isMobile, simLabel}) => {
       },
     },
     scales: {
-     
-      
+
+
       y: {
         type: "linear",
         position: "left",
-        ticks:{
+        ticks: {
           // stepSize:100,
-         
+
         },
         grid: {
           drawOnChartArea: true,
@@ -250,18 +250,18 @@ const MacroSimVarOneLineChart = ({ data ,isMobile, simLabel}) => {
   };
 
   return (
-    <div className="chart-container" style={{ width:isMobile?"300px":"436px", height:isMobile?"290px":""}}>
+    <div className="chart-container" style={{ width: isMobile ? "300px" : "436px", height: isMobile ? "290px" : "" }}>
       {chart_data != undefined && (
-        <Line data={chart_data} options={optionsChart} height={isMobile?"299px":"218px"} width={isMobile?"300px":"436px"}/>
+        <Line data={chart_data} options={optionsChart} height={isMobile ? "299px" : "218px"} width={isMobile ? "300px" : "436px"} />
       )}
     </div>
   );
 };
-const MacroSimVarTwoLineChart = ({ data ,isMobile, simLabel}) => {
+const MacroSimVarTwoLineChart = ({ data, isMobile, simLabel }) => {
   let chart_data;
 
   chart_data = {
-    labels: [1, 2,3,4,5,6, 7, 8], // You can use either daily or weekly dates here
+    labels: [1, 2, 3, 4, 5, 6, 7, 8], // You can use either daily or weekly dates here
     datasets: [
       {
         label: data[1].label.past,
@@ -275,7 +275,7 @@ const MacroSimVarTwoLineChart = ({ data ,isMobile, simLabel}) => {
         type: "line",
       },
       {
-        label:  data[1].label.now,
+        label: data[1].label.now,
         data: data[1].now,
         borderColor: "rgb(153, 0, 0)",
         backgroundColor: "rgba(153, 0, 0, 0.5)",
@@ -285,7 +285,7 @@ const MacroSimVarTwoLineChart = ({ data ,isMobile, simLabel}) => {
         yAxisID: "y",
         type: "line",
       },
-      
+
       // Repeat the same structure for weekly data if needed
     ],
   };
@@ -295,7 +295,7 @@ const MacroSimVarTwoLineChart = ({ data ,isMobile, simLabel}) => {
   const optionsChart = {
     responsive: true,
     plugins: {
-    
+
       legend: {
         position: "top",
         labels: {
@@ -309,17 +309,17 @@ const MacroSimVarTwoLineChart = ({ data ,isMobile, simLabel}) => {
       },
     },
     scales: {
-      
-      
+
+
       y: {
         type: "linear",
         position: "left",
         ticks: {
 
-          min:minYValue,
+          min: minYValue,
           max: maxYValue,
           callback: function (value, index, values) {
-            return (value).toLocaleString('en-US'); 
+            return (value).toLocaleString('en-US');
           },
         },
         grid: {
@@ -330,9 +330,9 @@ const MacroSimVarTwoLineChart = ({ data ,isMobile, simLabel}) => {
   };
 
   return (
-    <div className="chart-container" style={{ width:isMobile?"300px":"436px", height:isMobile?"299px":""}}>
+    <div className="chart-container" style={{ width: isMobile ? "300px" : "436px", height: isMobile ? "299px" : "" }}>
       {chart_data != undefined && (
-        <Line data={chart_data} options={optionsChart} height={isMobile?"299px":"218px"} width={isMobile?"300px":"436px"}/>
+        <Line data={chart_data} options={optionsChart} height={isMobile ? "299px" : "218px"} width={isMobile ? "300px" : "436px"} />
       )}
     </div>
   );
@@ -345,7 +345,7 @@ const tableStyle = {
   borderTop: '3px double',
   borderBottom: '3px double',
   // borderTopborderTop: '2px solid'
-  
+
 };
 
 const thStyle = {
@@ -384,18 +384,18 @@ function DbInvestment() {
     padding: "8px",
     textAlign: "center",
     borderBottom: "none",
-    fontSize:responsiveValue(14, 12, 8)
-  
+    fontSize: responsiveValue(14, 12, 8)
+
   };
-  
+
   const tdStyleUp = {
     // border: '1px solid #ddd', // Add border to the table data cells
     // padding: "8px",
     paddingBottom: 0,
     textAlign: "center",
     borderBottom: "none",
-    fontSize:responsiveValue(14, 12, 8)
-  
+    fontSize: responsiveValue(14, 12, 8)
+
   };
 
   const tdStyleDown = {
@@ -404,8 +404,8 @@ function DbInvestment() {
     paddingBottom: 0,
     textAlign: "center",
     borderBottom: "none",
-    fontSize:responsiveValue(14, 12, 8)
-  
+    fontSize: responsiveValue(14, 12, 8)
+
   };
 
   const tdStyleRed = {
@@ -417,12 +417,12 @@ function DbInvestment() {
     // backgroundColor: "#00b0f0",
   };
 
-const [xaiLongShortImpLoader, setXaiLongShortImpLoader] = useState(false)
-const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
+  const [xaiLongShortImpLoader, setXaiLongShortImpLoader] = useState(false)
+  const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
   const [dTXaiImpFeat4MonthResult, setDTXaiImpFeat4MonthResult] = useState([])
   const [dtxaiImpFeat4MonthLoader, setDtxaiImpFeat4MonthLoader] = useState(false)
   const [xaiImpFeatureResultLoader, setXaiImpFeatureResultLoader] = useState(false)
- const [xaiImpFeatureResult, setXaiImpFeatureResult] = useState([])
+  const [xaiImpFeatureResult, setXaiImpFeatureResult] = useState([])
   const [limeMacroPastDate, setLimeMacroPastDate] = useState('');
   const [pastEMPTextDate, setPastEMPTextDate] = useState(options[0].label);
   const [currentEMPTextDate, setCurrentEMPTextDate] = useState("");
@@ -520,8 +520,8 @@ const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
       else if (res.status === 500) {
         console.log("getDbInvestmentCurrentSignal res.status 500")
         const currentDate = new Date();
-      const _currentYear = String(currentDate.getFullYear());
-      const res = await getDtData.getDBInvestCurrentData(_currentYear);
+        const _currentYear = String(currentDate.getFullYear());
+        const res = await getDtData.getDBInvestCurrentData(_currentYear);
         // console.log("getDbInvestmentCurrentSignal res.data", res.data);
         const first_row = res.data.data[0]["buying_date"];
 
@@ -529,7 +529,7 @@ const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
         setDbSignalCurrentData(res.data.data);
         setSelectedStockDate(first_row);
       }
-       else {
+      else {
         setDbSignalCurrentData([]);
         console.log(" getDbInvestmentCurrentSignal res.status", res.status);
       }
@@ -556,12 +556,12 @@ const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
       if (res.status === 200) {
         // console.log("getChartData data", res.data);
         setDbChartData(res.data);
-      } 
+      }
       else if (res.status === 500) {
         const res = await getDtData.getDBChartData();
         // console.log("getChartData data", res.data);
         setDbChartData(res.data);
-      } 
+      }
       else {
         setDbChartData([]);
         console.log("getChartData res.status", res.status);
@@ -586,28 +586,28 @@ const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
   const getDbInvestmentSignal = async () => {
     setLoader(true);
 
-      const res = await getDtData.getDBInvestData(
+    const res = await getDtData.getDBInvestData(
+      user_info_reducer.company_name,
+      currentYear
+    );
+    if (res.status === 200) {
+      // console.log("getDbInvestmentSignal res.data", res.data);
+      // const first_row = res.data[0]["buying_date"];
+
+      setDbSignalData(res.data);
+    } else if (res.status === 500) {
+      const _res = await getDtData.getDBInvestData(
         user_info_reducer.company_name,
         currentYear
       );
-      if (res.status === 200) {
-        // console.log("getDbInvestmentSignal res.data", res.data);
-        // const first_row = res.data[0]["buying_date"];
-
-        setDbSignalData(res.data);
-      } else if(res.status === 500) {
-        const _res = await getDtData.getDBInvestData(
-          user_info_reducer.company_name,
-          currentYear
-        );
-        if(_res.status===200){
-          setDbSignalData(_res.data);
-        }
-      }else{
-        setDbSignalData([]);
-        console.log(" getDbInvestmentSignal res.status", res.status);
+      if (_res.status === 200) {
+        setDbSignalData(_res.data);
       }
-    
+    } else {
+      setDbSignalData([]);
+      console.log(" getDbInvestmentSignal res.status", res.status);
+    }
+
     setLoader(false);
   };
   useEffect(() => {
@@ -634,7 +634,7 @@ const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
         setLimeResultImp(res.data.lime_imp);
       } else {
         setLimeResult([]);
-      
+
       }
     } catch (error) {
       console.log("XAI 적용 결과값 fetchLimeResult catch error", error);
@@ -644,111 +644,111 @@ const [xaiLongShortImpResult, setXaiLongShortImpResult] = useState([])
   };
 
 
-    // Get XAI Important features Result
-    const getXAIImportantFeatures = async () => {
-      try {
-        setXaiImpFeatureResultLoader(true);
-  
+  // Get XAI Important features Result
+  const getXAIImportantFeatures = async () => {
+    try {
+      setXaiImpFeatureResultLoader(true);
+
+      const res = await getDtData.fetchXAIImportantFeaturesResult(selectedStockDate);
+
+      if (res.status === 200) {
+
+        setXaiImpFeatureResult(res.data);
+
+
+      } else if (res.status === 500) {
         const res = await getDtData.fetchXAIImportantFeaturesResult(selectedStockDate);
-  
+
         if (res.status === 200) {
-      
+
           setXaiImpFeatureResult(res.data);
-          
-         
-        } else if(res.status === 500) {
-          const res = await getDtData.fetchXAIImportantFeaturesResult(selectedStockDate);
-  
-          if (res.status === 200) {
-        
-            setXaiImpFeatureResult(res.data);
-            
-           
-          }else{
+
+
+        } else {
           setXaiImpFeatureResult([]);
-          }
         }
-          else{
-            setXaiImpFeatureResult([]); 
-          }
-        
-      } catch (error) {
-        console.log("fetchXAIImportantFeaturesResult catch error", error);
-        toast("서버 접속 에러 관리자에게 문의해주세요.");
       }
-      setXaiImpFeatureResultLoader(false);
-    };
+      else {
+        setXaiImpFeatureResult([]);
+      }
 
-// Get DT-XAI  Important features Three/four Months Result
-const getXAIImportantFeaturesFourMonth = async () => {
-  try {
-    setDtxaiImpFeat4MonthLoader(true);
+    } catch (error) {
+      console.log("fetchXAIImportantFeaturesResult catch error", error);
+      toast("서버 접속 에러 관리자에게 문의해주세요.");
+    }
+    setXaiImpFeatureResultLoader(false);
+  };
 
-    const res = await getDtData.fetchXAIImpFeatFourMonthResult();
+  // Get DT-XAI  Important features Three/four Months Result
+  const getXAIImportantFeaturesFourMonth = async () => {
+    try {
+      setDtxaiImpFeat4MonthLoader(true);
 
-    if (res.status === 200) {
-      // console.log("getXAIImportantFeaturesFourMonth",res.data )
-      setDTXaiImpFeat4MonthResult(res.data);
-      
-     
-    } else if(res.status === 500) {
       const res = await getDtData.fetchXAIImpFeatFourMonthResult();
+
       if (res.status === 200) {
         // console.log("getXAIImportantFeaturesFourMonth",res.data )
         setDTXaiImpFeat4MonthResult(res.data);
-        
-       
-      }else{
-      setDTXaiImpFeat4MonthResult([]);
+
+
+      } else if (res.status === 500) {
+        const res = await getDtData.fetchXAIImpFeatFourMonthResult();
+        if (res.status === 200) {
+          // console.log("getXAIImportantFeaturesFourMonth",res.data )
+          setDTXaiImpFeat4MonthResult(res.data);
+
+
+        } else {
+          setDTXaiImpFeat4MonthResult([]);
+        }
+      } else {
+        setDTXaiImpFeat4MonthResult([]);
       }
-    }else{
-      setDTXaiImpFeat4MonthResult([]);
+    } catch (error) {
+      console.log("getXAIImportantFeaturesFourMonth catch error", error);
+      toast("서버 접속 에러 관리자에게 문의해주세요.");
     }
-  } catch (error) {
-    console.log("getXAIImportantFeaturesFourMonth catch error", error);
-    toast("서버 접속 에러 관리자에게 문의해주세요.");
-  }
-  setDtxaiImpFeat4MonthLoader(false);
-};
+    setDtxaiImpFeat4MonthLoader(false);
+  };
 
-// 장기 대비 단기 중요도의 변화 정도는 아래와 같습니다. 중요도 변화
-const getXAILongShortImportance = async () => {
-  try {
-    setXaiLongShortImpLoader(true);
-    
-    const res = await getDtData.fetchXAILongShortImportanceResult(selectedStockDate);
+  // 장기 대비 단기 중요도의 변화 정도는 아래와 같습니다. 중요도 변화
+  const getXAILongShortImportance = async () => {
+    try {
+      setXaiLongShortImpLoader(true);
 
-    if (res.status === 200) {
-      // console.log("fetchXAILongShortImportanceResult",res.data )
-      setXaiLongShortImpResult(res.data);
-      
-     
-    } else if(res.status === 500) {
       const res = await getDtData.fetchXAILongShortImportanceResult(selectedStockDate);
+
       if (res.status === 200) {
-        console.log("fetchXAILongShortImportanceResult",res.data )
+        // console.log("fetchXAILongShortImportanceResult",res.data )
         setXaiLongShortImpResult(res.data);
-        
-       
-      }else{
+
+
+      } else if (res.status === 500) {
+        const res = await getDtData.fetchXAILongShortImportanceResult(selectedStockDate);
+        if (res.status === 200) {
+          console.log("fetchXAILongShortImportanceResult", res.data)
+          setXaiLongShortImpResult(res.data);
+
+
+        } else {
+          setXaiLongShortImpResult([]);
+        }
+      } else {
         setXaiLongShortImpResult([]);
       }
-    }else{
-      setXaiLongShortImpResult([]);
+    } catch (error) {
+      console.log("getXAILongShortImportance catch error", error);
+      toast("서버 접속 에러 관리자에게 문의해주세요.");
     }
-  } catch (error) {
-    console.log("getXAILongShortImportance catch error", error);
-    toast("서버 접속 에러 관리자에게 문의해주세요.");
-  }
-  setXaiLongShortImpLoader(false);
-};
+    setXaiLongShortImpLoader(false);
+  };
 
 
   useEffect(() => {
     let isComponentRender = true;
     if (isComponentRender === true) {
       fetchLimeResult();
-   
+
     }
 
     return () => {
@@ -759,7 +759,7 @@ const getXAILongShortImportance = async () => {
   useEffect(() => {
     let isComponentRender = true;
     if (isComponentRender === true) {
- 
+
       getXAIImportantFeatures()
       getXAIImportantFeaturesFourMonth()
       getXAILongShortImportance()
@@ -768,7 +768,7 @@ const getXAILongShortImportance = async () => {
     return () => {
       isComponentRender = false;
     };
-  }, []); 
+  }, []);
 
   //Get past related Macro data
   const fetchLimeMacro = async () => {
@@ -815,7 +815,7 @@ const getXAILongShortImportance = async () => {
         style={{
           alignItems: "flex-start",
           fontSize: responsiveValue(20, 18, 15),
-          
+
 
           justifyContent: "flex-start",
           marginBottom: "10px",
@@ -882,7 +882,7 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 900,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
               추천시점
@@ -893,7 +893,7 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
               Cash
@@ -904,7 +904,7 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
               KODEX 200
@@ -915,10 +915,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX <br/>코스닥150
+              KODEX <br />코스닥150
             </div>
             <div
               style={{
@@ -926,34 +926,11 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX  <br/>Fn성장
-        
-    
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-              TIGER <br/>우량가치
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-              KODEX <br/>MSCI모멘텀
+              KODEX  <br />Fn성장
+
 
             </div>
             <div
@@ -962,10 +939,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX 200 <br/>가치저변동
+              TIGER <br />우량가치
             </div>
             <div
               style={{
@@ -973,10 +950,11 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-          KODEX  <br/>퀄리티Plus
+              KODEX <br />MSCI모멘텀
+
             </div>
             <div
               style={{
@@ -984,10 +962,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              ARIRANG <br/>고배당주
+              KODEX 200 <br />가치저변동
             </div>
             <div
               style={{
@@ -995,10 +973,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX <br/>반도체
+              KODEX  <br />퀄리티Plus
             </div>
             <div
               style={{
@@ -1006,10 +984,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              TIGER <br/>헬스케어
+              ARIRANG <br />고배당주
             </div>
             <div
               style={{
@@ -1017,11 +995,33 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX <br/>2차전지산업
-    
+              KODEX <br />반도체
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize: responsiveValue(14, 12, 8)
+              }}
+            >
+              TIGER <br />헬스케어
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize: responsiveValue(14, 12, 8)
+              }}
+            >
+              KODEX <br />2차전지산업
+
             </div>
           </Row>
           <Row
@@ -1050,7 +1050,7 @@ const getXAILongShortImportance = async () => {
               />
             ) : (
               <>
-                {dbSignalCurrentData && user_info_reducer.company_name!="temp"?
+                {dbSignalCurrentData && user_info_reducer.company_name != "temp" ?
                   dbSignalCurrentData.map((list, index) => {
                     return (
                       <Row
@@ -1078,7 +1078,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.buying_date}
@@ -1092,8 +1092,8 @@ const getXAILongShortImportance = async () => {
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
                             overflow: "hidden",
-                            fontSize:responsiveValue(14, 12, 8)
-                            
+                            fontSize: responsiveValue(14, 12, 8)
+
                           }}
                         >
                           {list.cash}
@@ -1106,8 +1106,8 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                         
+                            fontSize: responsiveValue(14, 12, 8)
+
                           }}
                         >
                           {list.kodex_200}
@@ -1120,7 +1120,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_kq}
@@ -1133,7 +1133,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_growth}
@@ -1146,7 +1146,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.tiger_value}
@@ -1159,7 +1159,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_msci}
@@ -1172,7 +1172,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_value}
@@ -1185,67 +1185,67 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_qulity_plus}
                         </div>
                         <div
-                            style={{
-                              width: 110,
+                          style={{
+                            width: 110,
                             height: "auto",
                             display: "table-cell",
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.arirang_high_div}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
+                            fontSize: responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.arirang_high_div}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
                             height: "auto",
                             display: "table-cell",
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.kodex_semicon}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
+                            fontSize: responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_semicon}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
                             height: "auto",
                             display: "table-cell",
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.tiger_health}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
+                            fontSize: responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.tiger_health}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
                             height: "auto",
                             display: "table-cell",
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.kodex_btry_indus}
-                          </div>
-                         
+                            fontSize: responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_btry_indus}
+                        </div>
+
                       </Row>
                     );
-                  }): dbSignalCurrentData.map((list, index) => {
+                  }) : dbSignalCurrentData.map((list, index) => {
                     return (
                       <Row
                         key={index}
@@ -1272,7 +1272,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize: responsiveValue(18, 15, 10)
                           }}
                         >
                           {list.buying_date}
@@ -1286,8 +1286,8 @@ const getXAILongShortImportance = async () => {
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
                             overflow: "hidden",
-                            fontSize:responsiveValue(14, 12, 8)
-                            
+                            fontSize: responsiveValue(14, 12, 8)
+
                           }}
                         >
                           {list.cash}
@@ -1300,8 +1300,8 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                         
+                            fontSize: responsiveValue(14, 12, 8)
+
                           }}
                         >
                           {list.kodex_200}
@@ -1314,7 +1314,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_kq}
@@ -1327,7 +1327,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_growth}
@@ -1340,7 +1340,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.tiger_value}
@@ -1353,7 +1353,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_msci}
@@ -1366,7 +1366,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_value}
@@ -1379,63 +1379,63 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                            fontSize: responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.kodex_qulity_plus}
                         </div>
                         <div
-                            style={{
-                              width: 110,
+                          style={{
+                            width: 110,
                             height: "auto",
                             display: "table-cell",
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.arirang_high_div}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
+                            fontSize: responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.arirang_high_div}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
                             height: "auto",
                             display: "table-cell",
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.kodex_semicon}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
+                            fontSize: responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_semicon}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
                             height: "auto",
                             display: "table-cell",
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.tiger_health}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
+                            fontSize: responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.tiger_health}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
                             height: "auto",
                             display: "table-cell",
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.kodex_btry_indus}
-                          </div>
+                            fontSize: responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_btry_indus}
+                        </div>
                         {/* <div
                             style={{
                               width: 110,
@@ -1490,7 +1490,7 @@ const getXAILongShortImportance = async () => {
             marginBottom: "20px",
           }}
         >
-          <p style={{  fontSize: responsiveValue(18, 16, 14), fontWeight: "550", textAlign: "left" }}>
+          <p style={{ fontSize: responsiveValue(18, 16, 14), fontWeight: "550", textAlign: "left" }}>
             <span style={{ color: "#990000" }}>{pastEMPTextDate}</span>에 대한
             투자 비중 예측 정보를 표시합니다.
           </p>
@@ -1504,7 +1504,7 @@ const getXAILongShortImportance = async () => {
             />
           </div>
         </Row>
-     
+
 
         <Col
           style={{
@@ -1536,7 +1536,7 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 900,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
               추천시점
@@ -1547,7 +1547,7 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
               Cash
@@ -1558,7 +1558,7 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
               KODEX 200
@@ -1569,10 +1569,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX <br/>코스닥150
+              KODEX <br />코스닥150
             </div>
             <div
               style={{
@@ -1580,34 +1580,11 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX  <br/>Fn성장
-        
-    
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-              TIGER <br/>우량가치
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-              KODEX <br/>MSCI모멘텀
+              KODEX  <br />Fn성장
+
 
             </div>
             <div
@@ -1616,10 +1593,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX 200 <br/>가치저변동
+              TIGER <br />우량가치
             </div>
             <div
               style={{
@@ -1627,10 +1604,11 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-          KODEX  <br/>퀄리티Plus
+              KODEX <br />MSCI모멘텀
+
             </div>
             <div
               style={{
@@ -1638,10 +1616,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              ARIRANG <br/>고배당주
+              KODEX 200 <br />가치저변동
             </div>
             <div
               style={{
@@ -1649,10 +1627,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX <br/>반도체
+              KODEX  <br />퀄리티Plus
             </div>
             <div
               style={{
@@ -1660,10 +1638,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              TIGER <br/>헬스케어
+              ARIRANG <br />고배당주
             </div>
             <div
               style={{
@@ -1671,11 +1649,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              KODEX <br/>2차전지산업
-    
+              KODEX <br />반도체
             </div>
             <div
               style={{
@@ -1683,7 +1660,30 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
+                fontSize: responsiveValue(14, 12, 8)
+              }}
+            >
+              TIGER <br />헬스케어
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize: responsiveValue(14, 12, 8)
+              }}
+            >
+              KODEX <br />2차전지산업
+
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize: responsiveValue(14, 12, 8)
               }}
             >
               투자 <br />
@@ -1746,127 +1746,127 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
+                              fontSize: responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.buying_date}
                           </div>
                           <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            overflow: "hidden",
-                            fontSize:responsiveValue(14, 12, 8)
-                            
-                          }}
-                        >
-                          {list.cash}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                         
-                          }}
-                        >
-                          {list.kodex_200}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.kodex_kq}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.kodex_growth}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.tiger_value}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.kodex_msci}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.kodex_value}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.kodex_qulity_plus}
-                        </div>
-                        <div
                             style={{
                               width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              overflow: "hidden",
+                              fontSize: responsiveValue(14, 12, 8)
+
+                            }}
+                          >
+                            {list.cash}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
+
+                            }}
+                          >
+                            {list.kodex_200}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_kq}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_growth}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.tiger_value}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_msci}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_value}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_qulity_plus}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.arirang_high_div}
@@ -1874,12 +1874,12 @@ const getXAILongShortImportance = async () => {
                           <div
                             style={{
                               width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.kodex_semicon}
@@ -1887,12 +1887,12 @@ const getXAILongShortImportance = async () => {
                           <div
                             style={{
                               width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.tiger_health}
@@ -1900,12 +1900,12 @@ const getXAILongShortImportance = async () => {
                           <div
                             style={{
                               width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize: responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.kodex_btry_indus}
@@ -1918,14 +1918,14 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
+                              fontSize: responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.pv_return}%
                           </div>
                         </Row>
                       );
-                    }):<Oval
+                    }) : <Oval
                     height={50}
                     width={50}
                     color="#4fa94d"
@@ -1947,8 +1947,8 @@ const getXAILongShortImportance = async () => {
         {dbSignalData.length > 5 && (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
           <a onClick={() => {
-              setOpen((prev) => !prev);
-            }}
+            setOpen((prev) => !prev);
+          }}
             style={{
               cursor: "pointer",
               transform: `rotate(${open ? 180 : 0}deg)`,
@@ -2060,74 +2060,85 @@ const getXAILongShortImportance = async () => {
                     textAlign: "center",
                   }}
                 >
-                  <table style={{  
+                  <table style={{
                     width: "100%",
-                    borderCollapse: 'collapse', 
+                    borderCollapse: 'collapse',
                     overflowWrap: "anywhere",
 
-                    ...tableStyle 
+                    ...tableStyle
                   }}>
                     <thead style={{
                       paddingTop: '2px'
                     }}>
                       <tr>
                         <th colSpan={7}
-                            style={{
-                              paddingTop: responsiveValue(10, 5, 5)
-                            }}/>
+                          style={{
+                            paddingTop: responsiveValue(10, 5, 5)
+                          }} />
                       </tr>
                       <tr>
-                        <th rowSpan={2} style={{ fontSize:responsiveValue(14, 12, 8)}}>추천시점</th>
-                        <th rowSpan={2} style={{ fontSize:responsiveValue(14, 12, 8)}}>중요 변수</th>
-                        <th rowSpan={2} style={{ fontSize:responsiveValue(14, 12, 8)}}>변수 중요도</th>
-                        <th colSpan={8} 
-                            style={{
-                              fontSize:responsiveValue(14, 12, 8),
-                              paddingBottom: responsiveValue(7, 2, 2)}}>중요 변수 제거 결과</th>
+                        <th rowSpan={2} style={{ fontSize: responsiveValue(14, 12, 8) }}>추천시점</th>
+                        <th rowSpan={2} style={{ fontSize: responsiveValue(14, 12, 8) }}>중요 변수</th>
+                        <th rowSpan={2} style={{ fontSize: responsiveValue(14, 12, 8) }}>변수 중요도</th>
+                        <th colSpan={8}
+                          style={{
+                            fontSize: responsiveValue(14, 12, 8),
+                            paddingBottom: responsiveValue(7, 2, 2)
+                          }}>중요 변수 제거 결과</th>
                       </tr>
                       <tr>
-                        <th style={{ fontSize:responsiveValue(14, 12, 8)}}>Cash</th>
-                        <th style={{ fontSize:responsiveValue(14, 12, 8)}}>   KODEX 200</th>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-            KODEX <br/>반도체</th>
-                        <th style={{  fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-                TIGER <br/>헬스케어</th>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-                ARIRANG <br/>고배당주</th>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-           KODEX 200 <br/>가치저변동</th>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-          TIGER <br/>우량가치</th>
-                        <th style={{ fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-         KODEX <br/>코스닥150</th>
-         <th style={{ fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-          KODEX  <br/>퀄리티Plus</th>
-         <th style={{ fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-         KODEX <br/>MSCI모멘텀</th>
-         <th style={{ fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-         KODEX <br/>2차전지산업</th>
-         <th style={{ fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-               KODEX  <br/>Fn성장</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>Cash</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>   KODEX 200</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          KODEX <br />코스닥150</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          KODEX  <br />Fn성장</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          TIGER <br />우량가치</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          KODEX <br />MSCI모멘텀</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          KODEX 200 <br />가치저변동</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          KODEX  <br />퀄리티Plus</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          ARIRANG <br />고배당주</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          KODEX <br />반도체</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          TIGER <br />헬스케어</th>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8)
+                        }}
+                        >
+                          KODEX <br />2차전지산업</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -2139,180 +2150,184 @@ const getXAILongShortImportance = async () => {
                               <td style={tdStyle}>{list.date}</td>
                               <td style={tdStyle}>{list.lime_var}</td>
                               <td style={tdStyle}>{list.lime_imp}</td>
-                              <td style={tdStyle}>{list.cash?list.cash.toFixed(3):list.cash}</td>
-                              <td style={tdStyle}>{list.kodex_200?list.kodex_200.toFixed(3):list.kodex_200}</td>
-                              <td style={tdStyle}>{list.kodex_semicon?list.kodex_semicon.toFixed(3):list.kodex_semicon}</td>
-                              <td style={tdStyle}>{list.tiger_health?list.tiger_health.toFixed(3):list.tiger_health}</td>
-                              <td style={tdStyle}>{list.arirang_high_div?list.arirang_high_div.toFixed(3):list.arirang_high_div}</td>
-                              <td style={tdStyle}>{list.kodex_value?list.kodex_value.toFixed(3):list.kodex_value}</td>
-                              <td style={tdStyle}>{list.tiger_value?list.tiger_value.toFixed(3):list.tiger_value}</td>
-                              <td style={tdStyle}>{list.kodex_kq?list.kodex_kq.toFixed(3):list.kodex_kq}</td>
-                              <td style={tdStyle}>{list.kodex_qulity_plus?list.kodex_qulity_plus.toFixed(3):list.kodex_qulity_plus}</td>
-                              <td style={tdStyle}>{list.kodex_msci?list.kodex_msci.toFixed(3):list.kodex_msci}</td>
-                              <td style={tdStyle}>{list.kodex_btry_indus?list.kodex_btry_indus.toFixed(3):list.kodex_btry_indus}</td>
-                              <td style={tdStyle}>{list.kodex_growth?list.kodex_growth.toFixed(3):list.kodex_growth}</td>
+                              <td style={tdStyle}>{list.cash ? list.cash.toFixed(3) : list.cash}</td>
+                              <td style={tdStyle}>{list.kodex_200 ? list.kodex_200.toFixed(3) : list.kodex_200}</td>
+                              <td style={tdStyle}>{list.kodex_kq ? list.kodex_kq.toFixed(3) : list.kodex_kq}</td>
+                              <td style={tdStyle}>{list.kodex_growth ? list.kodex_growth.toFixed(3) : list.kodex_growth}</td>
+                              <td style={tdStyle}>{list.tiger_value ? list.tiger_value.toFixed(3) : list.tiger_value}</td>
+                              <td style={tdStyle}>{list.kodex_msci ? list.kodex_msci.toFixed(3) : list.kodex_msci}</td>
+                              <td style={tdStyle}>{list.kodex_value ? list.kodex_value.toFixed(3) : list.kodex_value}</td>
+                              <td style={tdStyle}>{list.kodex_qulity_plus ? list.kodex_qulity_plus.toFixed(3) : list.kodex_qulity_plus}</td>
+                              <td style={tdStyle}>{list.arirang_high_div ? list.arirang_high_div.toFixed(3) : list.arirang_high_div}</td>
+                              <td style={tdStyle}>{list.kodex_semicon ? list.kodex_semicon.toFixed(3) : list.kodex_semicon}</td>
+                              <td style={tdStyle}>{list.tiger_health ? list.tiger_health.toFixed(3) : list.tiger_health}</td>
+                              <td style={tdStyle}>{list.kodex_btry_indus ? list.kodex_btry_indus.toFixed(3) : list.kodex_btry_indus}</td>
                             </tr>
                           );
                         })}
                     </tbody>
                   </table>
 
-                <Row style={{
-                  alignItems: "flex-start",
-                  fontSize: "18px",
-                  marginTop:"30px",
-                  justifyContent: "flex-start",
-                  marginBottom: "10px",
-                  fontWeight: "500",
-                }}> 
-                  <p
-                    style={{
-                      fontSize: responsiveValue(18, 16, 14),
-                      fontWeight: "550",
-                      textAlign: "left",
-                    }}>
+                  <Row style={{
+                    alignItems: "flex-start",
+                    fontSize: "18px",
+                    marginTop: "30px",
+                    justifyContent: "flex-start",
+                    marginBottom: "10px",
+                    fontWeight: "500",
+                  }}>
+                    <p
+                      style={{
+                        fontSize: responsiveValue(18, 16, 14),
+                        fontWeight: "550",
+                        textAlign: "left",
+                      }}>
                       최근 중요 변수 변화는 다음과 같습니다.
-                  </p>
+                    </p>
                   </Row>
-                  <table style={{ 
-                    width: "100%", 
+                  <table style={{
+                    width: "100%",
                     borderCollapse: 'collapse',
                     overflowWrap: "anywhere",
-                    ...tableStyle 
+                    ...tableStyle
                   }}>
                     <thead>
                       <tr>
                         <th colSpan={7}
-                            style={{
-                              paddingTop: responsiveValue(10, 5, 5)
-                            }}/>
+                          style={{
+                            paddingTop: responsiveValue(10, 5, 5)
+                          }} />
                       </tr>
                       <tr>
-                        <th rowSpan={2} style={{fontSize:responsiveValue(14, 12, 8)}} >추천시점</th>
+                        <th rowSpan={2} style={{ fontSize: responsiveValue(14, 12, 8) }} >추천시점</th>
                         <th colSpan={5}
-                            style={{
-                              fontSize:responsiveValue(14, 12, 8), 
-                              paddingBottom: responsiveValue(7, 2, 2)}} >상위 중요 변수 및 중요도</th>
+                          style={{
+                            fontSize: responsiveValue(14, 12, 8),
+                            paddingBottom: responsiveValue(7, 2, 2)
+                          }} >상위 중요 변수 및 중요도</th>
                       </tr>
 
                       <tr>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>1위</th>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>2위</th>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>3위</th>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>4위</th>
-                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>5위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>1위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>2위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>3위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>4위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>5위</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {xaiImpFeatureResultLoader==true? <Oval
-                  height={50}
-                  width={50}
-                  color="#4fa94d"
-                  wrapperStyle={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  wrapperClass=""
-                  visible={true}
-                  ariaLabel="oval-loading"
-                  secondaryColor="#4fa94d"
-                  strokeWidth={2}
-                  strokeWidthSecondary={2}
-                />:  xaiImpFeatureResult.length>0? xaiImpFeatureResult && xaiImpFeatureResult.map(impFeature=>(
-                  <tr>
-                  <td style={tdStyle}>{impFeature.date}</td>
-                    <td style={tdStyle}>{impFeature.imp1_var}<br />{impFeature.imp1_score}</td>
-                    <td style={tdStyle}>{impFeature.imp2_var}<br />{impFeature.imp2_score}</td>
-                    <td style={tdStyle}>{impFeature.imp3_var}<br />{impFeature.imp3_score}</td>
-                    <td style={tdStyle}>{impFeature.imp4_var}<br />{impFeature.imp4_score}</td>
-                    <td style={tdStyle}>{impFeature.imp5_var}<br />{impFeature.imp5_score}</td>
-                  </tr>
-                )) : null }
-            
+                      {xaiImpFeatureResultLoader == true ? <Oval
+                        height={50}
+                        width={50}
+                        color="#4fa94d"
+                        wrapperStyle={{
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="oval-loading"
+                        secondaryColor="#4fa94d"
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
+                      /> : xaiImpFeatureResult.length > 0 ? xaiImpFeatureResult && xaiImpFeatureResult.map(impFeature => (
+                        <tr>
+                          <td style={tdStyle}>{impFeature.date}</td>
+                          <td style={tdStyle}>{impFeature.imp1_var}<br />{impFeature.imp1_score}</td>
+                          <td style={tdStyle}>{impFeature.imp2_var}<br />{impFeature.imp2_score}</td>
+                          <td style={tdStyle}>{impFeature.imp3_var}<br />{impFeature.imp3_score}</td>
+                          <td style={tdStyle}>{impFeature.imp4_var}<br />{impFeature.imp4_score}</td>
+                          <td style={tdStyle}>{impFeature.imp5_var}<br />{impFeature.imp5_score}</td>
+                        </tr>
+                      )) : null}
+
                       <tr>
-                        <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
+                        <td style={{ padding: responsiveValue(5, 2, 2) }} colSpan={7}></td>
                       </tr>
 
                     </tbody>
-                   
+
                   </table>
-                  {xaiImpFeatureResult.length==0 &&  <div
-                style={{
-                  fontSize: 14,
-                  fontWeight: "bold",
-                  color: color.DarkBlue,
-                  width: "100%",
-                  textAlign: "center",
-                  alignItems:'center'
-                }}
-              >
-                데이터를 불러오지 못했습니다.
-              </div>}
-                  <Row style={{
-                            alignItems: "flex-start",
-                            fontSize: "18px",
-                            marginTop:"30px",
-                            justifyContent: "flex-start",
-                            marginBottom: "10px",
-                            fontWeight: "500",}}> 
-                  <p style={{
-                     fontSize: responsiveValue(18, 16, 14),
-                     fontWeight: "550",
-                     textAlign: "left",}}
+                  {xaiImpFeatureResult.length == 0 && <div
+                    style={{
+                      fontSize: 14,
+                      fontWeight: "bold",
+                      color: color.DarkBlue,
+                      width: "100%",
+                      textAlign: "center",
+                      alignItems: 'center'
+                    }}
                   >
-                    <span style={{ color: "#990000" }}>{"DT-XAI"}</span>를 적용한 최근 4개월간의 중요 변수(해당 기간 평균)와 그 변수의 중요도는 아래와 같습니다.</p>
-                </Row>
-                <table style={{  width: "100%",borderCollapse: 'collapse', overflowWrap: "anywhere",...tableStyle }}>
-                  <thead>
-                    <tr>
-                      <th colSpan={7}
+                    데이터를 불러오지 못했습니다.
+                  </div>}
+                  <Row style={{
+                    alignItems: "flex-start",
+                    fontSize: "18px",
+                    marginTop: "30px",
+                    justifyContent: "flex-start",
+                    marginBottom: "10px",
+                    fontWeight: "500",
+                  }}>
+                    <p style={{
+                      fontSize: responsiveValue(18, 16, 14),
+                      fontWeight: "550",
+                      textAlign: "left",
+                    }}
+                    >
+                      <span style={{ color: "#990000" }}>{"DT-XAI"}</span>를 적용한 최근 4개월간의 중요 변수(해당 기간 평균)와 그 변수의 중요도는 아래와 같습니다.</p>
+                  </Row>
+                  <table style={{ width: "100%", borderCollapse: 'collapse', overflowWrap: "anywhere", ...tableStyle }}>
+                    <thead>
+                      <tr>
+                        <th colSpan={7}
                           style={{
                             paddingTop: responsiveValue(10, 5, 5)
-                          }}/>
-                    </tr>
-                    <tr>
-                      <th rowSpan={2} style={{fontSize:responsiveValue(14, 12, 8)}}>추천시점 (기간)</th>
-                      <th colSpan={5}
-                            style={{
-                              fontSize:responsiveValue(14, 12, 8), 
-                              paddingBottom: responsiveValue(7, 2, 2)}} >상위 중요 변수 및 중요도</th>
-                    </tr>
-                    <tr>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>1위</th>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>2위</th>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>3위</th>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>4위</th>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>5위</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {dtxaiImpFeat4MonthLoader==true ?  <Oval
-                  height={50}
-                  width={50}
-                  color="#4fa94d"
-                  wrapperStyle={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  wrapperClass=""
-                  visible={true}
-                  ariaLabel="oval-loading"
-                  secondaryColor="#4fa94d"
-                  strokeWidth={2}
-                  strokeWidthSecondary={2}
-                />:dTXaiImpFeat4MonthResult.length>0? dTXaiImpFeat4MonthResult && dTXaiImpFeat4MonthResult.map(item=>(
-                  <tr>
-                  <td style={tdStyle}>{item.date}</td>
-                  <td style={tdStyleUp}>{item.imp1_var}<br />{item.imp1_score}</td>
-                  <td style={tdStyleUp}>{item.imp2_var}<br />{item.imp2_score}</td>
-                  <td style={tdStyleUp}>{item.imp3_var}<br />{item.imp3_score}</td>
-                  <td style={tdStyleUp}>{item.imp4_var}<br />{item.imp4_score}</td>
-                  <td style={tdStyleUp}>{item.imp5_var}<br />{item.imp5_score}</td>
-                </tr>)
-                ):null}
-                  {/* <tbody> */}
+                          }} />
+                      </tr>
+                      <tr>
+                        <th rowSpan={2} style={{ fontSize: responsiveValue(14, 12, 8) }}>추천시점 (기간)</th>
+                        <th colSpan={5}
+                          style={{
+                            fontSize: responsiveValue(14, 12, 8),
+                            paddingBottom: responsiveValue(7, 2, 2)
+                          }} >상위 중요 변수 및 중요도</th>
+                      </tr>
+                      <tr>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>1위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>2위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>3위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>4위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }}>5위</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dtxaiImpFeat4MonthLoader == true ? <Oval
+                        height={50}
+                        width={50}
+                        color="#4fa94d"
+                        wrapperStyle={{
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="oval-loading"
+                        secondaryColor="#4fa94d"
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
+                      /> : dTXaiImpFeat4MonthResult.length > 0 ? dTXaiImpFeat4MonthResult && dTXaiImpFeat4MonthResult.map(item => (
+                        <tr>
+                          <td style={tdStyle}>{item.date}</td>
+                          <td style={tdStyleUp}>{item.imp1_var}<br />{item.imp1_score}</td>
+                          <td style={tdStyleUp}>{item.imp2_var}<br />{item.imp2_score}</td>
+                          <td style={tdStyleUp}>{item.imp3_var}<br />{item.imp3_score}</td>
+                          <td style={tdStyleUp}>{item.imp4_var}<br />{item.imp4_score}</td>
+                          <td style={tdStyleUp}>{item.imp5_var}<br />{item.imp5_score}</td>
+                        </tr>)
+                      ) : null}
+                      {/* <tbody> */}
 
-                  {/* <tr>
+                      {/* <tr>
                       <td style={tdStyle}>2024-02-20 ~ 2024-03-20</td>
                       <td style={tdStyleUp}>NASDAQ<br />114</td>
                       <td style={tdStyleUp}>KOSPI<br />109</td>
@@ -2347,7 +2362,7 @@ const getXAILongShortImportance = async () => {
                       <td style={tdStyleUp}>DOW JONES<br />105</td>
                     </tr> */}
 
-                    {/* <tr>
+                      {/* <tr>
                       <td style={tdStyle}>2023-10-20 ~ 2023-11-20</td>
                       <td style={tdStyleUp}>NASDAQ<br />121</td>
                       <td style={tdStyleUp}>S&P500<br />119</td>
@@ -2355,106 +2370,110 @@ const getXAILongShortImportance = async () => {
                       <td style={tdStyleUp}>DOW JONES<br />114</td>
                       <td style={tdStyleUp}>KOSPI<br />107</td>
                     </tr> */}
-                    <tr>
-                      <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
-                    </tr>
-                  </tbody>
-                </table>
-                {dTXaiImpFeat4MonthResult.length==0 &&  <div
-                style={{
-                  fontSize: 14,
-                  fontWeight: "bold",
-                  color: color.DarkBlue,
-                  width: "100%",
-                  textAlign: "center",
-                  alignItems:'center'
-                }}
-              >
-                데이터를 불러오지 못했습니다.
-              </div>}
-                <Row style={{
-                  alignItems: "flex-start",
-                  fontSize: "18px",
-                  marginTop:"30px",
-                  justifyContent: "flex-start",
-                  marginBottom: "10px",
-                  fontWeight: "500",}}
-                > 
-                  <p style={{
-                     fontSize: responsiveValue(18, 16, 14),
-                     fontWeight: "550",
-                     textAlign: "left",}}
+                      <tr>
+                        <td style={{ padding: responsiveValue(5, 2, 2) }} colSpan={7}></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {dTXaiImpFeat4MonthResult.length == 0 && <div
+                    style={{
+                      fontSize: 14,
+                      fontWeight: "bold",
+                      color: color.DarkBlue,
+                      width: "100%",
+                      textAlign: "center",
+                      alignItems: 'center'
+                    }}
                   >
-                    장기 대비 단기 중요도의 변화 정도는 아래와 같습니다.  <br />
-                    <ul>중요도 변화
-                      <ol>
-                        &#183; 양수: 중요도의 순위가 올라간 변수
-                      </ol> 
-                      <ol>
-                        &#183; 음수: 중요도의 순위가 내려간 변수
-                      </ol>
-                    </ul>
-                    {/* 가 인 것은 그만큼 중요도의 순위가 올라간 것을 의미하며 음수인 것은 그만큼 중요도의 순위가 내려간 변수임을 의미합니다. */}
-                  </p>
-                </Row>
-                <table style={{ 
-                  width: "100%" ,
-                  borderCollapse: 'collapse', 
-                  overflowWrap: "anywhere", 
-                  ...tableStyle }}
-                >
-                  <thead>
-                    <tr>
-                      <th colSpan={7}
+                    데이터를 불러오지 못했습니다.
+                  </div>}
+                  <Row style={{
+                    alignItems: "flex-start",
+                    fontSize: "18px",
+                    marginTop: "30px",
+                    justifyContent: "flex-start",
+                    marginBottom: "10px",
+                    fontWeight: "500",
+                  }}
+                  >
+                    <p style={{
+                      fontSize: responsiveValue(18, 16, 14),
+                      fontWeight: "550",
+                      textAlign: "left",
+                    }}
+                    >
+                      장기 대비 단기 중요도의 변화 정도는 아래와 같습니다.  <br />
+                      <ul>중요도 변화
+                        <ol>
+                          &#183; 양수: 중요도의 순위가 올라간 변수
+                        </ol>
+                        <ol>
+                          &#183; 음수: 중요도의 순위가 내려간 변수
+                        </ol>
+                      </ul>
+                      {/* 가 인 것은 그만큼 중요도의 순위가 올라간 것을 의미하며 음수인 것은 그만큼 중요도의 순위가 내려간 변수임을 의미합니다. */}
+                    </p>
+                  </Row>
+                  <table style={{
+                    width: "100%",
+                    borderCollapse: 'collapse',
+                    overflowWrap: "anywhere",
+                    ...tableStyle
+                  }}
+                  >
+                    <thead>
+                      <tr>
+                        <th colSpan={7}
                           style={{
                             paddingTop: responsiveValue(10, 5, 5)
-                          }}/>
-                    </tr>
-                    <tr>
-                      <th rowSpan={2}
+                          }} />
+                      </tr>
+                      <tr>
+                        <th rowSpan={2}
                           style={{
-                            fontSize:responsiveValue(14, 12, 8),
+                            fontSize: responsiveValue(14, 12, 8),
                           }}> 추천시점 (기준)</th>
-                      <th  style={{
-                       fontSize:responsiveValue(14, 12, 8),
-                        paddingBottom: responsiveValue(7, 2, 2)}} colSpan={5}>상위 중요 변수 변수 중요도</th>
-                  
-                    </tr>
-                    <tr>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >1위</th>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >2위</th>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >3위</th>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >4위</th>
-                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >5위</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {xaiLongShortImpLoader==true?<Oval
-                  height={50}
-                  width={50}
-                  color="#4fa94d"
-                  wrapperStyle={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  wrapperClass=""
-                  visible={true}
-                  ariaLabel="oval-loading"
-                  secondaryColor="#4fa94d"
-                  strokeWidth={2}
-                  strokeWidthSecondary={2}
-                />: xaiLongShortImpResult.length>0 ? xaiLongShortImpResult && xaiLongShortImpResult.map(item=>(
-                  <tr>
-                  <td style={tdStyle}>{item.index} </td>
-                  <td style={{...tdStyleUp, ...tdStyleBlue}}>{item.r1_var}<br />{item.r1_dff}</td>
-                  <td style={{...tdStyleUp, ...tdStyleBlue}}>{item.r2_var}<br />{item.r2_dff}</td>
-                  <td style={{...tdStyleUp, ...tdStyleRed}}>{item.r3_var}<br />{item.r3_dff}</td>
-                  <td style={{...tdStyleUp, ...tdStyleRed}}>{item.r4_var}<br />{item.r4_dff}</td>
-                  <td style={{...tdStyleUp, ...tdStyleRed}}>{item.r5_var}<br />{item.r5_dff}</td>
-                </tr>
+                        <th style={{
+                          fontSize: responsiveValue(14, 12, 8),
+                          paddingBottom: responsiveValue(7, 2, 2)
+                        }} colSpan={5}>상위 중요 변수 변수 중요도</th>
 
-                )):null}
-                    {/* <tr>
+                      </tr>
+                      <tr>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }} >1위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }} >2위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }} >3위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }} >4위</th>
+                        <th style={{ fontSize: responsiveValue(14, 12, 8) }} >5위</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {xaiLongShortImpLoader == true ? <Oval
+                        height={50}
+                        width={50}
+                        color="#4fa94d"
+                        wrapperStyle={{
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="oval-loading"
+                        secondaryColor="#4fa94d"
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
+                      /> : xaiLongShortImpResult.length > 0 ? xaiLongShortImpResult && xaiLongShortImpResult.map(item => (
+                        <tr>
+                          <td style={tdStyle}>{item.index} </td>
+                          <td style={{ ...tdStyleUp, ...tdStyleBlue }}>{item.r1_var}<br />{item.r1_dff}</td>
+                          <td style={{ ...tdStyleUp, ...tdStyleBlue }}>{item.r2_var}<br />{item.r2_dff}</td>
+                          <td style={{ ...tdStyleUp, ...tdStyleRed }}>{item.r3_var}<br />{item.r3_dff}</td>
+                          <td style={{ ...tdStyleUp, ...tdStyleRed }}>{item.r4_var}<br />{item.r4_dff}</td>
+                          <td style={{ ...tdStyleUp, ...tdStyleRed }}>{item.r5_var}<br />{item.r5_dff}</td>
+                        </tr>
+
+                      )) : null}
+                      {/* <tr>
                       <td style={tdStyle}>3개월 전 ~ 5일 전 </td>
                       <td style={{...tdStyleUp, ...tdStyleBlue}}>OIL<br />5</td>
                       <td style={{...tdStyleUp, ...tdStyleBlue}}>KOSPI<br />-4</td>
@@ -2480,25 +2499,25 @@ const getXAILongShortImportance = async () => {
                       <td style={{...tdStyleUp, ...tdStyleRed}}>S&P500<br />3</td>
                       <td style={{...tdStyleUp, ...tdStyleRed}}>KOSPI<br />-3</td>
                     </tr> */}
-                    <tr>
-                      <td style={{padding: responsiveValue(5,2,2)}} colSpan={7}></td>
-                    </tr>
-                  </tbody>
+                      <tr>
+                        <td style={{ padding: responsiveValue(5, 2, 2) }} colSpan={7}></td>
+                      </tr>
+                    </tbody>
 
-                </table>
-                {xaiLongShortImpLoader.length==0 &&  <div
-                style={{
-                  fontSize: 14,
-                  fontWeight: "bold",
-                  color: color.DarkBlue,
-                  width: "100%",
-                  textAlign: "center",
-                  alignItems:'center'
-                }}
-              >
-                데이터를 불러오지 못했습니다.
-              </div>}
-                {/* <Row
+                  </table>
+                  {xaiLongShortImpLoader.length == 0 && <div
+                    style={{
+                      fontSize: 14,
+                      fontWeight: "bold",
+                      color: color.DarkBlue,
+                      width: "100%",
+                      textAlign: "center",
+                      alignItems: 'center'
+                    }}
+                  >
+                    데이터를 불러오지 못했습니다.
+                  </div>}
+                  {/* <Row
                   style={{
                     alignItems: "center",
 
@@ -2778,7 +2797,7 @@ const getXAILongShortImportance = async () => {
                       );
                     })}
                 </Row> */}
-              </Col>
+                </Col>
               ) : (
                 <div
                   style={{
@@ -2893,19 +2912,19 @@ const getXAILongShortImportance = async () => {
                     }}
                   >
                     <TableContainer>
-                      <Table  sx={{
-      minWidth: 650,
-      '@media (max-width: 600px)': {
-        minWidth: '100%',
-      },
-    }} aria-label="simple table">
+                      <Table sx={{
+                        minWidth: 650,
+                        '@media (max-width: 600px)': {
+                          minWidth: '100%',
+                        },
+                      }} aria-label="simple table">
                         <TableHead>
                           <TableRow>
                             <TableCell
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(14, 12, 8),
+                                fontSize: responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2916,7 +2935,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(14, 12, 8),
+                                fontSize: responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2927,7 +2946,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(14, 12, 8),
+                                fontSize: responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2946,19 +2965,19 @@ const getXAILongShortImportance = async () => {
                               >
                                 <TableCell
                                   align="center"
-                                  style={{     fontSize:responsiveValue(14, 12, 8),color: "#4f4f4f" }}
+                                  style={{ fontSize: responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.date}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{    fontSize:responsiveValue(14, 12, 8),color: "#4f4f4f" }}
+                                  style={{ fontSize: responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.sim_var1}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{    fontSize:responsiveValue(14, 12, 8), color: "#4f4f4f" }}
+                                  style={{ fontSize: responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.sim_var2}
                                 </TableCell>
@@ -2972,23 +2991,23 @@ const getXAILongShortImportance = async () => {
                     <Row
                       style={{
                         alignItems: "flex-start",
-                        fontSize:responsiveValue(14, 12, 8),
-                        flexWrap:"wrap",
-                        justifyContent:isMobile?'center': "space-around",
+                        fontSize: responsiveValue(14, 12, 8),
+                        flexWrap: "wrap",
+                        justifyContent: isMobile ? 'center' : "space-around",
                         marginTop: "20px",
                         marginBottom: "20px",
                         fontWeight: "500",
                       }}
                     >
-                  
-                      <MacroSimVarOneLineChart simLabel= {limeMacroSimVar[0]} data={limeMacroChartData
-} isMobile={isMobile}/>
-  <MacroSimVarTwoLineChart simLabel= {limeMacroSimVar[1]} data={limeMacroChartData
-} isMobile={isMobile}/>
+
+                      <MacroSimVarOneLineChart simLabel={limeMacroSimVar[0]} data={limeMacroChartData
+                      } isMobile={isMobile} />
+                      <MacroSimVarTwoLineChart simLabel={limeMacroSimVar[1]} data={limeMacroChartData
+                      } isMobile={isMobile} />
 
                     </Row>
 
-        
+
                     {/* 
 <table  style={tableStyle}>
       <thead>
@@ -3167,19 +3186,19 @@ const getXAILongShortImportance = async () => {
                     </Row>
 
                     <TableContainer>
-                      <Table  sx={{
-      minWidth: 650,
-      '@media (max-width: 600px)': {
-        minWidth: '100%',
-      },
-    }}aria-label="simple table">
+                      <Table sx={{
+                        minWidth: 650,
+                        '@media (max-width: 600px)': {
+                          minWidth: '100%',
+                        },
+                      }} aria-label="simple table">
                         <TableHead>
                           <TableRow>
                             <TableCell
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(14, 12, 8),
+                                fontSize: responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -3190,7 +3209,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(14, 12, 8),
+                                fontSize: responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -3201,7 +3220,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(14, 12, 8),
+                                fontSize: responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -3212,7 +3231,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(14, 12, 8),
+                                fontSize: responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -3231,25 +3250,25 @@ const getXAILongShortImportance = async () => {
                               >
                                 <TableCell
                                   align="center"
-                                  style={{   fontSize:responsiveValue(14, 12, 8),color: "#4f4f4f" }}
+                                  style={{ fontSize: responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.date}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{   fontSize:responsiveValue(14, 12, 8), color: "#4f4f4f" }}
+                                  style={{ fontSize: responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.avg_var1}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{    fontSize:responsiveValue(14, 12, 8), color: "#4f4f4f" }}
+                                  style={{ fontSize: responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.avg_var2}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{     fontSize:responsiveValue(14, 12, 8), color: "#4f4f4f" }}
+                                  style={{ fontSize: responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.avg_var3}
                                 </TableCell>
@@ -3475,7 +3494,7 @@ const getXAILongShortImportance = async () => {
             />
           ) : dbChartData ? (
             <>
-              <LineChart data={dbChartData} isMobile={isMobile}/>
+              <LineChart data={dbChartData} isMobile={isMobile} />
               <Row>
                 <p
                   style={{
