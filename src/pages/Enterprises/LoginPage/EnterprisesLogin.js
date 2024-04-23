@@ -11,6 +11,7 @@ import { Oval } from "react-loader-spinner";
 import { useResponsive } from "../../../hooks/useResponsive";
 import { WhiteSpace } from "../../../style/globalStyled";
 import { saveDataState } from "../../../redux/slices/dataSlice";
+import { PhoneFilled, ExclamationCircleFilled } from "@ant-design/icons";
 function EnterprisesLogin() {
   const { responsiveValue } = useResponsive()
   useTitle("딥트레이드 엔터프라이즈");
@@ -139,9 +140,21 @@ function EnterprisesLogin() {
           </button>
         </form>
       </div>
-      {/* <div className="infoSection">
-        <h3>서비스 안내 가이드</h3>
-     
+      {/* <div
+        style={{
+          display: 'flex',
+          gap: 10
+        }}
+      >
+        <div className="service_button" style={{paddingLeft: 10, paddingRight: 10, width: 150, backgroundColor: 'rgb(22, 51, 79)'}}>
+          서비스 안내 가이드
+        </div>
+        <div className="service_button" style={{paddingLeft: 10, paddingRight: 10, width: 150, display: 'flex', 'alignItems': 'center', justifyContent: 'center', gap: 5}}>
+          <ExclamationCircleFilled /> 서비스 오류 신고
+        </div>
+        <div className="service_button" style={{paddingLeft: 10, paddingRight: 10, width: 150, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5}}>
+          <PhoneFilled /> 문의하기
+        </div>
       </div> */}
       <ToastContainer />
     </div>

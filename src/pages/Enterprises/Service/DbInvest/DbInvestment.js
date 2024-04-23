@@ -918,61 +918,6 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              KODEX <br/>반도체
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-              TIGER <br/>헬스케어
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-              ARIRANG <br/>고배당주
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-              KODEX 200 <br/>가치저변동
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
-              TIGER <br/>우량가치
-            </div>
-            <div
-              style={{
-                width: 110,
-                display: "table-cell",
-                fontWeight: 700,
-                transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(14, 12, 8)
-              }}
-            >
               KODEX <br/>코스닥150
             </div>
             <div
@@ -984,7 +929,20 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-          KODEX  <br/>퀄리티Plus
+              KODEX  <br/>Fn성장
+        
+    
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+              TIGER <br/>우량가치
             </div>
             <div
               style={{
@@ -1007,8 +965,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              KODEX <br/>2차전지산업
-    
+              KODEX 200 <br/>가치저변동
             </div>
             <div
               style={{
@@ -1019,8 +976,51 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              KODEX  <br/>Fn성장
-        
+          KODEX  <br/>퀄리티Plus
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+              ARIRANG <br/>고배당주
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+              KODEX <br/>반도체
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+              TIGER <br/>헬스케어
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+              KODEX <br/>2차전지산업
     
             </div>
           </Row>
@@ -1123,7 +1123,7 @@ const getXAILongShortImportance = async () => {
                             fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.kodex_semicon}
+                          {list.kodex_kq}
                         </div>
                         <div
                           style={{
@@ -1136,33 +1136,7 @@ const getXAILongShortImportance = async () => {
                             fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.tiger_health}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.arirang_high_div}
-                        </div>
-                        <div
-                          style={{
-                            width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.kodex_value}
+                          {list.kodex_growth}
                         </div>
                         <div
                           style={{
@@ -1188,7 +1162,33 @@ const getXAILongShortImportance = async () => {
                             fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.kodex_kq}
+                          {list.kodex_msci}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_value}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_qulity_plus}
                         </div>
                         <div
                             style={{
@@ -1201,7 +1201,7 @@ const getXAILongShortImportance = async () => {
                             fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.kodex_qulity_plus}
+                            {list.arirang_high_div}
                           </div>
                           <div
                             style={{
@@ -1214,7 +1214,20 @@ const getXAILongShortImportance = async () => {
                             fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.kodex_msci}
+                            {list.kodex_semicon}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.tiger_health}
                           </div>
                           <div
                             style={{
@@ -1228,19 +1241,6 @@ const getXAILongShortImportance = async () => {
                             }}
                           >
                             {list.kodex_btry_indus}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                            height: "auto",
-                            display: "table-cell",
-                            justifyContent: "space-around",
-                            cursor: "pointer",
-                            transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.kodex_growth}
                           </div>
                          
                       </Row>
@@ -1286,8 +1286,7 @@ const getXAILongShortImportance = async () => {
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
                             overflow: "hidden",
-                            fontSize:responsiveValue(18, 15, 10),
-                            filter: 'blur(4px)'
+                            fontSize:responsiveValue(14, 12, 8)
                             
                           }}
                         >
@@ -1301,11 +1300,11 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10),
-                            filter:'blur(4px)'
+                            fontSize:responsiveValue(14, 12, 8)
+                         
                           }}
                         >
-                          {list.all_stocks}
+                          {list.kodex_200}
                         </div>
                         <div
                           style={{
@@ -1315,11 +1314,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10),
-                            filter: 'blur(4px)'
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.large_cap}
+                          {list.kodex_kq}
                         </div>
                         <div
                           style={{
@@ -1329,11 +1327,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10),
-                            filter: 'blur(4px)'
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.esg}
+                          {list.kodex_growth}
                         </div>
                         <div
                           style={{
@@ -1343,11 +1340,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10),
-                            filter: 'blur(4px)'
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.growth}
+                          {list.tiger_value}
                         </div>
                         <div
                           style={{
@@ -1357,11 +1353,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10),
-                            filter: 'blur(4px)'
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.value}
+                          {list.kodex_msci}
                         </div>
                         <div
                           style={{
@@ -1371,11 +1366,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10),
-                            filter: 'blur(4px)'
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.mid_small}
+                          {list.kodex_value}
                         </div>
                         <div
                           style={{
@@ -1385,12 +1379,63 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10),
-                            filter: 'blur(4px)'
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.dividend}
+                          {list.kodex_qulity_plus}
                         </div>
+                        <div
+                            style={{
+                              width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.arirang_high_div}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_semicon}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.tiger_health}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_btry_indus}
+                          </div>
                         {/* <div
                             style={{
                               width: 110,
@@ -1516,7 +1561,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-            KODEX 200
+              KODEX 200
             </div>
             <div
               style={{
@@ -1527,7 +1572,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-            KODEX <br/>반도체
+              KODEX <br/>코스닥150
             </div>
             <div
               style={{
@@ -1538,7 +1583,9 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-                TIGER <br/>헬스케어
+              KODEX  <br/>Fn성장
+        
+    
             </div>
             <div
               style={{
@@ -1549,7 +1596,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-                ARIRANG <br/>고배당주
+              TIGER <br/>우량가치
             </div>
             <div
               style={{
@@ -1560,7 +1607,8 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-           KODEX 200 <br/>가치저변동
+              KODEX <br/>MSCI모멘텀
+
             </div>
             <div
               style={{
@@ -1571,7 +1619,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-          TIGER <br/>우량가치
+              KODEX 200 <br/>가치저변동
             </div>
             <div
               style={{
@@ -1582,7 +1630,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-         KODEX <br/>코스닥150
+          KODEX  <br/>퀄리티Plus
             </div>
             <div
               style={{
@@ -1593,7 +1641,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-           KODEX  <br/>퀄리티Plus
+              ARIRANG <br/>고배당주
             </div>
             <div
               style={{
@@ -1604,7 +1652,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-  KODEX <br/>MSCI모멘텀
+              KODEX <br/>반도체
             </div>
             <div
               style={{
@@ -1615,7 +1663,7 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-    KODEX <br/>2차전지산업
+              TIGER <br/>헬스케어
             </div>
             <div
               style={{
@@ -1626,7 +1674,8 @@ const getXAILongShortImportance = async () => {
                 fontSize:responsiveValue(14, 12, 8)
               }}
             >
-          KODEX  <br/>Fn성장
+              KODEX <br/>2차전지산업
+    
             </div>
             <div
               style={{
@@ -1703,67 +1752,121 @@ const getXAILongShortImportance = async () => {
                             {list.buying_date}
                           </div>
                           <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            overflow: "hidden",
+                            fontSize:responsiveValue(14, 12, 8)
+                            
+                          }}
+                        >
+                          {list.cash}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                         
+                          }}
+                        >
+                          {list.kodex_200}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_kq}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_growth}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.tiger_value}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_msci}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_value}
+                        </div>
+                        <div
+                          style={{
+                            width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_qulity_plus}
+                        </div>
+                        <div
                             style={{
                               width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              overflow: "hidden",
-                              fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.cash}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.kodex_200}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.kodex_semicon}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
-                            }}
-                          >
-                            {list.tiger_health}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.arirang_high_div}
@@ -1771,93 +1874,41 @@ const getXAILongShortImportance = async () => {
                           <div
                             style={{
                               width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.kodex_value}
+                            {list.kodex_semicon}
                           </div>
                           <div
                             style={{
                               width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.tiger_value}
+                            {list.tiger_health}
                           </div>
                           <div
                             style={{
                               width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                          {list.kodex_kq}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                    {list.kodex_qulity_plus}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                        {list.kodex_msci}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                        {list.kodex_btry_indus}
-                          </div>
-                          <div
-                            style={{
-                              width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              // cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(14, 12, 8)
-                          }}
-                        >
-                 {list.kodex_growth}
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_btry_indus}
                           </div>
                           <div
                             style={{

@@ -35,7 +35,8 @@ import { VerifyAuth } from "./routing/VerifyAuth";
 import authRoles from "./routing/authRoles";
 import EnterpriseServiceTest from "./pages/Enterprises/Service/EnterpriseServiceTest";
 import StockPortfolio from "./pages/Solution/SubPages/StockPortfolio";
-
+import TestPage from "./pages/RATB/TestPage";
+import TestPage2 from "./pages/RATB/TestPage2";
 import EMP from "./pages/Solution/SubPages/EMP";
 import RiskManagement from "./pages/Solution/SubPages/RiskManagement";
 import NoticeBoardDetails from "./pages/NoticeBoard/NoticeBoardDetails";
@@ -74,6 +75,14 @@ ReactDOM.render(
               path="enterprise"
               exact={true}
               element={<EnterprisesLogin />}
+            />
+            <Route
+              path="test"
+              element={<TestPage />}
+            />
+            <Route
+              path="danger"
+              element={<TestPage2 />}
             />
             <Route
               path="enterprise/service"
