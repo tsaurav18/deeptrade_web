@@ -384,7 +384,7 @@ function DbInvestment() {
     padding: "8px",
     textAlign: "center",
     borderBottom: "none",
-    fontSize:responsiveValue(18, 15, 10)
+    fontSize:responsiveValue(14, 12, 8)
   
   };
   
@@ -394,7 +394,7 @@ function DbInvestment() {
     paddingBottom: 0,
     textAlign: "center",
     borderBottom: "none",
-    fontSize:responsiveValue(18, 15, 10)
+    fontSize:responsiveValue(14, 12, 8)
   
   };
 
@@ -404,7 +404,7 @@ function DbInvestment() {
     paddingBottom: 0,
     textAlign: "center",
     borderBottom: "none",
-    fontSize:responsiveValue(18, 15, 10)
+    fontSize:responsiveValue(14, 12, 8)
   
   };
 
@@ -870,7 +870,7 @@ const getXAILongShortImportance = async () => {
             style={{
               alignItems: "center",
 
-              height: 50,
+              height: 70,
               justifyContent: "space-around",
               borderTopLeftRadius: "10px",
               borderTopRightRadius: "10px",
@@ -880,9 +880,9 @@ const getXAILongShortImportance = async () => {
               style={{
                 width: 110,
                 display: "table-cell",
-                fontWeight: 700,
+                fontWeight: 900,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
               추천시점
@@ -893,7 +893,7 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
               Cash
@@ -904,10 +904,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              전체 주식
+              KODEX 200
             </div>
             <div
               style={{
@@ -915,10 +915,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              대형주
+              KODEX <br/>반도체
             </div>
             <div
               style={{
@@ -926,10 +926,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              ESG
+              TIGER <br/>헬스케어
             </div>
             <div
               style={{
@@ -937,10 +937,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              성장
+              ARIRANG <br/>고배당주
             </div>
             <div
               style={{
@@ -948,10 +948,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              가치
+              KODEX 200 <br/>가치저변동
             </div>
             <div
               style={{
@@ -959,10 +959,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              중소형
+              TIGER <br/>우량가치
             </div>
             <div
               style={{
@@ -970,22 +970,59 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              배당
+              KODEX <br/>코스닥150
             </div>
-            {/* <div
+            <div
               style={{
                 width: 110,
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              투자 <br />
-              수익률
-            </div> */}
+          KODEX  <br/>퀄리티Plus
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+              KODEX <br/>MSCI모멘텀
+
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+              KODEX <br/>2차전지산업
+    
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+              KODEX  <br/>Fn성장
+        
+    
+            </div>
           </Row>
           <Row
             style={{
@@ -1041,7 +1078,7 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
                           {list.buying_date}
@@ -1055,7 +1092,7 @@ const getXAILongShortImportance = async () => {
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
                             overflow: "hidden",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(14, 12, 8)
                             
                           }}
                         >
@@ -1069,11 +1106,11 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10),
+                            fontSize:responsiveValue(14, 12, 8)
                          
                           }}
                         >
-                          {list.all_stocks}
+                          {list.kodex_200}
                         </div>
                         <div
                           style={{
@@ -1083,10 +1120,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.large_cap}
+                          {list.kodex_semicon}
                         </div>
                         <div
                           style={{
@@ -1096,10 +1133,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.esg}
+                          {list.tiger_health}
                         </div>
                         <div
                           style={{
@@ -1109,10 +1146,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.growth}
+                          {list.arirang_high_div}
                         </div>
                         <div
                           style={{
@@ -1122,10 +1159,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.value}
+                          {list.kodex_value}
                         </div>
                         <div
                           style={{
@@ -1135,10 +1172,10 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.mid_small}
+                          {list.tiger_value}
                         </div>
                         <div
                           style={{
@@ -1148,23 +1185,64 @@ const getXAILongShortImportance = async () => {
                             justifyContent: "space-around",
                             cursor: "pointer",
                             transition: "all 0.3s ease-in-out",
-                            fontSize:responsiveValue(18, 15, 10)
+                            fontSize:responsiveValue(14, 12, 8)
                           }}
                         >
-                          {list.dividend}
+                          {list.kodex_kq}
                         </div>
-                        {/* <div
+                        <div
                             style={{
                               width: 110,
-                              height: "auto",
-                              display: "table-cell",
-                              justifyContent: "space-around",
-                              cursor: "pointer",
-                              transition: "all 0.3s ease-in-out",
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.pv_return}
-                          </div> */}
+                            {list.kodex_qulity_plus}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_msci}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_btry_indus}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                            height: "auto",
+                            display: "table-cell",
+                            justifyContent: "space-around",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontSize:responsiveValue(14, 12, 8)
+                            }}
+                          >
+                            {list.kodex_growth}
+                          </div>
+                         
                       </Row>
                     );
                   }): dbSignalCurrentData.map((list, index) => {
@@ -1401,7 +1479,7 @@ const getXAILongShortImportance = async () => {
             style={{
               alignItems: "center",
 
-              height: 50,
+              height: 70,
               justifyContent: "space-around",
               borderTopLeftRadius: "10px",
               borderTopRightRadius: "10px",
@@ -1411,9 +1489,9 @@ const getXAILongShortImportance = async () => {
               style={{
                 width: 110,
                 display: "table-cell",
-                fontWeight: 700,
+                fontWeight: 900,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
               추천시점
@@ -1424,7 +1502,7 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
               Cash
@@ -1435,10 +1513,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              전체 주식
+            KODEX 200
             </div>
             <div
               style={{
@@ -1446,10 +1524,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              대형주
+            KODEX <br/>반도체
             </div>
             <div
               style={{
@@ -1457,10 +1535,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              ESG
+                TIGER <br/>헬스케어
             </div>
             <div
               style={{
@@ -1468,10 +1546,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              성장
+                ARIRANG <br/>고배당주
             </div>
             <div
               style={{
@@ -1479,10 +1557,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              가치
+           KODEX 200 <br/>가치저변동
             </div>
             <div
               style={{
@@ -1490,10 +1568,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              중소형
+          TIGER <br/>우량가치
             </div>
             <div
               style={{
@@ -1501,10 +1579,10 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
-              배당
+         KODEX <br/>코스닥150
             </div>
             <div
               style={{
@@ -1512,7 +1590,51 @@ const getXAILongShortImportance = async () => {
                 display: "table-cell",
                 fontWeight: 700,
                 transition: "all 0.3s ease-in-out",
-                fontSize:responsiveValue(18, 15, 10)
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+           KODEX  <br/>퀄리티Plus
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+  KODEX <br/>MSCI모멘텀
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+    KODEX <br/>2차전지산업
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+          KODEX  <br/>Fn성장
+            </div>
+            <div
+              style={{
+                width: 110,
+                display: "table-cell",
+                fontWeight: 700,
+                transition: "all 0.3s ease-in-out",
+                fontSize:responsiveValue(14, 12, 8)
               }}
             >
               투자 <br />
@@ -1575,7 +1697,7 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.buying_date}
@@ -1589,7 +1711,7 @@ const getXAILongShortImportance = async () => {
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
                               overflow: "hidden",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.cash}
@@ -1602,10 +1724,10 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.all_stocks}
+                            {list.kodex_200}
                           </div>
                           <div
                             style={{
@@ -1615,10 +1737,10 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.large_cap}
+                            {list.kodex_semicon}
                           </div>
                           <div
                             style={{
@@ -1628,10 +1750,10 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.esg}
+                            {list.tiger_health}
                           </div>
                           <div
                             style={{
@@ -1641,10 +1763,10 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.growth}
+                            {list.arirang_high_div}
                           </div>
                           <div
                             style={{
@@ -1654,10 +1776,10 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.value}
+                            {list.kodex_value}
                           </div>
                           <div
                             style={{
@@ -1667,10 +1789,10 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
-                            {list.mid_small}
+                            {list.tiger_value}
                           </div>
                           <div
                             style={{
@@ -1680,10 +1802,10 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
-                            }}
-                          >
-                            {list.dividend}
+                              fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                          {list.kodex_kq}
                           </div>
                           <div
                             style={{
@@ -1693,7 +1815,59 @@ const getXAILongShortImportance = async () => {
                               justifyContent: "space-around",
                               // cursor: "pointer",
                               transition: "all 0.3s ease-in-out",
-                              fontSize:responsiveValue(18, 15, 10)
+                              fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                    {list.kodex_qulity_plus}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              // cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                        {list.kodex_msci}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              // cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                        {list.kodex_btry_indus}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              // cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize:responsiveValue(14, 12, 8)
+                          }}
+                        >
+                 {list.kodex_growth}
+                          </div>
+                          <div
+                            style={{
+                              width: 110,
+                              height: "auto",
+                              display: "table-cell",
+                              justifyContent: "space-around",
+                              // cursor: "pointer",
+                              transition: "all 0.3s ease-in-out",
+                              fontSize:responsiveValue(14, 12, 8)
                             }}
                           >
                             {list.pv_return}%
@@ -1852,23 +2026,57 @@ const getXAILongShortImportance = async () => {
                             }}/>
                       </tr>
                       <tr>
-                        <th rowSpan={2} style={{fontSize: responsiveValue(18, 15, 10)}}>추천시점</th>
-                        <th rowSpan={2} style={{fontSize: responsiveValue(18, 15, 10)}}>중요 변수</th>
-                        <th rowSpan={2} style={{fontSize: responsiveValue(18, 15, 10)}}>변수 중요도</th>
+                        <th rowSpan={2} style={{ fontSize:responsiveValue(14, 12, 8)}}>추천시점</th>
+                        <th rowSpan={2} style={{ fontSize:responsiveValue(14, 12, 8)}}>중요 변수</th>
+                        <th rowSpan={2} style={{ fontSize:responsiveValue(14, 12, 8)}}>변수 중요도</th>
                         <th colSpan={8} 
                             style={{
-                              fontSize: responsiveValue(18, 15, 10),
+                              fontSize:responsiveValue(14, 12, 8),
                               paddingBottom: responsiveValue(7, 2, 2)}}>중요 변수 제거 결과</th>
                       </tr>
                       <tr>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>Cash</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>전체 주식</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>대형주</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>ESG</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>성장</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>가치</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>중소형</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>배당</th>
+                        <th style={{ fontSize:responsiveValue(14, 12, 8)}}>Cash</th>
+                        <th style={{ fontSize:responsiveValue(14, 12, 8)}}>   KODEX 200</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+            KODEX <br/>반도체</th>
+                        <th style={{  fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+                TIGER <br/>헬스케어</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+                ARIRANG <br/>고배당주</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+           KODEX 200 <br/>가치저변동</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+          TIGER <br/>우량가치</th>
+                        <th style={{ fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+         KODEX <br/>코스닥150</th>
+         <th style={{ fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+          KODEX  <br/>퀄리티Plus</th>
+         <th style={{ fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+         KODEX <br/>MSCI모멘텀</th>
+         <th style={{ fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+         KODEX <br/>2차전지산업</th>
+         <th style={{ fontSize:responsiveValue(14, 12, 8)
+              }}
+            >
+               KODEX  <br/>Fn성장</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1881,13 +2089,17 @@ const getXAILongShortImportance = async () => {
                               <td style={tdStyle}>{list.lime_var}</td>
                               <td style={tdStyle}>{list.lime_imp}</td>
                               <td style={tdStyle}>{list.cash?list.cash.toFixed(3):list.cash}</td>
-                              <td style={tdStyle}>{list.all_stocks?list.all_stocks.toFixed(3):list.all_stocks}</td>
-                              <td style={tdStyle}>{list.large_cap?list.large_cap.toFixed(3):list.large_cap}</td>
-                              <td style={tdStyle}>{list.esg?list.esg.toFixed(3):list.esg}</td>
-                              <td style={tdStyle}>{list.growth?list.growth.toFixed(3):list.growth}</td>
-                              <td style={tdStyle}>{list.value?list.value.toFixed(3):list.value}</td>
-                              <td style={tdStyle}>{list.mid_small?list.mid_small.toFixed(3):list.mid_small}</td>
-                              <td style={tdStyle}>{list.dividend?list.dividend.toFixed(3):list.dividend}</td>
+                              <td style={tdStyle}>{list.kodex_200?list.kodex_200.toFixed(3):list.kodex_200}</td>
+                              <td style={tdStyle}>{list.kodex_semicon?list.kodex_semicon.toFixed(3):list.kodex_semicon}</td>
+                              <td style={tdStyle}>{list.tiger_health?list.tiger_health.toFixed(3):list.tiger_health}</td>
+                              <td style={tdStyle}>{list.arirang_high_div?list.arirang_high_div.toFixed(3):list.arirang_high_div}</td>
+                              <td style={tdStyle}>{list.kodex_value?list.kodex_value.toFixed(3):list.kodex_value}</td>
+                              <td style={tdStyle}>{list.tiger_value?list.tiger_value.toFixed(3):list.tiger_value}</td>
+                              <td style={tdStyle}>{list.kodex_kq?list.kodex_kq.toFixed(3):list.kodex_kq}</td>
+                              <td style={tdStyle}>{list.kodex_qulity_plus?list.kodex_qulity_plus.toFixed(3):list.kodex_qulity_plus}</td>
+                              <td style={tdStyle}>{list.kodex_msci?list.kodex_msci.toFixed(3):list.kodex_msci}</td>
+                              <td style={tdStyle}>{list.kodex_btry_indus?list.kodex_btry_indus.toFixed(3):list.kodex_btry_indus}</td>
+                              <td style={tdStyle}>{list.kodex_growth?list.kodex_growth.toFixed(3):list.kodex_growth}</td>
                             </tr>
                           );
                         })}
@@ -1925,19 +2137,19 @@ const getXAILongShortImportance = async () => {
                             }}/>
                       </tr>
                       <tr>
-                        <th rowSpan={2} style={{fontSize: responsiveValue(18, 15, 10)}} >추천시점</th>
+                        <th rowSpan={2} style={{fontSize:responsiveValue(14, 12, 8)}} >추천시점</th>
                         <th colSpan={5}
                             style={{
-                              fontSize: responsiveValue(18, 15, 10), 
+                              fontSize:responsiveValue(14, 12, 8), 
                               paddingBottom: responsiveValue(7, 2, 2)}} >상위 중요 변수 및 중요도</th>
                       </tr>
 
                       <tr>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>1위</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>2위</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>3위</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>4위</th>
-                        <th style={{fontSize:responsiveValue(18, 15, 10)}}>5위</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>1위</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>2위</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>3위</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>4위</th>
+                        <th style={{fontSize:responsiveValue(14, 12, 8)}}>5위</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -2008,18 +2220,18 @@ const getXAILongShortImportance = async () => {
                           }}/>
                     </tr>
                     <tr>
-                      <th rowSpan={2} style={{fontSize: responsiveValue(18, 15, 10)}}>추천시점 (기간)</th>
+                      <th rowSpan={2} style={{fontSize:responsiveValue(14, 12, 8)}}>추천시점 (기간)</th>
                       <th colSpan={5}
                             style={{
-                              fontSize: responsiveValue(18, 15, 10), 
+                              fontSize:responsiveValue(14, 12, 8), 
                               paddingBottom: responsiveValue(7, 2, 2)}} >상위 중요 변수 및 중요도</th>
                     </tr>
                     <tr>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}}>1위</th>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}}>2위</th>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}}>3위</th>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}}>4위</th>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}}>5위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>1위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>2위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>3위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>4위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}}>5위</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -2150,19 +2362,19 @@ const getXAILongShortImportance = async () => {
                     <tr>
                       <th rowSpan={2}
                           style={{
-                            fontSize: responsiveValue(18, 15, 10),
+                            fontSize:responsiveValue(14, 12, 8),
                           }}> 추천시점 (기준)</th>
                       <th  style={{
-                        fontSize:responsiveValue(18, 15, 10),
+                       fontSize:responsiveValue(14, 12, 8),
                         paddingBottom: responsiveValue(7, 2, 2)}} colSpan={5}>상위 중요 변수 변수 중요도</th>
                   
                     </tr>
                     <tr>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}} >1위</th>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}} >2위</th>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}} >3위</th>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}} >4위</th>
-                      <th style={{fontSize:responsiveValue(18, 15, 10)}} >5위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >1위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >2위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >3위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >4위</th>
+                      <th style={{fontSize:responsiveValue(14, 12, 8)}} >5위</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -2642,7 +2854,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(18, 15, 10),
+                                fontSize:responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2653,7 +2865,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(18, 15, 10),
+                                fontSize:responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2664,7 +2876,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(18, 15, 10),
+                                fontSize:responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2683,19 +2895,19 @@ const getXAILongShortImportance = async () => {
                               >
                                 <TableCell
                                   align="center"
-                                  style={{     fontSize:responsiveValue(18, 15, 10), color: "#4f4f4f" }}
+                                  style={{     fontSize:responsiveValue(14, 12, 8),color: "#4f4f4f" }}
                                 >
                                   {list.date}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{     fontSize:responsiveValue(18, 15, 10), color: "#4f4f4f" }}
+                                  style={{    fontSize:responsiveValue(14, 12, 8),color: "#4f4f4f" }}
                                 >
                                   {list.sim_var1}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{     fontSize:responsiveValue(18, 15, 10), color: "#4f4f4f" }}
+                                  style={{    fontSize:responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.sim_var2}
                                 </TableCell>
@@ -2709,7 +2921,7 @@ const getXAILongShortImportance = async () => {
                     <Row
                       style={{
                         alignItems: "flex-start",
-                        fontSize: responsiveValue(18, 16, 14),
+                        fontSize:responsiveValue(14, 12, 8),
                         flexWrap:"wrap",
                         justifyContent:isMobile?'center': "space-around",
                         marginTop: "20px",
@@ -2916,7 +3128,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(18, 15, 10),
+                                fontSize:responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2927,7 +3139,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(18, 15, 10),
+                                fontSize:responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2938,7 +3150,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(18, 15, 10),
+                                fontSize:responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2949,7 +3161,7 @@ const getXAILongShortImportance = async () => {
                               sx={{ borderBottom: 0 }}
                               align="center"
                               style={{
-                                fontSize:responsiveValue(18, 15, 10),
+                                fontSize:responsiveValue(14, 12, 8),
                                 fontWeight: "550",
                                 color: "#4f4f4f",
                               }}
@@ -2968,25 +3180,25 @@ const getXAILongShortImportance = async () => {
                               >
                                 <TableCell
                                   align="center"
-                                  style={{    fontSize:responsiveValue(18, 15, 10), color: "#4f4f4f" }}
+                                  style={{   fontSize:responsiveValue(14, 12, 8),color: "#4f4f4f" }}
                                 >
                                   {list.date}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{    fontSize:responsiveValue(18, 15, 10), color: "#4f4f4f" }}
+                                  style={{   fontSize:responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.avg_var1}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{    fontSize:responsiveValue(18, 15, 10), color: "#4f4f4f" }}
+                                  style={{    fontSize:responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.avg_var2}
                                 </TableCell>
                                 <TableCell
                                   align="center"
-                                  style={{     fontSize:responsiveValue(18, 15, 10), color: "#4f4f4f" }}
+                                  style={{     fontSize:responsiveValue(14, 12, 8), color: "#4f4f4f" }}
                                 >
                                   {list.avg_var3}
                                 </TableCell>
