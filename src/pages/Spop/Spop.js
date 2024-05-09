@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import React, { useRef, useEffect, useState } from "react";
 import "./Spop.css";
-import register_info_doc from "../../documents/register_info_doc.pdf";
-import service_info_doc from "../../documents/service_info_doc.pdf";
+import register_info_doc from "../../documents/register_info_doc_new.pdf";
+import service_info_doc from "../../documents/service_info_doc_new.pdf";
 
 export default function Spop() {
   useEffect(() => {
@@ -152,6 +152,56 @@ export default function Spop() {
               </div>
             </div>
           </div>
+
+
+          <div className="spop_portfolio_inner_container">
+            <div className="spop_portfolio_left_container">
+              <img
+                src="../../assets/spop/portfolio4.png"
+                className="portfolio_img"
+              />
+            </div>
+            <div className="spop_portfolio_right_container">
+              <div className="port_top">
+                <div className="port_top_title">딥트레이드 알파</div>
+                <div className="port_top_body">
+                딥트레이드테크놀로지스 Index Shannon, Stock Shannon, EMP Shannon AI 엔진을 복합적으로 활용하여 분석한 시장 방향을 바탕으로 주식과 다양한 ETF(인버스 포함), 현금성 자산 등에 투자하는 액티브 로보어드바이저 
+                </div>
+              </div>
+              <div className="port_bottom">
+                <div className="port_bottom_title">가입 대상</div>
+                <div className="port_bottom_body">
+                딥트레이드테크놀로지스의 Index Shannon, Stock Shannon, EMP Shannon AI 엔진을 복합적으로 활용하여 분석한 시장 방향을 바탕으로 한 포트폴리오를 통해 지수보다 높고 안정적인 투자 성과를 기대하는 투자자
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="spop_portfolio_inner_container">
+            <div className="spop_portfolio_left_container">
+              <img
+                src="../../assets/spop/portfolio5.png"
+                className="portfolio_img"
+              />
+            </div>
+            <div className="spop_portfolio_right_container">
+              <div className="port_top">
+                <div className="port_top_title">딥트레이드 알파 (IRP/DC, 연금저축)</div>
+                <div className="port_top_body">
+                딥트레이드테크놀로지스 Index Shannon, Stock Shannon, EMP Shannon AI 엔진을 복합적으로 활용하여 분석한 시장 방향을 바탕으로 주식과 다양한 ETF, 현금성 자산 등에 투자하는 안정적인 퇴직연금 및 연금저축 관리 서비스
+                </div>
+              </div>
+              <div className="port_bottom">
+                <div className="port_bottom_title">가입 대상</div>
+                <div className="port_bottom_body">
+                지속적으로 적립되는 퇴직연금 및 연금저축 계좌에서 지수보다 높고 매우 안정적인 투자 성과를 기대하는 투자자
+
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <div className="spop_container" style={{ backgroundColor: "#F9F9F9" }}>

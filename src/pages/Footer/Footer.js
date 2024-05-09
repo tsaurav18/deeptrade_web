@@ -13,29 +13,29 @@ function Footer() {
       </div>
       <div className="row gx-0">
         <div className="col-10 col-xl-8 col-lg-10 col-md-10">
-          <div className="footer_body_title">증권사 및 기타 금융 관련 회사</div>
+          <div className="footer_body_title" >딥트레이드테크놀로지스의 AI 로보 어드바이저를 활용하는 비즈니스</div>
         </div>
       </div>
-      <div className="row gx-0">
+      {/* <div className="row gx-0">
         <div className="col-10 col-xl-8 col-lg-10 col-md-10">
           <div className="footer_body_content">
             딥트레이드테크놀로지스 AI 로보 어드바이저를 활용하는 비즈니스
           </div>
-        </div>
-      </div>
+        </div>  
+      </div> */}
       <div className="row gx-0">
         <div className="col-10 col-xl-8 col-lg-10 col-md-10">
-          <div className="footer_body_title">자산운용사</div>
+          <div className="footer_body_title">안정적인 지수 초과 수익을 제공하는 딥트레이드테크놀로지스의 SHANNON 엔진을 활용한 AI 펀드 개설 및 자문</div>
         </div>
       </div>
-      <div className="row gx-0">
+      {/* <div className="row gx-0">
         <div className="col-10 col-xl-8 col-lg-10 col-md-10">
           <div className="footer_body_content">
             안정적인 지수 초과 수익을 제공하는 딥트레이드테크놀로지스의 SHANNON
             엔진을 활용한 AI 펀드 개설 및 자문
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="row gx-0">
         <div className="col-10 col-xl-8 col-lg-10 col-md-10">
           <div className="footer_grid_button">
