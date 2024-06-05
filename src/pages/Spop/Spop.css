@@ -229,7 +229,7 @@
 }
 
 .portfolio_outer_container {
-    padding-bottom: 120px;
+    padding-bottom: 40px;
 }
 
 .download_icon {
@@ -238,6 +238,16 @@
     margin-left: 1vw;
 }
 
+
+.irp_dc_detailbtn{
+    background-color: "#F9F9F9";
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+}
 @media only screen and (max-width: 1300px) {
     .portfolio_container {
         margin: 0 10vw;
@@ -406,6 +416,10 @@
         width: 70vw;
     }
 
+    .irp_dc_detailbtn{
+        width: 70vw;
+    }
+
     .spop_checkpoint_text {
         width: 70vw;
         font-size: 3vw;
@@ -514,6 +528,9 @@
     }
 
     .spop_checkpoint_inner_container {
+        width: 90vw;
+    }
+    .irp_dc_detailbtn{
         width: 90vw;
     }
 

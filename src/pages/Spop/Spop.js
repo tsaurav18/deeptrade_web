@@ -204,6 +204,28 @@ export default function Spop() {
 
         </div>
       </div>
+    {/* IRP/DC에 대한 설명서 링크 */}
+    <div className="spop_container" style={{ display: "flex", justifyContent: "center", margin: "20px 0",  }}>
+  <div className="irp_dc_detailbtn" style={{ }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ flex: 1, marginRight: "30px" }}>
+      연금저축, 퇴직연금(IRP, DC형, DB형)이 무엇인지 궁금하신가요?</div>
+      <div>
+        <button 
+          onClick={() => {
+            window.open("https://blog.naver.com/deeptrade/223469659242", "_blank"); // Replace "#" with the link to the detailed page
+          }}
+          style={{ padding: "10px 20px", backgroundColor: "#394350", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" }}
+        >
+          알아보기
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
       <div className="spop_container" style={{ backgroundColor: "#F9F9F9" }}>
         <div
           className="spop_checkpoint_background"
