@@ -11,6 +11,9 @@ function Partnership(props) {
       </div>
       <div className="row gx-0 gy-2 partnership_content_container">
       <div className="col-4 partnership_icon bottom_row">
+          <img src="assets/partnership/sinyeong.png" alt="sinyeong" />
+        </div>
+      <div className="col-4 partnership_icon bottom_row">
           <img src="assets/partnership/DB_investment.png" alt="DB_investment" />
         </div>
         <div className="col-4 partnership_icon bottom_row">
