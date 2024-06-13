@@ -47,6 +47,33 @@ function News(props) {
           <SwiperSlide>
             <div className="news_slide">
               <div className="news_image" style={{ paddingTop: 15 }}>
+                <img src="assets/news/news23.png" alt="news23" />
+              </div>
+              <div className="news_content">
+                <h6>
+                딥트레이드테크놀로지스, 신영증권과 AI 기반 자산운용 서비스 협력 MOU 체결
+                </h6>
+                <p>2024/05</p>
+                <p>
+                딥트레이드테크놀로지스가 국내 주요 증권사인 신영증권과 AI 기술 기반 자산운용 서비스의 사업화를 위한 업무 협약을 체결했습니다. 딥트레이드는 첨단 AI 기술을 활용한 혁신적인 자산운용 상품을 개발하고 이를 시장에 선보일 계획입니다. 양사는 이번 협력을 통해 AI 기술을 활용한 새로운 자산운용 상품 및 서비스를 보다 많은 투자자에게 제공하는 것을 목표로 삼고 있습니다.<br />
+                  <button
+                    className="news_link_button"
+                    onClick={() =>
+                      window.open(
+                        "https://www.newswire.co.kr/newsRead.php?no=991517",
+                        "_blank"
+                      )
+                    }
+                  >
+                    기사 보기
+                  </button>
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="news_slide">
+              <div className="news_image" style={{ paddingTop: 15 }}>
                 <img src="assets/news/news16.png" alt="news19" />
               </div>
               <div className="news_content">
