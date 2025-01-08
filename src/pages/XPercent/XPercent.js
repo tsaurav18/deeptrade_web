@@ -108,7 +108,7 @@ function XPercent(props) {
                       padding: "5px 0",
                     }}
                   >
-                    시그널형 자문서비스
+                    모바일 연금 자문서비스
                   </div>
                   <div className="row" style={{height:"78px",}}>
                     <div className="col-12 col-md-12">
@@ -120,21 +120,19 @@ function XPercent(props) {
                           style={{ alignItems: "center" }}
                         >
                           <img
-                            src="assets/product/xpercent_small_logo.png"
+                            src="assets/product/dangyeon_logo_color.png"
                             alt="deeptrade_logo"
-                            style={{ width: "100%" }}
+                            style={{ width: "100%" , marginTop:-25}}
                           />
                         </div>
                         <div className="col-9 xpercent_text">
-                          장/단기 상승확률이 높은 종목의 시그널을 섹터별로
-                          제공받아 사용자의 성향에 적합한 포트폴리오 구성이
-                          가능합니다.
+                        연금 운용에 적절한 안전한 ETF들을 AI가 판단한 시장 상황에 따라 적절한 포트폴리오로 만들어 제공합니다.
                         </div>
                       </div>
                       <div className="row" style={{ marginTop: 10 }}>
                         <div className="col-12 solution_img_margin_top">
                           <img
-                            src="assets/product/xpct_logo.png"
+                            src="assets/product/dangyeon_logo.png"
                             alt="xpct_logo"
                             style={{ width: "100%" }}
                           />
@@ -143,7 +141,7 @@ function XPercent(props) {
                       <div
                         className="service_button"
                         onClick={() => {
-                          window.open("https://xpercent.io", "_blank");
+                          window.open("https://dangyeon.deeptrade.co/", "_blank");
                         }}
                       >
                         서비스 상세 보기

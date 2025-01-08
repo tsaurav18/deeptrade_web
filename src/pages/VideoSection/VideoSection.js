@@ -40,16 +40,16 @@ function VideoSection() {
         setsrc2("https://deeptrade-bucket.s3.ap-northeast-2.amazonaws.com/samsung_revised.mp4")
         refVideo2.current.src = src2;
     }, [src2]);
-  return <div className="video_containter " style={{paddingTop:"200px"}}>
+  return <div className="video_containter " style={{}}>
     <div className="video_outer_wrapper">
-    <div className="video_wrapper">
+    {/* <div className="video_wrapper">
     <video ref={refVideo} src="https://deeptrade-bucket.s3.ap-northeast-2.amazonaws.com/XPercentmp4.mp4" height="400" loop controls autoPlay playsInline muted controlsList="nodownload">
  
      </video>
     
-    </div>
+    </div> */}
     <div className="video_wrapper">
-    <video  ref={refVideo2} src="https://deeptrade-bucket.s3.ap-northeast-2.amazonaws.com/samsung_revised.mp4" height="400" loop controls  playsInline muted controlsList="nodownload">
+    <video  ref={refVideo2} src="https://deeptrade-bucket.s3.ap-northeast-2.amazonaws.com/samsung_revised.mp4" height="400" loop controls autoPlay playsInline muted controlsList="nodownload">
  
  </video>
  </div>
