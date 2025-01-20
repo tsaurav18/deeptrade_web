@@ -112,8 +112,8 @@ function App() {
       {/* <NoticeBoard refProp={noticeRef}/> */}
       <News refProp={newsRef} />
       <Partnership mainRef={mainRef} />
-      <Newsletter refProp={newsletterRef} mainRef={mainRef} />
-      <Footer />
+      {/* <Newsletter refProp={newsletterRef} mainRef={mainRef} /> */}
+      <Footer mainRef={mainRef} />
 
       <Modal
         visible={false}

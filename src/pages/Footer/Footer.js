@@ -3,7 +3,9 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
-function Footer() {
+
+import { ArrowUpOutlined } from "@ant-design/icons";
+function Footer(props) {
   return (
     <div className="footer_container">
       <div className="row gx-0" style={{ justifyContent: "center" }}>
@@ -66,9 +68,9 @@ function Footer() {
           <div className="row gx-0 service_contact">
             <div className="col-4">
               <div className="footer_body_content">
-                DeepTrade Technologies 블로그
+               공식채널
               </div>
-              <div
+              {/* <div
                 className="footer_body_content_und block_1"
                 onClick={() => {
                   window.open("https://blog.naver.com/deeptrade", "_blank");
@@ -78,11 +80,11 @@ function Footer() {
                   <div> 네이버 블로그</div>
                   <div>
                     바로가기 <FontAwesomeIcon icon={faArrowRight} />
-                    {/* <FontAwesomeIcon icon="fa-sharp fa-light fa-arrow-right" /> */}
+                  
                   </div>
-                  {/* <ArrowRightOutlined style={{ marginLeft: 10 }} /> */}
+             
                 </div>
-              </div>
+              </div> */}
               <div className="social-icons">
                 <div className="footer_body_content_sns">
                   <a
@@ -122,6 +124,17 @@ function Footer() {
             </div>
           </div>
         </div>
+      </div>
+      <div
+        className="up_arrow"
+        onClick={() => {
+          console.log("clicked");
+          props.mainRef.current.scrollIntoView();
+        }}
+      >
+        <ArrowUpOutlined
+          style={{ color: "white", fontSize: 20, cursor: "pointer" }}
+        />
       </div>
     </div>
   );
