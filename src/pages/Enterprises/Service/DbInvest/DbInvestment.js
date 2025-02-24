@@ -987,7 +987,7 @@ function DbInvestment() {
                 fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              ARIRANG <br />고배당주
+              PLUS <br />고배당주
             </div>
             <div
               style={{
@@ -1641,7 +1641,7 @@ function DbInvestment() {
                 fontSize: responsiveValue(14, 12, 8)
               }}
             >
-              ARIRANG <br />고배당주
+              PLUS <br />고배당주
             </div>
             <div
               style={{
@@ -2123,7 +2123,7 @@ function DbInvestment() {
                           fontSize: responsiveValue(14, 12, 8)
                         }}
                         >
-                          ARIRANG <br />고배당주</th>
+                          PLUS <br />고배당주</th>
                         <th style={{
                           fontSize: responsiveValue(14, 12, 8)
                         }}
@@ -2436,7 +2436,7 @@ function DbInvestment() {
                         <th style={{
                           fontSize: responsiveValue(14, 12, 8),
                           paddingBottom: responsiveValue(7, 2, 2)
-                        }} colSpan={5}>상위 중요 변수 변수 중요도</th>
+                        }} colSpan={5}>상위 중요 변수 및 변수 중요도</th>
 
                       </tr>
                       <tr>

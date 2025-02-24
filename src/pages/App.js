@@ -98,7 +98,7 @@ function App() {
         technologyRef={technologyRef}
         // noticeRef={noticeRef}
         newsRef={newsRef}
-        newsletterRef={newsletterRef}
+        // newsletterRef={newsletterRef}
         solutionRef={solutionRef}
       />
       <Main refProp={mainRef} />

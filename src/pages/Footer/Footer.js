@@ -66,11 +66,11 @@ function Footer(props) {
       <div className="row gx-0">
         <div className="col-9 col-xl-8 col-lg-10 col-md-10">
           <div className="row gx-0 service_contact">
-            <div className="col-4">
+            {/* <div className="col-4">
               <div className="footer_body_content">
                공식채널
               </div>
-              {/* <div
+              <div
                 className="footer_body_content_und block_1"
                 onClick={() => {
                   window.open("https://blog.naver.com/deeptrade", "_blank");
@@ -84,7 +84,7 @@ function Footer(props) {
                   </div>
              
                 </div>
-              </div> */}
+              </div>
               <div className="social-icons">
                 <div className="footer_body_content_sns">
                   <a
@@ -106,7 +106,10 @@ function Footer(props) {
                 </div>
               </div>
               <div></div>
-            </div>
+            </div> */}
+
+
+
             <div className="col-4">
               <div className="footer_body_content">담당자 이메일</div>
               <div className="footer_body_content_und block_2">

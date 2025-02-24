@@ -44,6 +44,23 @@ function News(props) {
           loop={true}
           navigation={true}
         >
+           <SwiperSlide>
+            <div className="news_slide">
+              <div className="news_image" style={{ paddingTop: 15 }}>
+                <img src="assets/news/news25.png" alt="news25" />
+              </div>
+              <div className="news_content">
+                <h6>
+                딥트레이드테크놀로지스, 인공지능 분야 최우수 학회 KDD 2024에 논문 게재 승인
+                </h6>
+                <p>2024/08</p>
+                <p>
+                인공지능 분야 최고 학회 중 하나인 SIGKDD 2024에 Portfolio Optimization을 주제로 한 딥트레이드테크놀로지스의 “FreQuant: A Reinforcement-Learning based Adaptive Portfolio Optimization with Multi-frequency Decomposition” 논문 게재가 승인되었습니다. 해당 논문은 한국, 미국, 중국, 일본, 영국 시장에서 기존 State Of The Art(SOTA)보다 우수한 성능을 낸 인공지능 자산 배분 전략을 제시합니다.<br />
+                 
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
           <SwiperSlide>
             <div className="news_slide">
               <div className="news_image" style={{ paddingTop: 15 }}>
