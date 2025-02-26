@@ -3,7 +3,7 @@ import axios from "axios";
 const productionUrl = "https://xpercent.io/api/";
 const localUrl = "http://13.125.37.183:9999/api/";
 export const instance = axios.create({
-  baseURL: localUrl,
+  baseURL: productionUrl,
 
   headers: {},
   validateStatus: function (status) {
