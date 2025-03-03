@@ -28,9 +28,9 @@ function Partnership(props) {
         <div className="col-4 partnership_icon bottom_row">
           <img src="assets/kb_investment.png" alt="img1" />
         </div>
-        <div className="col-4 partnership_icon bottom_row">
+        {/* <div className="col-4 partnership_icon bottom_row">
           <img src="assets/partnership/nh_investment.png" alt="nh_investment" />
-        </div>
+        </div> */}
 
         <div className="col-4 partnership_icon bottom_row">
           <img src="assets/spring_camp.png" alt="img1" />
