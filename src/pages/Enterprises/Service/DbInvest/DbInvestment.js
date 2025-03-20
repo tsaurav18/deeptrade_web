@@ -374,7 +374,8 @@ function DbInvestment() {
     query: "(max-width:467px)",
   });
   const options = [
-    { value: "2024", label: "최근 1년" },
+    { value: "2025", label: "최근 1년" },
+    { value: "2024", label: "2024" },
     { value: "2023", label: "2023" },
     { value: "2022", label: "2022" },
   ];
@@ -2465,11 +2466,11 @@ function DbInvestment() {
                       /> : xaiLongShortImpResult.length > 0 ? xaiLongShortImpResult && xaiLongShortImpResult.map(item => (
                         <tr>
                           <td style={tdStyle}>{item.index} </td>
-                          <td style={{ ...tdStyleUp, ...tdStyleBlue }}>{item.r1_var==="KS200"?"코스피200":item.r1_var}<br />{item.r1_dff}</td>
+                          <td style={{ ...tdStyleUp, ...tdStyleBlue }}>{item.r1_var}<br />{item.r1_dff}</td>
                           <td style={{ ...tdStyleUp, ...tdStyleBlue }}>{item.r2_var}<br />{item.r2_dff}</td>
                           <td style={{ ...tdStyleUp, ...tdStyleRed }}>{item.r3_var}<br />{item.r3_dff}</td>
                           <td style={{ ...tdStyleUp, ...tdStyleRed }}>{item.r4_var}<br />{item.r4_dff}</td>
-                          <td style={{ ...tdStyleUp, ...tdStyleRed }}>{item.r5_var==="KR_RATE_SPREAD"?"한국 장단기 금리차":item.r5_var}<br />{item.r5_dff}</td>
+                          <td style={{ ...tdStyleUp, ...tdStyleRed }}>{item.r5_var}<br />{item.r5_dff}</td>
                         </tr>
 
                       )) : null}
