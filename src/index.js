@@ -40,6 +40,7 @@ import TestPage2 from "./pages/RATB/TestPage2";
 import EMP from "./pages/Solution/SubPages/EMP";
 import RiskManagement from "./pages/Solution/SubPages/RiskManagement";
 import NoticeBoardDetails from "./pages/NoticeBoard/NoticeBoardDetails";
+import SimulationHome from "./pages/Enterprises/ModelSimulation/SimulationHome";
 
 const store = configureStore({
   reducer: persistedReducers,
@@ -83,6 +84,16 @@ ReactDOM.render(
             <Route
               path="danger"
               element={<TestPage2 />}
+            />
+             <Route
+              path="enterprise/simulation"
+              exact={true}
+              element={
+                <VerifyAuth
+                  authRoles={authRoles}
+                  component={SimulationHome}
+                />
+              }
             />
             <Route
               path="enterprise/service"
