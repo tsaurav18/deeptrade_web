@@ -10,32 +10,56 @@ function SimulationHome() {
   const user_info_reducer = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const [allSelected, setAllSelected] = useState(false);
+
   const [userIP, setUserIP] = useState("");
+  // Initialize with some tickers; user can change these later.
   const [tickers, setTickers] = useState([
-    "AAPL", "AMZN", "AVGO", "COST", "GOOGL", "HD", "JNJ", "JPM", "LLY", "MA",
-    "META", "MSFT", "NFLX", "NVDA", "PG", "TSLA", "UNH", "V", "WMT", "XOM"
+    "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "BRK.B", "AVGO", "LLY",
+    "JPM", "WMT", "V", "MA", "ORCL", "XOM", "UNH", "COST", "NFLX", "PG", "JNJ", "HD",
+    "ABBV", "BAC", "KO", "PLTR", "CRM", "CVX", "TMUS", "CSCO", "ACN", "WFC", "IBM",
+    "ABT", "MRK", "PM", "AXP", "MCD", "GE", "LIN", "MS", "NOW", "ISRG", "TMO", "DIS",
+    "PEP", "QCOM", "GS", "T", "AMD"
   ]);
+  const [selectedTickers, setSelectedTickers] = useState([]);
+
   // status can be "idle", "running", or "done"
   const [status, setStatus] = useState("idle");
   const today = new Date().toISOString().split('T')[0];
   // Additional input fields
   const [targetDate, setTargetDate] = useState(today);
-  const [buyFee, setBuyFee] = useState("");
-  const [server, setServer] = useState("");
-  const [sellFee, setSellFee] = useState("");
+  const [buyFee, setBuyFee] = useState("10");
+  const [server, setServer] = useState("T1");
+  const [sellFee, setSellFee] = useState("10");
+  // Toggle for ticker selection panel visibility
+  const [showTickerList, setShowTickerList] = useState(false);
 
   const onLogout = () => {
     dispatch(resetState());
     navigate("/enterprise", { replace: true });
   };
 
-  const addTicker = () => {
-    if (tickers.length < 20) {
-      setTickers([...tickers, ""]);
+
+  const handleToggleAll = () => {
+    if (allSelected) {
+      setSelectedTickers([]); // 전체 취소
+    } else {
+      setSelectedTickers(tickers.slice(0, 50)); // 최대 50개 선택
+    }
+    setAllSelected(!allSelected);
+  };
+  const handleSelectTicker = (ticker) => {
+    if (selectedTickers.includes(ticker)) {
+      setSelectedTickers(prev => prev.filter(t => t !== ticker));
+    } else {
+      if (selectedTickers.length >= 50) {
+        toast.warning("최대 50개까지만 선택 가능합니다.");
+        return;
+      }
+      setSelectedTickers(prev => [...prev, ticker]);
     }
   };
-
+  
   useEffect(() => {
     fetch("https://api.ipify.org?format=json")
       .then((res) => res.json())
@@ -43,47 +67,31 @@ function SimulationHome() {
       .catch((error) => console.error("Error fetching IP:", error));
   }, []);
 
-  const handleTickerChange = (index, newValue) => {
-    const updatedTickers = [...tickers];
-    updatedTickers[index] = newValue.toUpperCase();
-    setTickers(updatedTickers);
-  };
-
-  const removeTicker = (index) => {
-    const updatedTickers = [...tickers];
-    updatedTickers.splice(index, 1);
-    setTickers(updatedTickers);
-  };
-
   const handleSubmit = () => {
-    // Validate additional fields
     if (!targetDate || !buyFee || !server || !sellFee) {
       toast.error("모든 입력 필드를 채워주세요.");
       return;
     }
-    // Ensure exactly 20 tickers
-    if (tickers.length !== 20) {
-      toast.error("총 20개의 티커를 입력해야 합니다.");
+    if (selectedTickers.length < 20) {
+      toast.error("최소 20개의 티커를 선택해야 합니다.");
       return;
     }
-    // Check for empty ticker entries
-    if (tickers.some(ticker => ticker.trim() === "")) {
-      toast.error("빈 티커가 존재합니다. 모든 티커를 입력해주세요.");
+    if (selectedTickers.length > 50) {
+      toast.error("최대 50개의 티커만 선택할 수 있습니다.");
       return;
     }
-    // Check that all tickers are unique
-    if (new Set(tickers).size !== tickers.length) {
-      toast.error("중복된 티커가 있습니다. 모든 티커는 유일해야 합니다.");
+    if (new Set(selectedTickers).size !== selectedTickers.length) {
+      toast.error("중복된 티커가 있습니다.");
       return;
     }
-    // If valid, simulate the running process
+  
     setStatus("running");
     setTimeout(() => {
       setStatus("done");
       toast.success("프로그램 실행이 완료되었습니다.");
     }, 5000);
   };
-
+  
   return (
     <div className="tw-flex tw-flex-col tw-min-h-screen tw-bg-gray-50 tw-text-sm">
       <ToastContainer />
@@ -179,52 +187,60 @@ function SimulationHome() {
               </div>
             </div>
 
-            {/* SNP 20 종목 리스트 with Add button aligned to right */}
+            {/* Ticker Selection Panel Toggle */}
             <div className="tw-mb-4">
-              <div className="tw-flex tw-justify-between tw-items-center tw-mb-2">
-                <h3 className="tw-font-semibold tw-text-base">SNP 20 종목 리스트</h3>
-                {tickers.length < 20 && (
-                  <button 
-                    onClick={addTicker}
-                    className="tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-blue-700 tw-border-0"
-                  >
-                    티커 추가하기
-                  </button>
-                )}
-              </div>
-              <div className="tw-grid tw-grid-cols-3 tw-gap-2">
-                {tickers.map((ticker, index) => (
-                  <div key={index} className="tw-relative tw-group">
-                    <input 
-                      value={ticker}
-                      onChange={(e) => handleTickerChange(index, e.target.value)}
-                      className="tw-border tw-rounded tw-p-2 tw-w-full"
-                      placeholder="티커 이름"
-                    />
-                    <button
-                      onClick={() => removeTicker(index)}
-                      className="tw-absolute tw-top-0.5 tw-right-1 tw-p-1 tw-text-red-500 group-hover:tw-block tw-hidden tw-border-0 tw-bg-white"
-
-                      >
-                      <CloseOutlined />
-                    </button>
-                  </div>
-                ))}
-              </div>
+              <button 
+                onClick={() => setShowTickerList(!showTickerList)}
+                className="tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-blue-700 tw-border-0"
+              >
+                종목 선택하기
+              </button>
             </div>
 
+            {showTickerList && (
+  <div className="tw-mb-4">
+    <h3 className="tw-font-semibold tw-text-base tw-mb-2">티커 리스트</h3>
+    <div className="tw-grid tw-grid-cols-3 tw-gap-2">
+      {tickers.map((ticker, index) => (
+        <label key={index} className="tw-flex tw-items-center tw-space-x-2 cursor-pointer">
+          <input
+            type="checkbox"
+            value={ticker}
+            checked={selectedTickers.includes(ticker)}
+            onChange={() => handleSelectTicker(ticker)}
+            className="tw-form-checkbox tw-accent-blue-600"
+          />
+          <span className="tw-text-base">{ticker}</span>
+        </label>
+      ))}
+    </div>
+    <div className="tw-flex tw-items-center tw-justify-between tw-mt-2">
+  <p className="tw-text-xs tw-text-gray-500">
+    선택된 종목 수: {selectedTickers.length} (최소 20, 최대 50)
+  </p>
+  <button
+    onClick={() => handleToggleAll()}  // 최대 50개
+    className="tw-text-xs tw-text-blue-600 tw-underline-none hover:tw-text-blue-800 tw-border-0 tw-p-2 tw-rounded tw-font-bold"
+  >
+ {allSelected ? "전체 취소" : "전체 선택하기"}
+  </button>
+</div>
+  </div>
+)}
+
             {/* 실행하기 Button */}
-            <button 
-              onClick={handleSubmit}
-              disabled={!targetDate || !buyFee || !server || !sellFee || tickers.length !== 20}
-              className={`tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-border-0 ${
-                (!targetDate || !buyFee || !server || !sellFee || tickers.length !== 20)
-                  ? 'tw-opacity-50 tw-cursor-not-allowed'
-                  : 'tw-hover:tw-bg-blue-700'
-              }`}
-            >
-              실행하기
-            </button>
+            {selectedTickers.length > 20  && <button
+  onClick={handleSubmit}
+  disabled={!targetDate || !buyFee || !server || !sellFee || selectedTickers.length < 20}
+  className={`tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-border-0 ${
+    (!targetDate || !buyFee || !server || !sellFee || selectedTickers.length < 20)
+      ? 'tw-opacity-50 tw-cursor-not-allowed'
+      : 'tw-hover:tw-bg-blue-700'
+  }`}
+>
+  실행하기
+</button>}
+            
 
             <div className="tw-mt-6">
               <h3 className="tw-font-semibold tw-mb-2 tw-text-base">실행 로그</h3>
