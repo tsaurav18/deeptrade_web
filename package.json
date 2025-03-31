@@ -2,7 +2,8 @@
   "name": "deeptrade",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://deeptrade.co/",
+  "homepage": "https://deeptrade.co",
+  "proxy": "https://shinyoung.t1.deeptrade.co",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.11.1",
@@ -56,7 +57,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "up": "git add . && git commit -m 'add simulation home' && git push origin master"
+    "up": "git add . && git commit -m 'add simulation T1 api' && git push origin master"
   },
   "eslintConfig": {
     "extends": [

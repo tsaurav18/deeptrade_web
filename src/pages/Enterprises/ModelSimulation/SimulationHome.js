@@ -1,65 +1,167 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector, } from "react-redux";
-import { CloseOutlined } from '@ant-design/icons';
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CloseOutlined } from "@ant-design/icons";
 import { resetState } from "../../../redux/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { shinyongAPI } from "../../../api";
 
 function SimulationHome() {
   const user_info_reducer = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [allSelected, setAllSelected] = useState(false);
-
+  const [logContent, setLogContent] = useState("");
   const [userIP, setUserIP] = useState("");
   // Initialize with some tickers; user can change these later.
   const [tickers, setTickers] = useState([
-    "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA", "BRK.B", "AVGO", "LLY",
-    "JPM", "WMT", "V", "MA", "ORCL", "XOM", "UNH", "COST", "NFLX", "PG", "JNJ", "HD",
-    "ABBV", "BAC", "KO", "PLTR", "CRM", "CVX", "TMUS", "CSCO", "ACN", "WFC", "IBM",
-    "ABT", "MRK", "PM", "AXP", "MCD", "GE", "LIN", "MS", "NOW", "ISRG", "TMO", "DIS",
-    "PEP", "QCOM", "GS", "T", "AMD"
+    "AAPL",
+    "MSFT",
+    "NVDA",
+    "AMZN",
+    "GOOGL",
+    "META",
+    "TSLA",
+    "AVGO",
+    "LLY",
+    "JPM",
+    "WMT",
+    "V",
+    "MA",
+    "ORCL",
+    "XOM",
+    "UNH",
+    "COST",
+    "NFLX",
+    "PG",
+    "JNJ",
+    "HD",
+    "ABBV",
+    "BAC",
+    "KO",
+    "PLTR",
+    "CRM",
+    "CVX",
+    "TMUS",
+    "CSCO",
+    "ACN",
+    "WFC",
+    "IBM",
+    "ABT",
+    "MRK",
+    "PM",
+    "AXP",
+    "MCD",
+    "GE",
+    "LIN",
+    "MS",
+    "NOW",
+    "ISRG",
+    "TMO",
+    "DIS",
+    "PEP",
+    "QCOM",
+    "GS",
+    "T",
+    "AMD",
   ]);
   const [selectedTickers, setSelectedTickers] = useState([]);
-
-  // status can be "idle", "running", or "done"
+  const selectedTickersRef = useRef(selectedTickers);
+  useEffect(() => {
+    selectedTickersRef.current = selectedTickers;
+  }, [selectedTickers]);
+  const toastShownRef = useRef(false);
+  const pollIntervalRef = useRef(null);
   const [status, setStatus] = useState("idle");
-  const today = new Date().toISOString().split('T')[0];
-  // Additional input fields
+  const today = new Date().toISOString().split("T")[0];
   const [targetDate, setTargetDate] = useState(today);
   const [buyFee, setBuyFee] = useState("10");
   const [server, setServer] = useState("T1");
   const [sellFee, setSellFee] = useState("10");
-  // Toggle for ticker selection panel visibility
   const [showTickerList, setShowTickerList] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragColumn, setDragColumn] = useState(null);
+  const numColumns = 3; // number of columns in grid
+  const [dragMode, setDragMode] = useState(null); // "select" or "deselect"
+  const [isLoading, setIsLoading] = useState(false);
+  const [serverStatus, setServerStatus] = useState([])
+  // Drag event handlers now use the ref so that they always get the latest state
+  const handleMouseDown = (index) => {
+    const isSelected = selectedTickersRef.current.includes(tickers[index]);
+    setIsDragging(true);
+    setDragColumn(index % numColumns);
+    setDragMode(isSelected ? "deselect" : "select");
+
+    if (isSelected) {
+      setSelectedTickers((prev) => prev.filter((t) => t !== tickers[index]));
+    } else {
+      setSelectedTickers((prev) => [...prev, tickers[index]]);
+    }
+  };
+
+  const handleMouseEnter = (index) => {
+    if (!isDragging || dragColumn === null) return;
+
+    // 현재 마우스가 지나간 티커의 열 번호 계산
+    const currentColumn = index % numColumns;
+
+    // 드래그 시작한 열과 같지 않다면 아무것도 하지 않음
+    if (currentColumn !== dragColumn) return;
+
+    const ticker = tickers[index];
+    const isSelected = selectedTickersRef.current.includes(ticker);
+
+    if (dragMode === "select" && !isSelected) {
+      setSelectedTickers((prev) => [...prev, ticker]);
+    } else if (dragMode === "deselect" && isSelected) {
+      setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setDragColumn(null);
+    setDragMode(null);
+  };
+
+  // Global mouseup to catch end of drag selection
+  useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      if (isDragging) {
+        setIsDragging(false);
+        setDragColumn(null);
+      }
+    };
+    window.addEventListener("mouseup", handleGlobalMouseUp);
+    return () => window.removeEventListener("mouseup", handleGlobalMouseUp);
+  }, [isDragging]);
 
   const onLogout = () => {
     dispatch(resetState());
     navigate("/enterprise", { replace: true });
   };
 
-
   const handleToggleAll = () => {
     if (allSelected) {
       setSelectedTickers([]); // 전체 취소
     } else {
-      setSelectedTickers(tickers.slice(0, 50)); // 최대 50개 선택
+      setSelectedTickers(tickers.slice(0, tickers.length)); // 최대 50개 선택
     }
     setAllSelected(!allSelected);
   };
   const handleSelectTicker = (ticker) => {
     if (selectedTickers.includes(ticker)) {
-      setSelectedTickers(prev => prev.filter(t => t !== ticker));
+      setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
     } else {
-      if (selectedTickers.length >= 50) {
-        toast.warning("최대 50개까지만 선택 가능합니다.");
+      if (selectedTickers.length >= tickers.length) {
+        toast.warning(`최대 ${ticker.length}개까지만 선택 가능합니다.`);
         return;
       }
-      setSelectedTickers(prev => [...prev, ticker]);
+      setSelectedTickers((prev) => [...prev, ticker]);
     }
   };
-  
+
   useEffect(() => {
     fetch("https://api.ipify.org?format=json")
       .then((res) => res.json())
@@ -67,7 +169,9 @@ function SimulationHome() {
       .catch((error) => console.error("Error fetching IP:", error));
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    toastShownRef.current = false;
+    // Validate input fields
     if (!targetDate || !buyFee || !server || !sellFee) {
       toast.error("모든 입력 필드를 채워주세요.");
       return;
@@ -76,7 +180,7 @@ function SimulationHome() {
       toast.error("최소 20개의 티커를 선택해야 합니다.");
       return;
     }
-    if (selectedTickers.length > 50) {
+    if (selectedTickers.length > tickers.length) {
       toast.error("최대 50개의 티커만 선택할 수 있습니다.");
       return;
     }
@@ -84,14 +188,91 @@ function SimulationHome() {
       toast.error("중복된 티커가 있습니다.");
       return;
     }
-  
-    setStatus("running");
-    setTimeout(() => {
-      setStatus("done");
-      toast.success("프로그램 실행이 완료되었습니다.");
-    }, 5000);
+    try {
+      setIsLoading(true);
+      const body = {
+        model_num: [65, 173, 58],
+        targetDate,
+        buyFee: parseFloat(buyFee) / 100,
+        server,
+        sellFee: parseFloat(sellFee) / 100,
+        tickers: [selectedTickers],
+      };
+      const res = await shinyongAPI.runShinyongProcess(body);
+      // console.log("Simulation response:", res);
+      if (res.status !== 200) {
+        toast.error(String(res.data.error));
+        setIsLoading(false);
+        
+      }
+
+      if (res.data.message) {
+        toast.success(res.data.message);
+      }
+
+      // Process started
+      setStatus("running");
+
+      // Start polling the log endpoint every 2 seconds
+      pollIntervalRef.current = setInterval(async () => {
+        try {
+          const logData = await shinyongAPI.getLog();
+          setLogContent(logData);
+
+          if (logData.includes("Finished")) {
+            clearInterval(pollIntervalRef.current);
+            pollIntervalRef.current = null;
+            setStatus("done");
+            setIsLoading(false);
+            if (!toastShownRef.current) {
+              if (status === "done") {
+                toast.success("프로그램 실행이 완료되었습니다.");
+              }
+
+              toastShownRef.current = true;
+            }
+          }
+        } catch (error) {
+          setIsLoading(false);
+          console.error("Error fetching log:", error);
+        }
+      }, 500);
+    } catch (error) {
+      console.error("Error submitting simulation:", error);
+      toast.error("프로그램 실행 중 오류가 발생했습니다.");
+      return;
+    }
   };
-  
+  // Cleanup polling interval on component unmount
+  useEffect(() => {
+    return () => {
+      if (pollIntervalRef.current) {
+        clearInterval(pollIntervalRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const fetchServerStatus = async () => {
+      try {
+        const response = await shinyongAPI.getServerStatus();
+        console.log("Server Status:", response);
+         const filteredResponse = response.filter((server) => server.name === "T1" || server.name === "T2");
+         const sortedResponse = filteredResponse.sort((a, b) => b.id - a.id);
+  setServerStatus(sortedResponse);
+      
+      } catch (error) {
+        console.error("Error fetching server status:", error);
+      }
+    };
+
+    // Call it immediately
+    fetchServerStatus();
+    // And then every 30 seconds
+    const intervalId = setInterval(fetchServerStatus, 30000);
+    return () => clearInterval(intervalId);
+    return ()=>{}
+  }, []);
   return (
     <div className="tw-flex tw-flex-col tw-min-h-screen tw-bg-gray-50 tw-text-sm">
       <ToastContainer />
@@ -107,23 +288,53 @@ function SimulationHome() {
         </div>
       </header>
 
-      {/* MAIN CONTENT */}
       <main className="tw-flex-1 tw-w-full tw-max-w-7xl tw-mx-auto tw-p-4">
         <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-4">
-          {/* RIGHT SECTION (NARROW) - appears first on mobile */}
-          <section className="tw-order-1 md:tw-order-2 md:tw-w-1/5 tw-bg-white tw-rounded-md tw-shadow tw-p-4 sm:tw-my-4 tw-my-2 mx-4">
+          <section className="tw-order-2 md:tw-order-1 md:tw-w-3/5 tw-bg-white tw-rounded-md tw-shadow tw-p-4 sm:tw-my-4 tw-my-2 mx-2">
+            <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-1 tw-gap-1">
+              <h3 className="tw-font-semibold tw-text-base tw-mb-2 tw-px-2">
+                Server Status
+              </h3>
+              {serverStatus && serverStatus.length > 0 ? (
+                serverStatus.map((server, index) => (
+                  <div
+                    key={index}
+                    className="tw-border tw-rounded tw-py-2 tw-px-2 tw-mb-2 tw-flex tw-justify-between tw-items-center"
+                  >
+                    <span className="tw-font-semibold tw-text-base">Server name: {server.name}</span>
+                    <span className="tw-font-semibold tw-text-base">CPU: {server.cpu_percent}%</span>
+                    <span className="tw-font-semibold tw-text-base">MEM: {server.memory_percent}%</span>
+                    <span className="tw-font-semibold tw-text-base">DISK: {server.disk_percent}%</span>
+                    <span className="tw-flex tw-items-center">
+        <span
+          className={`tw-w-3 tw-h-3 tw-rounded-full tw-inline-block tw-mr-1  ${
+            server.status === "online"
+              ? "tw-bg-green-500"
+              : "tw-bg-red-500"
+          }`}
+        ></span>
+       <span className="tw-font-semibold tw-text-base"> Status: {server.status}</span>
+      </span>
+                  </div>
+                ))
+              ) : (
+                <p className="tw-text-gray-500">No server status available.</p>
+              )}
+            </div>
+          </section>
+          <section className="tw-order-1 md:tw-order-2 md:tw-w-2/5 tw-bg-white tw-rounded-md tw-shadow tw-p-4 sm:tw-my-4 tw-my-2 mx-1">
             <div className="tw-mb-4 tw-flex tw-flex-col tw-justify-start tw-items-start">
               <div className="tw-flex tw-flex-row tw-items-center tw-justify-center">
-                <p className="tw-text-gray-700 tw-font-bold">접속자:</p> 
-                <p className="tw-text-gray-700 tw-text-base">{user_info_reducer.company_usrnm}</p> 
+                <span className="tw-text-gray-700 tw-font-semibold tw-text-base tw-mb-2">접속자: {user_info_reducer.company_usrnm}</span>
+              
               </div>
               <div className="tw-flex tw-flex-row tw-items-center tw-justify-center">
-                <p className="tw-text-gray-700 tw-font-bold">접속 위치 IP:</p>
-                <p className="tw-text-gray-700">{userIP || ''}</p>
+                <span className="tw-text-gray-700 tw-font-semibold tw-text-base">접속 위치 IP: {userIP || ""}</span>
+   
               </div>
             </div>
-            <div className="tw-flex tw-justify-center">
-              <button 
+            <div className="tw-flex ">
+              <button
                 onClick={onLogout}
                 className="tw-bg-red-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-red-700 tw-cursor-pointer tw-border-0"
               >
@@ -131,14 +342,22 @@ function SimulationHome() {
               </button>
             </div>
           </section>
+        </div>
+      </main>
+      {/* MAIN CONTENT */}
+      <main className="tw-flex-1 tw-w-full tw-max-w-7xl tw-mx-auto tw-p-4">
+        <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-4">
+          {/* RIGHT SECTION (NARROW) - appears first on mobile */}
 
           {/* LEFT SECTION (WIDER) - appears second on mobile */}
-          <section className="tw-order-2 md:tw-order-1 md:tw-w-4/5 tw-bg-white tw-rounded-md tw-shadow tw-p-4 sm:tw-my-4 tw-my-2 mx-4">
+          <section className="tw-order-2 md:tw-order-1 md:tw-w-full tw-bg-white tw-rounded-md tw-shadow tw-p-4 sm:tw-my-4 tw-my-2 mx-2">
             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4 tw-mb-4">
               {/* Left sub-container */}
               <div>
                 <div className="tw-mb-4">
-                  <h3 className="tw-font-semibold tw-text-base">목표 리밸런싱일</h3>
+                  <h3 className="tw-font-semibold tw-text-base">
+                    목표 리밸런싱일
+                  </h3>
                   <input
                     type="date"
                     value={targetDate}
@@ -148,7 +367,9 @@ function SimulationHome() {
                   />
                 </div>
                 <div>
-                  <h3 className="tw-font-semibold tw-text-base">매수 수수료 (bp)</h3>
+                  <h3 className="tw-font-semibold tw-text-base">
+                    매수 수수료 (bp)
+                  </h3>
                   <input
                     type="number"
                     step="any"
@@ -174,7 +395,9 @@ function SimulationHome() {
                   </select>
                 </div>
                 <div>
-                  <h3 className="tw-font-semibold tw-text-base">매도 수수료 (bp)</h3>
+                  <h3 className="tw-font-semibold tw-text-base">
+                    매도 수수료 (bp)
+                  </h3>
                   <input
                     type="number"
                     step="any"
@@ -189,7 +412,7 @@ function SimulationHome() {
 
             {/* Ticker Selection Panel Toggle */}
             <div className="tw-mb-4">
-              <button 
+              <button
                 onClick={() => setShowTickerList(!showTickerList)}
                 className="tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-blue-700 tw-border-0"
               >
@@ -198,61 +421,99 @@ function SimulationHome() {
             </div>
 
             {showTickerList && (
-  <div className="tw-mb-4">
-    <h3 className="tw-font-semibold tw-text-base tw-mb-2">티커 리스트</h3>
-    <div className="tw-grid tw-grid-cols-3 tw-gap-2">
-      {tickers.map((ticker, index) => (
-        <label key={index} className="tw-flex tw-items-center tw-space-x-2 cursor-pointer">
-          <input
-            type="checkbox"
-            value={ticker}
-            checked={selectedTickers.includes(ticker)}
-            onChange={() => handleSelectTicker(ticker)}
-            className="tw-form-checkbox tw-accent-blue-600"
-          />
-          <span className="tw-text-base">{ticker}</span>
-        </label>
-      ))}
-    </div>
-    <div className="tw-flex tw-items-center tw-justify-between tw-mt-2">
-  <p className="tw-text-xs tw-text-gray-500">
-    선택된 종목 수: {selectedTickers.length} (최소 20, 최대 50)
-  </p>
-  <button
-    onClick={() => handleToggleAll()}  // 최대 50개
-    className="tw-text-xs tw-text-blue-600 tw-underline-none hover:tw-text-blue-800 tw-border-0 tw-p-2 tw-rounded tw-font-bold"
-  >
- {allSelected ? "전체 취소" : "전체 선택하기"}
-  </button>
-</div>
-  </div>
-)}
+              <div className="tw-mb-4">
+                <h3 className="tw-font-semibold tw-text-base tw-mb-2">
+                  티커 리스트
+                </h3>
+                <div className="tw-grid tw-grid-cols-3 tw-gap-2">
+                  {tickers.map((ticker, index) => (
+                    <label
+                      key={index}
+                      className="tw-flex tw-items-center tw-space-x-2 cursor-pointer"
+                    >
+                      <input
+                        type="checkbox"
+                        value={ticker}
+                        checked={selectedTickers.includes(ticker)}
+                        onMouseDown={() => handleMouseDown(index)}
+                        onMouseEnter={() => handleMouseEnter(index)}
+                        onMouseUp={handleMouseUp}
+                        className="tw-form-checkbox tw-accent-blue-600 tw-transform tw-scale-125"
+                      />
+                      <span
+                        className="tw-text-xl"
+                        onClick={() => handleSelectTicker(ticker)}
+                      >
+                        {ticker}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+                <div className="tw-flex tw-items-center tw-justify-between tw-mt-2">
+                  <p className="tw-text-xm tw-text-gray-500">
+                    선택된 종목 수: {selectedTickers.length} (최소 20, 최대{" "}
+                    {tickers.length}개)
+                  </p>
+                  <button
+                    onClick={handleToggleAll}
+                    className="tw-text-xs tw-text-blue-600 tw-p-2 tw-rounded tw-font-bold tw-border-gray-100"
+                  >
+                    {allSelected ? "전체 취소" : "전체 선택하기"}
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* 실행하기 Button */}
-            {selectedTickers.length > 20  && <button
-  onClick={handleSubmit}
-  disabled={!targetDate || !buyFee || !server || !sellFee || selectedTickers.length < 20}
-  className={`tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-border-0 ${
-    (!targetDate || !buyFee || !server || !sellFee || selectedTickers.length < 20)
-      ? 'tw-opacity-50 tw-cursor-not-allowed'
-      : 'tw-hover:tw-bg-blue-700'
-  }`}
->
-  실행하기
-</button>}
-            
+            {selectedTickers.length >= 20 && (
+              <button
+                onClick={handleSubmit}
+                disabled={
+                  !targetDate ||
+                  !buyFee ||
+                  !server ||
+                  !sellFee ||
+                  selectedTickers.length < 20 ||
+                  isLoading
+                }
+                className={`tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-border-0 ${
+                  !targetDate ||
+                  !buyFee ||
+                  !server ||
+                  !sellFee ||
+                  isLoading ||
+                  selectedTickers.length < 20
+                    ? "tw-opacity-50 tw-cursor-not-allowed"
+                    : "tw-hover:tw-bg-blue-700"
+                }`}
+              >
+                실행하기
+              </button>
+            )}
 
             <div className="tw-mt-6">
-              <h3 className="tw-font-semibold tw-mb-2 tw-text-base">실행 로그</h3>
-              <div className="tw-border tw-rounded tw-max-h-96 tw-h-96 tw-p-2 tw-overflow-y-auto tw-text-sm tw-bg-gray-50">
-                로그가 여기 표시됩니다...
-              </div>
+              <h3 className="tw-font-semibold tw-mb-2 tw-text-base">
+                실행 로그
+              </h3>
+              <pre className="tw-border tw-rounded tw-max-h-96 tw-h-96 tw-p-2 tw-overflow-y-auto tw-text-sm tw-bg-gray-50">
+                {logContent || "로그가 여기 표시됩니다..."}
+              </pre>
             </div>
 
             <div className="tw-mt-6 tw-flex tw-space-x-2">
               {status !== "idle" && (
-                <button className="tw-bg-gray-400 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-gray-500 tw-border-0">
-                  {status === "done" ? "완료" : "진행 중"}
+                <button
+                  onClick={() => {
+                    if (status === "done") {
+                      clearInterval(pollIntervalRef.current);
+                      setIsLoading(false);
+                      setStatus("idle");
+                      setLogContent("");
+                    }
+                  }}
+                  className="tw-bg-gray-400 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-gray-500 tw-border-0"
+                >
+                  {status === "done" ? "리셋" : "진행 중"}
                 </button>
               )}
               {status === "done" && (

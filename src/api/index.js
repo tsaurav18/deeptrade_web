@@ -1,5 +1,6 @@
 import axios from "axios";
-
+// const T1Url = 'http://0.0.0.0:9000'
+const T1Url = 'https://shinyoung.t1.deeptrade.co'
 const productionUrl = "https://xpercent.io/api/";
 const localUrl = "http://13.125.37.183:9999/api/";
 export const instance = axios.create({
@@ -23,6 +24,80 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+// Create a separate instance for T1
+export const T1Instance = axios.create({
+  baseURL: T1Url,
+  headers: {},
+  validateStatus: function (status) {
+    return (status >= 200 && status < 300) || status === 401;
+  },
+});
+
+T1Instance.interceptors.request.use(
+  function (config) {
+    config.headers["Content-Type"] = "application/json";
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+export const shinyongAPI = {
+  async runShinyongProcess(formData) {
+    const body = JSON.stringify({
+      model_num:formData.model_num,
+      targetDate: formData.targetDate,
+      buyFee: formData.buyFee,
+      server: formData.server,
+      sellFee: formData.sellFee,
+      tickers: formData.tickers
+    });
+    console.log("body", body);
+    try {
+      // Post to the FastAPI endpoint "/run_process"
+      const res = await T1Instance.post("/run_process/", body, {
+        headers: {
+          "Content-Type": "application/json"
+        }, 
+        withCredentials: false
+      });
+      return res;
+    } catch (error) {
+      console.error("Error in runShinyongProcess", error);
+      throw error;
+    }
+  },
+  async getLog() {
+    try {
+      const res = await T1Instance.get("/get_log", {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: false
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error in getLog", error);
+      throw error;
+    }
+  },
+  async getServerStatus (){
+    try {
+      const res = await T1Instance.get("/server_status", {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: false
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error in getServerStatus", error);
+      throw error;
+    }
+  }
+};
+
 
 export const loginAPI = {
   async dtLogin(formdata) {

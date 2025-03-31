@@ -45,7 +45,7 @@ function EnterprisesLogin() {
           navigate("/enterprise/simulation")
           // dispatch(saveSimulationDataState(res.data));
         }
-        console.log("res.data in login", res.data)
+        // console.log("res.data in login", res.data)
         dispatch(loginInfo(res.data));
         dispatch(saveDataState(res.data.result));
         // toast("로그인 되었습니다.");
