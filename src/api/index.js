@@ -46,12 +46,12 @@ T1Instance.interceptors.request.use(
 export const shinyongAPI = {
   async runShinyongProcess(formData) {
     const body = JSON.stringify({
-      model_num:formData.model_num,
-      targetDate: formData.targetDate,
-      buyFee: formData.buyFee,
+      rebalance_date: [formData.targetDate],
+      buy_fee: formData.buyFee,
       server: formData.server,
-      sellFee: formData.sellFee,
-      tickers: formData.tickers
+      sell_fee: formData.sellFee,
+      tickers: formData.tickers,
+      webssh: 'web'
     });
     console.log("body", body);
     try {
@@ -95,9 +95,45 @@ export const shinyongAPI = {
       console.error("Error in getServerStatus", error);
       throw error;
     }
-  }
-};
+  },
 
+  async getDBStatus (){
+    try {
+      const res = await T1Instance.get("/db_status", {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: false
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error in getDBStatus", error);
+      throw error;
+    }
+  },
+
+  async downloadFile(formData) {
+    const body = JSON.stringify({
+      file_name:formData.downloadFileName,
+    
+    });
+    console.log("body", body);
+  try {
+    const res = await T1Instance.post("/download_file/",body, {
+      headers: {
+        "Content-Type": "application/json",
+
+      },
+      responseType: 'blob',
+      withCredentials: false
+    });
+    return res;
+  } catch (error) {
+    console.error("Error in getServerStatus", error);
+    throw error;
+  }
+}
+}
 
 export const loginAPI = {
   async dtLogin(formdata) {

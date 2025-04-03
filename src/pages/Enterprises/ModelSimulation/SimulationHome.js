@@ -6,7 +6,25 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { shinyongAPI } from "../../../api";
+import { Oval } from "react-loader-spinner";
 
+
+
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center h-full w-full">
+    <Oval
+      
+      height={20}
+      width={20}
+      color="#3b82f6" 
+      visible={true}
+      ariaLabel="oval-loading"
+      secondaryColor="#93c5fd"
+      strokeWidth={2}
+      strokeWidthSecondary={2}
+    />
+  </div>
+);
 function SimulationHome() {
   const user_info_reducer = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
@@ -85,7 +103,11 @@ function SimulationHome() {
   const numColumns = 3; // number of columns in grid
   const [dragMode, setDragMode] = useState(null); // "select" or "deselect"
   const [isLoading, setIsLoading] = useState(false);
-  const [serverStatus, setServerStatus] = useState([])
+  const [serverStatus, setServerStatus] = useState([]);
+  const [downloadFileName, setDownloadFileName] = useState("");
+  const [dBStatus, setDBStatus] = useState(null);
+  const [serverLoadingStatus, setServerLoadingStatus] = useState(false);
+  const [dbLoadingStatus, setDbLoadingStatus] = useState(false);
   // Drag event handlers now use the ref so that they always get the latest state
   const handleMouseDown = (index) => {
     const isSelected = selectedTickersRef.current.includes(tickers[index]);
@@ -168,7 +190,22 @@ function SimulationHome() {
       .then((data) => setUserIP(data.ip))
       .catch((error) => console.error("Error fetching IP:", error));
   }, []);
+  const collapseTqdmLines = (log) => {
+    const lines = log.split("\n");
+    const latestLines = {};
+    const tqdmRegex = /^(\w+):\s+\d+%/;
 
+    for (let line of lines) {
+      const match = line.match(tqdmRegex);
+      if (match) {
+        latestLines[match[1]] = line; // keep only latest per tqdm group
+      } else {
+        latestLines[`${Math.random()}`] = line; // unique key for non-tqdm lines
+      }
+    }
+
+    return Object.values(latestLines).join("\n");
+  };
   const handleSubmit = async () => {
     toastShownRef.current = false;
     // Validate input fields
@@ -191,7 +228,6 @@ function SimulationHome() {
     try {
       setIsLoading(true);
       const body = {
-        model_num: [65, 173, 58],
         targetDate,
         buyFee: parseFloat(buyFee) / 100,
         server,
@@ -203,7 +239,6 @@ function SimulationHome() {
       if (res.status !== 200) {
         toast.error(String(res.data.error));
         setIsLoading(false);
-        
       }
 
       if (res.data.message) {
@@ -217,29 +252,48 @@ function SimulationHome() {
       pollIntervalRef.current = setInterval(async () => {
         try {
           const logData = await shinyongAPI.getLog();
-          setLogContent(logData);
+          const cleanedLog = collapseTqdmLines(logData);
+          setLogContent(cleanedLog);
+          if (
+            logData.includes("Traceback") ||
+            logData.includes("ModuleNotFoundError")
+          ) {
+            clearInterval(pollIntervalRef.current);
+            pollIntervalRef.current = null;
+            setStatus("error");
+            setIsLoading(false);
+            if (!toastShownRef.current) {
+              toast.error("프로그램 실행 중 오류가 발생했습니다.");
+              toastShownRef.current = true;
+            }
+            return; // Stop further processing in this callback
+          }
+          const regex = /SNP20_ReDay\d+_ID\d+\.xlsx/;
+          const match = logData.match(regex);
 
-          if (logData.includes("Finished")) {
+          if (match) {
             clearInterval(pollIntervalRef.current);
             pollIntervalRef.current = null;
             setStatus("done");
             setIsLoading(false);
-            if (!toastShownRef.current) {
-              if (status === "done") {
-                toast.success("프로그램 실행이 완료되었습니다.");
-              }
+            setDownloadFileName(match[0]); // Save filename for download
 
+            if (!toastShownRef.current) {
+              toast.success("프로그램 실행이 완료되었습니다.");
               toastShownRef.current = true;
             }
           }
         } catch (error) {
           setIsLoading(false);
+          setStatus("idle");
           console.error("Error fetching log:", error);
         }
       }, 500);
     } catch (error) {
       console.error("Error submitting simulation:", error);
       toast.error("프로그램 실행 중 오류가 발생했습니다.");
+      setIsLoading(false);
+      setStatus("idle");
       return;
     }
   };
@@ -253,16 +307,20 @@ function SimulationHome() {
   }, []);
 
   useEffect(() => {
+    setServerLoadingStatus(true)
     const fetchServerStatus = async () => {
       try {
         const response = await shinyongAPI.getServerStatus();
         console.log("Server Status:", response);
-         const filteredResponse = response.filter((server) => server.name === "T1" || server.name === "T2");
-         const sortedResponse = filteredResponse.sort((a, b) => b.id - a.id);
-  setServerStatus(sortedResponse);
-      
+        const filteredResponse = response.filter(
+          (server) => server.name === "T1" || server.name === "T2"
+        );
+        const sortedResponse = filteredResponse.sort((a, b) => b.id - a.id);
+        setServerStatus(sortedResponse);
+        setServerLoadingStatus(false)
       } catch (error) {
         console.error("Error fetching server status:", error);
+        setServerLoadingStatus(false)
       }
     };
 
@@ -271,8 +329,62 @@ function SimulationHome() {
     // And then every 30 seconds
     const intervalId = setInterval(fetchServerStatus, 30000);
     return () => clearInterval(intervalId);
-    return ()=>{}
   }, []);
+
+  useEffect(() => {
+    setDbLoadingStatus(true)
+    const fetchDBStatus = async () => {
+      try {
+        const response = await shinyongAPI.getDBStatus();
+        console.log("Fetched DB Status:", response);
+
+        // 👇 If the response is { data: [...] }, extract .data
+        const dbData = Array.isArray(response) ? response : response.data;
+        setDBStatus(dbData); // Make sure it's a list
+        setDbLoadingStatus(false)
+      } catch (error) {
+        console.error("Error fetching DB status:", error);
+        setDbLoadingStatus(false)
+      }
+    };
+
+    fetchDBStatus();
+    const dbIntervalId = setInterval(fetchDBStatus, 30000);
+
+    return () => clearInterval(dbIntervalId);
+  }, []);
+
+  const handleDownload = async () => {
+    if (downloadFileName) {
+      try {
+        const data = {
+          downloadFileName: downloadFileName,
+        };
+
+        await shinyongAPI.downloadFile(data).then((response) => {
+          console.log("response", response);
+          const blob = new Blob([response.data], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // MIME type for Excel files
+            encoding: "UTF-8",
+          });
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = downloadFileName;
+          document.body.appendChild(a); // append the element to the dom
+          a.click();
+          a.remove(); // afterwards, remove the element
+        });
+      } catch (error) {
+        toast.error("파일을 다운로드하는 중 오류가 발생했습니다.");
+        console.error("Error downloading file:", error);
+      }
+    } else {
+      console.log("No file name to download.");
+      toast.error("파일을 찾을 수 없습니다.");
+    }
+  };
+
   return (
     <div className="tw-flex tw-flex-col tw-min-h-screen tw-bg-gray-50 tw-text-sm">
       <ToastContainer />
@@ -289,48 +401,169 @@ function SimulationHome() {
       </header>
 
       <main className="tw-flex-1 tw-w-full tw-max-w-7xl tw-mx-auto tw-p-4">
-        <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-4">
+  <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-4">
+
+
           <section className="tw-order-2 md:tw-order-1 md:tw-w-3/5 tw-bg-white tw-rounded-md tw-shadow tw-p-4 sm:tw-my-4 tw-my-2 mx-2">
+         
             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-1 tw-gap-1">
               <h3 className="tw-font-semibold tw-text-base tw-mb-2 tw-px-2">
-                Server Status
+                서버 상태
               </h3>
+              {serverLoadingStatus ?   <div className="w-full flex items-center justify-center py-4">  <LoadingSpinner/></div>:<>
               {serverStatus && serverStatus.length > 0 ? (
                 serverStatus.map((server, index) => (
                   <div
                     key={index}
                     className="tw-border tw-rounded tw-py-2 tw-px-2 tw-mb-2 tw-flex tw-justify-between tw-items-center"
                   >
-                    <span className="tw-font-semibold tw-text-base">Server name: {server.name}</span>
-                    <span className="tw-font-semibold tw-text-base">CPU: {server.cpu_percent}%</span>
-                    <span className="tw-font-semibold tw-text-base">MEM: {server.memory_percent}%</span>
-                    <span className="tw-font-semibold tw-text-base">DISK: {server.disk_percent}%</span>
+                    <span className="tw-font-semibold tw-text-base">
+                      서버 네임: {server.name}
+                    </span>
+                    <span className="tw-font-semibold tw-text-base">
+                      CPU: {server.cpu_percent}%
+                    </span>
+                    <span className="tw-font-semibold tw-text-base">
+                      MEM: {server.memory_percent}%
+                    </span>
+                    <span className="tw-font-semibold tw-text-base">
+                      DISK: {server.disk_percent}%
+                    </span>
                     <span className="tw-flex tw-items-center">
-        <span
-          className={`tw-w-3 tw-h-3 tw-rounded-full tw-inline-block tw-mr-1  ${
-            server.status === "online"
-              ? "tw-bg-green-500"
-              : "tw-bg-red-500"
-          }`}
-        ></span>
-       <span className="tw-font-semibold tw-text-base"> Status: {server.status}</span>
-      </span>
+                      <span
+                        className={`tw-w-3 tw-h-3 tw-rounded-full tw-inline-block tw-mr-1  ${
+                          server.status === "online"
+                            ? "tw-bg-green-500"
+                            : "tw-bg-red-500"
+                        }`}
+                      ></span>
+                      <span className="tw-font-semibold tw-text-base">
+                        {" "}
+                        상태:{" "}
+                        {server.status === "online" ? "온라인" : "오프라인"}
+                      </span>
+                    </span>
                   </div>
                 ))
               ) : (
-                <p className="tw-text-gray-500">No server status available.</p>
+                <p className="tw-text-gray-500 tw-px-2">No server status available.</p>
               )}
+              </>}
+            </div>
+
+            
+            <div className="tw-w-full tw-h-px tw-bg-gray-300 tw-my-2"></div>
+
+            
+            <div className=" tw-mt-4">
+            <h3 className="tw-font-semibold tw-text-base tw-mb-4 tw-px-2">
+                데이터베이스 상태
+              </h3>
+              {dbLoadingStatus ? <div className="w-full flex items-center justify-center py-4"> <LoadingSpinner/></div>:<>
+              {dBStatus && dBStatus.length > 0 ? (
+                <>
+                  <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-mb-5">
+                    <div className="tw-flex tw-items-center tw-space-x-2">
+                      <span className="tw-w-3 tw-h-3 tw-rounded-full tw-bg-green-500"></span>
+                      <span className="tw-font-semibold tw-text-base">
+                        상태:
+                      </span>
+                      <span className="tw-text-green-600 tw-font-semibold tw-text-base">
+                        정상
+                      </span>
+                    </div>
+
+                    <div className="tw-flex tw-items-center tw-space-x-2">
+                      <span
+                        className={`tw-w-3 tw-h-3 tw-rounded-full ${
+                          dBStatus?.find((d) => d.data === "crawl")?.status ===
+                          1
+                            ? "tw-bg-green-500"
+                            : "tw-bg-red-500"
+                        }`}
+                      ></span>
+                      <span className="tw-font-semibold tw-text-base">
+                        수집 상태:
+                      </span>
+                      <span
+                        className={`tw-font-semibold tw-text-base ${
+                          dBStatus?.find((d) => d.data === "crawl")?.status ===
+                          1
+                            ? "tw-text-green-600"
+                            : "tw-text-red-500"
+                        }`}
+                      >
+                        {dBStatus?.find((d) => d.data === "crawl")?.status === 1
+                          ? "정상"
+                          : "연결되지 않음"}
+                      </span>
+                    </div>
+
+                    {/* 오류 수정 */}
+                    <div className="tw-flex tw-items-center tw-space-x-2">
+                      <span
+                        className={`tw-w-3 tw-h-3 tw-rounded-full ${
+                          dBStatus?.find((d) => d.data === "error")?.status ===
+                          1
+                            ? "tw-bg-green-500"
+                            : "tw-bg-yellow-500"
+                        }`}
+                      ></span>
+                      <span className="tw-font-semibold tw-text-base">
+                        데이터 오류 수정:
+                      </span>
+                      <span
+                        className={`tw-font-semibold tw-text-base ${
+                          dBStatus?.find((d) => d.data === "error")?.status ===
+                          1
+                            ? "tw-text-green-600"
+                            : "tw-text-yellow-600"
+                        }`}
+                      >
+                        {dBStatus?.find((d) => d.data === "error")?.status === 1
+                          ? "정상"
+                          : "오류 발생"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
+                    <p className="tw-font-semibold tw-text-base">
+                      최근 수집 날짜:{" "}
+                      {dBStatus
+                        ?.find((d) => d.data === "crawl")
+                        ?.filing_date?.split("T")[0] || "N/A"}
+                    </p>
+                    <p className="tw-font-semibold tw-text-base">
+                      최신 데이터 날짜:{" "}
+                      {dBStatus
+                        ?.find((d) => d.data === "final")
+                        ?.filing_date?.split("T")[0] || "N/A"}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <p className="tw-text-gray-500 tw-px-2">
+                  No database status available.
+                </p>
+              )}
+              </>
+              }
+            
             </div>
           </section>
+
           <section className="tw-order-1 md:tw-order-2 md:tw-w-2/5 tw-bg-white tw-rounded-md tw-shadow tw-p-4 sm:tw-my-4 tw-my-2 mx-1">
             <div className="tw-mb-4 tw-flex tw-flex-col tw-justify-start tw-items-start">
               <div className="tw-flex tw-flex-row tw-items-center tw-justify-center">
-                <span className="tw-text-gray-700 tw-font-semibold tw-text-base tw-mb-2">접속자: {user_info_reducer.company_usrnm}</span>
-              
+                <span className="tw-text-gray-700 tw-font-semibold tw-text-base tw-mb-2">
+                  접속자: {user_info_reducer.company_usrnm}
+                </span>
               </div>
               <div className="tw-flex tw-flex-row tw-items-center tw-justify-center">
-                <span className="tw-text-gray-700 tw-font-semibold tw-text-base">접속 위치 IP: {userIP || ""}</span>
-   
+                <span className="tw-text-gray-700 tw-font-semibold tw-text-base">
+                  접속 위치 IP: {userIP || ""}
+                </span>
               </div>
             </div>
             <div className="tw-flex ">
@@ -343,6 +576,8 @@ function SimulationHome() {
             </div>
           </section>
         </div>
+      
+
       </main>
       {/* MAIN CONTENT */}
       <main className="tw-flex-1 tw-w-full tw-max-w-7xl tw-mx-auto tw-p-4">
@@ -504,7 +739,7 @@ function SimulationHome() {
               {status !== "idle" && (
                 <button
                   onClick={() => {
-                    if (status === "done") {
+                    if (status === "done" || status === "error") {
                       clearInterval(pollIntervalRef.current);
                       setIsLoading(false);
                       setStatus("idle");
@@ -513,11 +748,21 @@ function SimulationHome() {
                   }}
                   className="tw-bg-gray-400 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-gray-500 tw-border-0"
                 >
-                  {status === "done" ? "리셋" : "진행 중"}
+                  {status === "done"
+                    ? "리셋"
+                    : status === "error"
+                    ? "리셋"
+                    : "진행 중"}
                 </button>
               )}
               {status === "done" && (
-                <button className="tw-bg-green-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-green-700 tw-border-0">
+                <button
+                  disabled={status !== "done"}
+                  onClick={() => {
+                    handleDownload();
+                  }}
+                  className="tw-bg-green-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-green-700 tw-border-0"
+                >
                   CSV 다운로드
                 </button>
               )}
