@@ -97,7 +97,7 @@ function SimulationHome() {
   const [buyFee, setBuyFee] = useState("10");
   const [server, setServer] = useState("T1");
   const [sellFee, setSellFee] = useState("10");
-  const [showTickerList, setShowTickerList] = useState(false);
+  const [showTickerList, setShowTickerList] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const [dragColumn, setDragColumn] = useState(null);
   const numColumns = 3; // number of columns in grid
@@ -108,6 +108,7 @@ function SimulationHome() {
   const [dBStatus, setDBStatus] = useState(null);
   const [serverLoadingStatus, setServerLoadingStatus] = useState(false);
   const [dbLoadingStatus, setDbLoadingStatus] = useState(false);
+  const [sy20List, setSy20List] = useState([])
   // Drag event handlers now use the ref so that they always get the latest state
   const handleMouseDown = (index) => {
     const isSelected = selectedTickersRef.current.includes(tickers[index]);
@@ -190,22 +191,44 @@ function SimulationHome() {
       .then((data) => setUserIP(data.ip))
       .catch((error) => console.error("Error fetching IP:", error));
   }, []);
-  const collapseTqdmLines = (log) => {
-    const lines = log.split("\n");
-    const latestLines = {};
-    const tqdmRegex = /^(\w+):\s+\d+%/;
 
-    for (let line of lines) {
-      const match = line.match(tqdmRegex);
-      if (match) {
-        latestLines[match[1]] = line; // keep only latest per tqdm group
+
+const collapseTqdmLines = (log) => {
+  const progressRegex = /^\s*\d+%.*\]$/;
+
+  const lines = log.split("\n");
+  const newLines = [];
+  let lastProgressLine = null;
+
+  for (const line of lines) {
+    if (progressRegex.test(line)) {
+      // If it's a progress line, check the percentage
+      const progressMatch = line.match(/(\d+)%/);
+      const progressPercentage = progressMatch ? parseInt(progressMatch[1]) : null;
+
+      if (progressPercentage === 100) {
+        // If it's 100%, push the completed line and stop overwriting it
+        newLines.push(line); // Append the 100% progress line
       } else {
-        latestLines[`${Math.random()}`] = line; // unique key for non-tqdm lines
+        // Otherwise, keep overwriting the progress line
+        lastProgressLine = line;
       }
+    } else {
+      // If it's not a progress line, push it immediately
+      newLines.push(line);
     }
+  }
 
-    return Object.values(latestLines).join("\n");
-  };
+  // After processing all lines, add the last progress line if it's still in progress
+  if (lastProgressLine) {
+    newLines.push(lastProgressLine);
+  }
+
+  return newLines.join("\n");
+};
+
+  
+  
   const handleSubmit = async () => {
     toastShownRef.current = false;
     // Validate input fields
@@ -234,6 +257,7 @@ function SimulationHome() {
         sellFee: parseFloat(sellFee) / 100,
         tickers: [selectedTickers],
       };
+      
       const res = await shinyongAPI.runShinyongProcess(body);
       // console.log("Simulation response:", res);
       if (res.status !== 200) {
@@ -251,13 +275,30 @@ function SimulationHome() {
       // Start polling the log endpoint every 2 seconds
       pollIntervalRef.current = setInterval(async () => {
         try {
-          const logData = await shinyongAPI.getLog();
+          const serverData = { server: server };
+          const logData = await shinyongAPI.getLog(serverData);
           const cleanedLog = collapseTqdmLines(logData);
           setLogContent(cleanedLog);
-          if (
-            logData.includes("Traceback") ||
-            logData.includes("ModuleNotFoundError")
-          ) {
+      
+          // Updated regex to match the file name with alphanumeric characters and hyphens
+          const regex = /SNP20_ReDay\d+_ID[\w-]+\.xlsx/;
+          const match = logData.match(regex);
+          console.log("match", match);
+          if (match) {
+            // Stop polling once the file is found
+            clearInterval(pollIntervalRef.current);
+            pollIntervalRef.current = null;
+            setStatus("done");
+            setIsLoading(false);
+            setDownloadFileName(match[0]); // Save filename for download
+      
+            if (!toastShownRef.current) {
+              toast.success("프로그램 실행이 완료되었습니다.");
+              toastShownRef.current = true;
+            }
+          }
+      
+          if (logData.includes("Traceback") || logData.includes("ModuleNotFoundError")) {
             clearInterval(pollIntervalRef.current);
             pollIntervalRef.current = null;
             setStatus("error");
@@ -268,27 +309,12 @@ function SimulationHome() {
             }
             return; // Stop further processing in this callback
           }
-          const regex = /SNP20_ReDay\d+_ID\d+\.xlsx/;
-          const match = logData.match(regex);
-
-          if (match) {
-            clearInterval(pollIntervalRef.current);
-            pollIntervalRef.current = null;
-            setStatus("done");
-            setIsLoading(false);
-            setDownloadFileName(match[0]); // Save filename for download
-
-            if (!toastShownRef.current) {
-              toast.success("프로그램 실행이 완료되었습니다.");
-              toastShownRef.current = true;
-            }
-          }
         } catch (error) {
           setIsLoading(false);
           setStatus("idle");
           console.error("Error fetching log:", error);
         }
-      }, 500);
+      }, 1000);
     } catch (error) {
       console.error("Error submitting simulation:", error);
       toast.error("프로그램 실행 중 오류가 발생했습니다.");
@@ -359,6 +385,7 @@ function SimulationHome() {
       try {
         const data = {
           downloadFileName: downloadFileName,
+          server: server
         };
 
         await shinyongAPI.downloadFile(data).then((response) => {
@@ -385,6 +412,33 @@ function SimulationHome() {
     }
   };
 
+  useEffect(() => {
+    
+    
+    const fetchSY20  = async () => {
+    try {
+      const res = await shinyongAPI.getSY_SNP_20();
+      console.log("SY_SNP_20 response:", res);
+      if (res.length >= 0) {
+        const data = res[0];
+        const stockValues20 = Object.keys(data)
+          .filter(key => key !== "date")  // Remove the date key
+          .map(key => data[key]);
+          setSy20List(stockValues20)
+          setSelectedTickers(stockValues20);
+      }
+
+  } catch (error) {     
+    console.error("Error setting up beforeunload event:", error);
+  }
+   }
+   fetchSY20()
+
+    return () => {
+      
+    }
+  }, [])
+  console.log(server)
   return (
     <div className="tw-flex tw-flex-col tw-min-h-screen tw-bg-gray-50 tw-text-sm">
       <ToastContainer />
@@ -646,13 +700,13 @@ function SimulationHome() {
             </div>
 
             {/* Ticker Selection Panel Toggle */}
-            <div className="tw-mb-4">
-              <button
+            <div className="tw-my-10">
+              <span
                 onClick={() => setShowTickerList(!showTickerList)}
                 className="tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-hover:tw-bg-blue-700 tw-border-0"
               >
                 종목 선택하기
-              </button>
+              </span>
             </div>
 
             {showTickerList && (

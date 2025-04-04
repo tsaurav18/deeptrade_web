@@ -1,6 +1,8 @@
 import axios from "axios";
 // const T1Url = 'http://0.0.0.0:9000'
+// const T2Url = "http://127.0.0.1:9001"
 const T1Url = 'https://shinyoung.t1.deeptrade.co'
+const T2Url = 'https://shinyoung.t2.deeptrade.co';
 const productionUrl = "https://xpercent.io/api/";
 const localUrl = "http://13.125.37.183:9999/api/";
 export const instance = axios.create({
@@ -43,6 +45,25 @@ T1Instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export const T2Instance = axios.create({
+  baseURL: T2Url,
+  headers: {},
+  validateStatus: function (status) {
+    return (status >= 200 && status < 300) || status === 401;
+  },
+});
+
+T2Instance.interceptors.request.use(
+  function (config) {
+    config.headers["Content-Type"] = "application/json";
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+
 export const shinyongAPI = {
   async runShinyongProcess(formData) {
     const body = JSON.stringify({
@@ -56,20 +77,32 @@ export const shinyongAPI = {
     console.log("body", body);
     try {
       // Post to the FastAPI endpoint "/run_process"
-      const res = await T1Instance.post("/run_process/", body, {
-        headers: {
-          "Content-Type": "application/json"
-        }, 
-        withCredentials: false
-      });
-      return res;
+      if(formData.server === 'T1'){
+        const res = await T1Instance.post("/run_process/", body, {
+          headers: {
+            "Content-Type": "application/json"
+          }, 
+          withCredentials: false
+        });
+        return res
+      }else{
+ 
+        const res = await T2Instance.post("/run_process/", body, {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          withCredentials: false
+        });
+        return res
+      }
     } catch (error) {
       console.error("Error in runShinyongProcess", error);
       throw error;
     }
   },
-  async getLog() {
+  async getLog(formData) {
     try {
+      if(formData.server === 'T1'){
       const res = await T1Instance.get("/get_log", {
         headers: {
           "Content-Type": "application/json"
@@ -77,12 +110,21 @@ export const shinyongAPI = {
         withCredentials: false
       });
       return res.data;
+    }else{
+      const res = await T2Instance.get("/get_log", {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: false
+      });
+      return res.data;
+    }
     } catch (error) {
       console.error("Error in getLog", error);
       throw error;
     }
   },
-  async getServerStatus (){
+  async getServerStatus(){
     try {
       const res = await T1Instance.get("/server_status", {
         headers: {
@@ -96,6 +138,35 @@ export const shinyongAPI = {
       throw error;
     }
   },
+  async getSY_SNP_20(){
+    try {
+      const res = await T1Instance.get("/get_snp_20", {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: false
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error in getSY_SNP_20", error);
+      throw error;
+    }
+  },
+  async getSY_SNP_40(){
+    try {
+      const res = await T1Instance.get("/get_snp_40", {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: false
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error in getSY_SNP_40", error);
+      throw error;
+    }
+  },
+  
 
   async getDBStatus (){
     try {
@@ -119,6 +190,7 @@ export const shinyongAPI = {
     });
     console.log("body", body);
   try {
+    if(formData.server === 'T1'){
     const res = await T1Instance.post("/download_file/",body, {
       headers: {
         "Content-Type": "application/json",
@@ -128,6 +200,17 @@ export const shinyongAPI = {
       withCredentials: false
     });
     return res;
+  }else{
+    const res = await T2Instance.post("/download_file/",body, {
+      headers: {
+        "Content-Type": "application/json",
+
+      },
+      responseType: 'blob',
+      withCredentials: false
+    });
+    return res;
+  }
   } catch (error) {
     console.error("Error in getServerStatus", error);
     throw error;
