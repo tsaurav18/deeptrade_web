@@ -186,7 +186,7 @@ export const shinyongAPI = {
   async downloadFile(formData) {
     const body = JSON.stringify({
       file_name:formData.downloadFileName,
-    
+       
     });
     console.log("body", body);
   try {

@@ -195,7 +195,7 @@ function SimulationHome() {
 
 const collapseTqdmLines = (log) => {
   const progressRegex = /^\s*\d+%.*\]$/;
-
+  const finalMarkerRegex = /신영\s*SNP.*\.xlsx\s*저장\s*완료/;
   const lines = log.split("\n");
   const newLines = [];
   let lastProgressLine = null;
@@ -209,6 +209,7 @@ const collapseTqdmLines = (log) => {
       if (progressPercentage === 100) {
         // If it's 100%, push the completed line and stop overwriting it
         newLines.push(line); // Append the 100% progress line
+        lastProgressLine = null;
       } else {
         // Otherwise, keep overwriting the progress line
         lastProgressLine = line;
@@ -219,10 +220,13 @@ const collapseTqdmLines = (log) => {
     }
   }
 
-  // After processing all lines, add the last progress line if it's still in progress
-  if (lastProgressLine) {
+  // If no final marker was found and there's a partial progress line, add it.
+  if (!newLines.some(line => finalMarkerRegex.test(line)) && lastProgressLine) {
     newLines.push(lastProgressLine);
   }
+  // if (lastProgressLine) {
+  //   newLines.push(lastProgressLine);
+  // }
 
   return newLines.join("\n");
 };
