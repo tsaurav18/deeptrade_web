@@ -2,7 +2,7 @@ import axios from "axios";
 // const T1Url = 'http://0.0.0.0:9000'
 // const T2Url = "http://127.0.0.1:9001"
 const T1Url = 'https://shinyoung.t1.deeptrade.co'
-const T2Url = 'https://shinyoung.t2.deeptrade.co';
+const T3Url = 'https://shinyoung.t3.deeptrade.co';
 const productionUrl = "https://xpercent.io/api/";
 const localUrl = "http://13.125.37.183:9999/api/";
 export const instance = axios.create({
@@ -46,15 +46,15 @@ T1Instance.interceptors.request.use(
   }
 );
 
-export const T2Instance = axios.create({
-  baseURL: T2Url,
+export const T3Instance = axios.create({
+  baseURL: T3Url,
   headers: {},
   validateStatus: function (status) {
     return (status >= 200 && status < 300) || status === 401;
   },
 });
 
-T2Instance.interceptors.request.use(
+T3Instance.interceptors.request.use(
   function (config) {
     config.headers["Content-Type"] = "application/json";
     return config;
@@ -87,7 +87,7 @@ export const shinyongAPI = {
         return res
       }else{
  
-        const res = await T2Instance.post("/run_process/", body, {
+        const res = await T3Instance.post("/run_process/", body, {
           headers: {
             "Content-Type": "application/json"
           },
@@ -111,7 +111,7 @@ export const shinyongAPI = {
       });
       return res.data;
     }else{
-      const res = await T2Instance.get("/get_log", {
+      const res = await T3Instance.get("/get_log", {
         headers: {
           "Content-Type": "application/json"
         },
@@ -201,7 +201,7 @@ export const shinyongAPI = {
     });
     return res;
   }else{
-    const res = await T2Instance.post("/download_file/",body, {
+    const res = await T3Instance.post("/download_file/",body, {
       headers: {
         "Content-Type": "application/json",
 

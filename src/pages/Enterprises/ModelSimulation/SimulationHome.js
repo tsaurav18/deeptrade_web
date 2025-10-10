@@ -343,7 +343,7 @@ const collapseTqdmLines = (log) => {
         const response = await shinyongAPI.getServerStatus();
         console.log("Server Status:", response);
         const filteredResponse = response.filter(
-          (server) => server.name === "T1" || server.name === "T2"
+          (server) => server.name === "T1" || server.name === "T3"
         );
         const sortedResponse = filteredResponse.sort((a, b) => b.id - a.id);
         setServerStatus(sortedResponse);
@@ -684,7 +684,7 @@ const collapseTqdmLines = (log) => {
                   >
                     <option value="">선택</option>
                     <option value="T1">T1</option>
-                    <option value="T2">T2</option>
+                    <option value="T3">T3</option>
                   </select>
                 </div>
                 <div>
