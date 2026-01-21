@@ -36,6 +36,10 @@ function EnterprisesLogin() {
       toast("비밀번호를 입력해주세요.");
       return;
     }
+    if (formInput.company_usrnm === "dbinvestment") {
+      toast("접근 권한이 없습니다.");
+      return
+    }
     setLoader(true);
     const res = await loginAPI.dtLogin(formInput);
     if (res.status === 200) {

@@ -76,6 +76,8 @@ const EnterprisesService = () => {
 // }, [])
 
 
+  if (user_info_reducer.company_name ==="DB")
+    return <></>;
 
 // console.log("user_info_reducer",user_info_reducer)
   return (
