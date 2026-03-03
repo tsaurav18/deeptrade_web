@@ -129,7 +129,7 @@ export default function Spop() {
               </div>
             </div>
           </div>
-          <div className="spop_portfolio_inner_container">
+          {/* <div className="spop_portfolio_inner_container">
             <div className="spop_portfolio_left_container">
               <img
                 src="../../assets/spop/portfolio3.png"
@@ -151,10 +151,10 @@ export default function Spop() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
 
-          <div className="spop_portfolio_inner_container">
+          {/* <div className="spop_portfolio_inner_container">
             <div className="spop_portfolio_left_container">
               <img
                 src="../../assets/spop/portfolio4.png"
@@ -176,9 +176,9 @@ export default function Spop() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="spop_portfolio_inner_container">
+          {/* <div className="spop_portfolio_inner_container">
             <div className="spop_portfolio_left_container">
               <img
                 src="../../assets/spop/portfolio5.png"
@@ -200,7 +200,7 @@ export default function Spop() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>

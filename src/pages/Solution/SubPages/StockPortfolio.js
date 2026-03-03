@@ -152,10 +152,6 @@ function StockPortfolio() {
                     <li>
                       소규모 고객부터, 대규모 기업 고객 대상 모두 활용 가능
                     </li>
-                    <li>
-                      현재 활발한 B2B2C 세일즈 중 (서비스 월 평균 거래 대금
-                      50억원)
-                    </li>
                   </ul>
                 </div>
               </div>

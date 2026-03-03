@@ -44,19 +44,35 @@ function News(props) {
           loop={true}
           navigation={true}
         >
-           <SwiperSlide>
+          {/* <SwiperSlide>
             <div className="news_slide">
               <div className="news_image" style={{ paddingTop: 15 }}>
                 <img src="assets/news/news25.png" alt="news25" />
               </div>
               <div className="news_content">
                 <h6>
-                딥트레이드테크놀로지스, 인공지능 분야 최우수 학회 KDD 2024에 논문 게재 승인
+                  딥트레이드테크놀로지스, 인공지능 분야 최우수 학회 ICLR 2026과 WSDM 2026에 논문 게재
+                </h6>
+                <p>2026/03</p>
+                <p>
+                  인공지능 분야 최우수 학회인 ICLR 2026과 WSDM 2026에 딥트레이드테크놀로지스의 "Shift-Tolerant Allocation via Black-Litterman Using Conditional Diffusion Estimates" 와 "Diffusion Models for Risk-Aware Portfolio Optimization" 논문이 게재 승인되었습니다. 해당 논문들은 동적으로 변하는 시장에서 리스크를 최소화하기 위한 포트폴리오 최적화 전략을 제시합니다.
+                </p>
+              </div>
+            </div>
+          </SwiperSlide> */}
+          <SwiperSlide>
+            <div className="news_slide">
+              <div className="news_image" style={{ paddingTop: 15 }}>
+                <img src="assets/news/news25.png" alt="news25" />
+              </div>
+              <div className="news_content">
+                <h6>
+                  딥트레이드테크놀로지스, 인공지능 분야 최우수 학회 KDD 2024에 논문 게재 승인
                 </h6>
                 <p>2024/08</p>
                 <p>
-                인공지능 분야 최고 학회 중 하나인 SIGKDD 2024에 Portfolio Optimization을 주제로 한 딥트레이드테크놀로지스의 “FreQuant: A Reinforcement-Learning based Adaptive Portfolio Optimization with Multi-frequency Decomposition” 논문 게재가 승인되었습니다. 해당 논문은 한국, 미국, 중국, 일본, 영국 시장에서 기존 State Of The Art(SOTA)보다 우수한 성능을 낸 인공지능 자산 배분 전략을 제시합니다.<br />
-                 
+                  인공지능 분야 최고 학회 중 하나인 SIGKDD 2024에 Portfolio Optimization을 주제로 한 딥트레이드테크놀로지스의 “FreQuant: A Reinforcement-Learning based Adaptive Portfolio Optimization with Multi-frequency Decomposition” 논문 게재가 승인되었습니다. 해당 논문은 한국, 미국, 중국, 일본, 영국 시장에서 기존 State Of The Art(SOTA)보다 우수한 성능을 낸 인공지능 자산 배분 전략을 제시합니다.<br />
+
                 </p>
               </div>
             </div>
@@ -68,11 +84,11 @@ function News(props) {
               </div>
               <div className="news_content">
                 <h6>
-                딥트레이드테크놀로지스, 신영증권과 AI 기반 자산운용 서비스 협력 MOU 체결
+                  딥트레이드테크놀로지스, 신영증권과 AI 기반 자산운용 서비스 협력 MOU 체결
                 </h6>
                 <p>2024/05</p>
                 <p>
-                딥트레이드테크놀로지스가 국내 주요 증권사인 신영증권과 AI 기술 기반 자산운용 서비스의 사업화를 위한 업무 협약을 체결했습니다. 딥트레이드는 첨단 AI 기술을 활용한 혁신적인 자산운용 상품을 개발하고 이를 시장에 선보일 계획입니다. 양사는 이번 협력을 통해 AI 기술을 활용한 새로운 자산운용 상품 및 서비스를 보다 많은 투자자에게 제공하는 것을 목표로 삼고 있습니다.<br />
+                  딥트레이드테크놀로지스가 국내 주요 증권사인 신영증권과 AI 기술 기반 자산운용 서비스의 사업화를 위한 업무 협약을 체결했습니다. 딥트레이드는 첨단 AI 기술을 활용한 혁신적인 자산운용 상품을 개발하고 이를 시장에 선보일 계획입니다. 양사는 이번 협력을 통해 AI 기술을 활용한 새로운 자산운용 상품 및 서비스를 보다 많은 투자자에게 제공하는 것을 목표로 삼고 있습니다.<br />
                   <button
                     className="news_link_button"
                     onClick={() =>

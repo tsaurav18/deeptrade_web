@@ -107,9 +107,6 @@ function App() {
       <Technology refProp={technologyRef} />
       <Solution refProp={solutionRef} />
       <XPercent refProp={xpercentRef} />
-      <VideoSection />
-      {/* <Recruitment /> */}
-      {/* <NoticeBoard refProp={noticeRef}/> */}
       <News refProp={newsRef} />
       <Partnership mainRef={mainRef} />
       {/* <Newsletter refProp={newsletterRef} mainRef={mainRef} /> */}

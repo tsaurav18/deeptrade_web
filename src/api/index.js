@@ -4,7 +4,7 @@ import axios from "axios";
 const T1Url = 'https://shinyoung.t1.deeptrade.co'
 const T3Url = 'https://shinyoung.t3.deeptrade.co';
 const productionUrl = "https://xpercent.io/api/";
-const localUrl = "http://13.125.37.183:9999/api/";
+const localUrl = "http://localhost:8000";
 export const instance = axios.create({
   baseURL: productionUrl,
 

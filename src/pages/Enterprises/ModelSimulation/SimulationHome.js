@@ -83,6 +83,7 @@ function SimulationHome() {
     "GS",
     "T",
     "AMD",
+    "MU"
   ]);
   const [selectedTickers, setSelectedTickers] = useState([]);
   const selectedTickersRef = useRef(selectedTickers);
