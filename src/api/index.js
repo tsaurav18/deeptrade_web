@@ -1,65 +1,156 @@
 import axios from "axios";
+import { store } from "../index"; // store 경로 맞춰주세요
+import { startRefresh, finishRefresh, logout } from "../redux/slices/authSlice";
+import { toast } from "react-toastify";
 // const T1Url = 'http://0.0.0.0:9000'
 // const T2Url = "http://127.0.0.1:9001"
 const T1Url = 'https://shinyoung.t1.deeptrade.co'
 const T3Url = 'https://shinyoung.t3.deeptrade.co';
-const productionUrl = "https://xpercent.io/api/";
-const localUrl = "http://localhost:8000";
-export const instance = axios.create({
-  baseURL: productionUrl,
+// const localUrl = "http://localhost:8000";
 
-  headers: {},
-  validateStatus: function (status) {
-    return (
-      (status >= 200 && status < 300) || 401
-    ); /** Will except responses without error*/
-  },
+const refreshClient = axios.create({
+  baseURL: T1Url,
+  withCredentials: true,
 });
 
-instance.interceptors.request.use(
-  function (config) {
-    config.headers["Content-Type"] = "application/json";
-    return config;
-  },
-  function (error) {
-    // console.log(error);
-    return Promise.reject(error);
-  }
-);
+let isRefreshing = false;
+let refreshQueue = [];
+let hasLoggedOut = false;
 
-// Create a separate instance for T1
+function resolveQueue(token) {
+  refreshQueue.forEach((cb) => cb(token));
+  refreshQueue = [];
+}
+
+function handleSessionExpiredOnce() {
+  if (hasLoggedOut) return;
+  hasLoggedOut = true;
+
+  const toastId = "SESSION_EXPIRED";
+  if (!toast.isActive(toastId)) {
+    toast.error("세션이 만료되었습니다.", { toastId });
+  }
+  store.dispatch(logout());
+}
+
 export const T1Instance = axios.create({
   baseURL: T1Url,
-  headers: {},
-  validateStatus: function (status) {
-    return (status >= 200 && status < 300) || status === 401;
-  },
+  withCredentials: true, // refresh 쿠키 자동 전송
 });
 
-T1Instance.interceptors.request.use(
-  function (config) {
-    config.headers["Content-Type"] = "application/json";
-    return config;
-  },
-  function (error) {
+T1Instance.interceptors.request.use((config) => {
+  const token = store.getState().authReducer.accessToken;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+T1Instance.interceptors.response.use(
+  (res) => res,
+  async (error) => {
+    const original = error.config;
+
+    // access 만료 (401) 처리
+    if (error.response?.status === 401 && !original._retry) {
+      original._retry = true;
+
+      // 이미 refresh 진행 중이면, 끝날 때까지 기다렸다가 재시도
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          refreshQueue.push((newToken) => {
+            original.headers.Authorization = `Bearer ${newToken}`;
+            resolve(T1Instance(original));
+          });
+        });
+      }
+
+      isRefreshing = true;
+      store.dispatch(startRefresh());
+
+      try {
+        const r = await refreshClient.post("/refresh");
+        const newToken = r.data.access_token;
+
+        store.dispatch(finishRefresh(newToken));
+        isRefreshing = false;
+        resolveQueue(newToken);
+
+        original.headers.Authorization = `Bearer ${newToken}`;
+        return T1Instance(original);
+      } catch (e) {
+        isRefreshing = false;
+        resolveQueue(null);
+
+        handleSessionExpiredOnce();
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 5000);
+
+        return Promise.reject(e);
+      }
+    }
+
     return Promise.reject(error);
   }
 );
 
 export const T3Instance = axios.create({
-  baseURL: T3Url,
-  headers: {},
-  validateStatus: function (status) {
-    return (status >= 200 && status < 300) || status === 401;
-  },
+  baseURL: T1Url,
+  withCredentials: true, // refresh 쿠키 자동 전송
 });
 
-T3Instance.interceptors.request.use(
-  function (config) {
-    config.headers["Content-Type"] = "application/json";
-    return config;
-  },
-  function (error) {
+T3Instance.interceptors.request.use((config) => {
+  const token = store.getState().authReducer.accessToken;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+T3Instance.interceptors.response.use(
+  (res) => res,
+  async (error) => {
+    const original = error.config;
+
+    // access 만료 (401) 처리
+    if (error.response?.status === 401 && !original._retry) {
+      original._retry = true;
+
+      // 이미 refresh 진행 중이면, 끝날 때까지 기다렸다가 재시도
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          refreshQueue.push((newToken) => {
+            original.headers.Authorization = `Bearer ${newToken}`;
+            resolve(T3Instance(original));
+          });
+        });
+      }
+
+      isRefreshing = true;
+      store.dispatch(startRefresh());
+
+      try {
+        const r = await refreshClient.post("/refresh");
+        const newToken = r.data.access_token;
+
+        store.dispatch(finishRefresh(newToken));
+        isRefreshing = false;
+        resolveQueue(newToken);
+
+        original.headers.Authorization = `Bearer ${newToken}`;
+        return T3Instance(original);
+      } catch (e) {
+        isRefreshing = false;
+        resolveQueue(null);
+
+        handleSessionExpiredOnce();
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 5000);
+
+        return Promise.reject(e);
+      }
+    }
+
     return Promise.reject(error);
   }
 );
@@ -74,20 +165,19 @@ export const shinyongAPI = {
       tickers: formData.tickers,
       webssh: 'web'
     });
-    console.log("body", body);
     try {
       // Post to the FastAPI endpoint "/run_process"
-      if(formData.server === 'T1'){
-        const res = await T1Instance.post("/run_process/", body, {
+      if (formData.server === 'T1') {
+        const res = await T1Instance.post("protected/run_process/", body, {
           headers: {
             "Content-Type": "application/json"
-          }, 
+          },
           withCredentials: false
         });
         return res
-      }else{
- 
-        const res = await T3Instance.post("/run_process/", body, {
+      } else {
+
+        const res = await T3Instance.post("protected/run_process/", body, {
           headers: {
             "Content-Type": "application/json"
           },
@@ -102,31 +192,31 @@ export const shinyongAPI = {
   },
   async getLog(formData) {
     try {
-      if(formData.server === 'T1'){
-      const res = await T1Instance.get("/get_log", {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        withCredentials: false
-      });
-      return res.data;
-    }else{
-      const res = await T3Instance.get("/get_log", {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        withCredentials: false
-      });
-      return res.data;
-    }
+      if (formData.server === 'T1') {
+        const res = await T1Instance.get("protected/get_log", {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          withCredentials: false
+        });
+        return res.data;
+      } else {
+        const res = await T3Instance.get("protected/get_log", {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          withCredentials: false
+        });
+        return res.data;
+      }
     } catch (error) {
       console.error("Error in getLog", error);
       throw error;
     }
   },
-  async getServerStatus(){
+  async getServerStatus() {
     try {
-      const res = await T1Instance.get("/server_status", {
+      const res = await T1Instance.get("protected/server_status", {
         headers: {
           "Content-Type": "application/json"
         },
@@ -138,9 +228,9 @@ export const shinyongAPI = {
       throw error;
     }
   },
-  async getSY_SNP_20(){
+  async getSY_SNP_20() {
     try {
-      const res = await T1Instance.get("/get_snp_20", {
+      const res = await T1Instance.get("protected/get_snp_20", {
         headers: {
           "Content-Type": "application/json"
         },
@@ -152,9 +242,9 @@ export const shinyongAPI = {
       throw error;
     }
   },
-  async getSY_SNP_40(){
+  async getSY_SNP_40() {
     try {
-      const res = await T1Instance.get("/get_snp_40", {
+      const res = await T1Instance.get("protected/get_snp_40", {
         headers: {
           "Content-Type": "application/json"
         },
@@ -166,11 +256,11 @@ export const shinyongAPI = {
       throw error;
     }
   },
-  
 
-  async getDBStatus (){
+
+  async getDBStatus() {
     try {
-      const res = await T1Instance.get("/db_status", {
+      const res = await T1Instance.get("protected/db_status", {
         headers: {
           "Content-Type": "application/json"
         },
@@ -185,37 +275,36 @@ export const shinyongAPI = {
 
   async downloadFile(formData) {
     const body = JSON.stringify({
-      file_name:formData.downloadFileName,
-       
-    });
-    console.log("body", body);
-  try {
-    if(formData.server === 'T1'){
-    const res = await T1Instance.post("/download_file/",body, {
-      headers: {
-        "Content-Type": "application/json",
+      file_name: formData.downloadFileName,
 
-      },
-      responseType: 'blob',
-      withCredentials: false
     });
-    return res;
-  }else{
-    const res = await T3Instance.post("/download_file/",body, {
-      headers: {
-        "Content-Type": "application/json",
+    try {
+      if (formData.server === 'T1') {
+        const res = await T1Instance.post("protected/download_file/", body, {
+          headers: {
+            "Content-Type": "application/json",
 
-      },
-      responseType: 'blob',
-      withCredentials: false
-    });
-    return res;
+          },
+          responseType: 'blob',
+          withCredentials: false
+        });
+        return res;
+      } else {
+        const res = await T3Instance.post("protected/download_file/", body, {
+          headers: {
+            "Content-Type": "application/json",
+
+          },
+          responseType: 'blob',
+          withCredentials: false
+        });
+        return res;
+      }
+    } catch (error) {
+      console.error("Error in getServerStatus", error);
+      throw error;
+    }
   }
-  } catch (error) {
-    console.error("Error in getServerStatus", error);
-    throw error;
-  }
-}
 }
 
 export const loginAPI = {
@@ -224,244 +313,244 @@ export const loginAPI = {
       username: formdata.company_usrnm,
       password: formdata.company_pass,
     });
-    let csrf = await instance.get("mobile/get_csrf/");
 
-    return instance
-      .post(`dtenter/dt_login/`, body, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
-  },
-};
-export const getDtData = {
-  
-//LIME Macro result
-async getLimeMacroResult(selectedDate) {
-  let body = JSON.stringify({
-    selectedDate:selectedDate,
-  });
-  let csrf = await instance.get("mobile/get_csrf/");
-  return instance
-    .post("dtenter/db_invest_macro/", body, {
+    return T1Instance.post(`/dtenter/dt_login/`, body, {
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": csrf.data["token"],
       },
-    })
-    .then((res) => {
-      return res;
     });
-},
-
-
-//Get XAI important features of months
-
-async fetchXAIImportantFeaturesResult(selectedDate) {
-  let body = JSON.stringify({
-    selectedDate:selectedDate,
-  });
-  let csrf = await instance.get("mobile/get_csrf/");
-  return instance
-    .post("dtenter/db_invest_xai_imp_features/", body, {
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrf.data["token"],
-      },
-    })
-    .then((res) => {
-      return res;
-    });
-},
-
-
-
-//Get DT-XAI important features of four months
-
-async fetchXAIImpFeatFourMonthResult() {
- 
-  let csrf = await instance.get("mobile/get_csrf/");
-  return instance
-    .post("dtenter/db_invest_dt_xai_imp_feat/",{
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrf.data["token"],
-      },
-    })
-    .then((res) => {
-      return res;
-    });
-},
-
-//Get DT-XAI  Long Short important features of four months
-
-async fetchXAILongShortImportanceResult(selectedDate) {
-  let body = JSON.stringify({
-    selectedDate:selectedDate,
-  });
-
-  let csrf = await instance.get("mobile/get_csrf/");
-  return instance
-    .post("dtenter/db_invest_dt_long_short_imp/", body, {
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrf.data["token"],
-      },
-    })
-    .then((res) => {
-      return res;
-    });
-},
-
-
-  //LIME result
-  async getLimeResult(selectedDate) {
-    let body = JSON.stringify({
-      selectedDate:selectedDate,
-    });
-    let csrf = await instance.get("mobile/get_csrf/");
-    return instance
-      .post("dtenter/db_invest_lime/", body, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
-  },
-  
-  async getDBChartData() {
-    let csrf = await instance.get("mobile/get_csrf/");
-    return instance
-      .post("dtenter/db_invest_cumpv/", {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
   },
 
-  
-  async getDBInvestCurrentData(currentYear) {
-    let body = JSON.stringify({
-      year: currentYear
-    });
-    let csrf = await instance.get("mobile/get_csrf/");
-
-    return instance
-      .post(`dtenter/db_invest_current_signal/`, body, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
+  async dtLogout() {
+    return T1Instance.post(`/dtenter/dt_logout/`);
   },
 
-  //DB 금융투자 시그널 불러오는 api
-  async getDBInvestData(company_name, currentYear) {
-    let body = JSON.stringify({
-      company:company_name,
-      year: currentYear
-    });
-    let csrf = await instance.get("mobile/get_csrf/");
+  me: async () => T1Instance.get("auth/me")
+}
 
-    return instance
-      .post(`dtenter/db_invest_signal/`, body, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
-  },
+// export const getDtData = {
+//   //LIME Macro result
+//   async getLimeMacroResult(selectedDate) {
+//     let body = JSON.stringify({
+//       selectedDate: selectedDate,
+//     });
+//     let csrf = await instance.get("mobile/get_csrf/");
+//     return instance
+//       .post("dtenter/db_invest_macro/", body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
 
-  //get Related news
 
-  async getRelatedNews({ ticker, contains_stock_name }) {
-    let body = JSON.stringify({
-      ticker: ticker,
-      contains_stock_name: contains_stock_name,
-    });
-    let csrf = await instance.get("mobile/get_csrf/");
+//   //Get XAI important features of months
 
-    return instance
-      .post(`mobile/related/`, body, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
-  },
-  async fetchDtData(company_name, currentSelectedDate) {
-    let body = JSON.stringify({
-      company: company_name,
-      date: currentSelectedDate,
-      test: false,
-    });
-    let csrf = await instance.get("mobile/get_csrf/");
+//   async fetchXAIImportantFeaturesResult(selectedDate) {
+//     let body = JSON.stringify({
+//       selectedDate: selectedDate,
+//     });
+//     let csrf = await instance.get("mobile/get_csrf/");
+//     return instance
+//       .post("dtenter/db_invest_xai_imp_features/", body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
 
-    return instance
-      .post(`dtenter/dt_service/`, body, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
-  },
-  async getDTStockInfo(id) {
-    let body = JSON.stringify({
-      id,
-    });
-    let csrf = await instance.get("mobile/get_csrf/");
 
-    return instance
-      .post(`dtenter/get_dt_stock_info/`, body, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
-  },
 
-  //get the stock price
+//   //Get DT-XAI important features of four months
 
-  async getNewsSummary() {
-    let csrf = await instance.get("mobile/get_csrf/");
-    return instance
-      .get("mobile/get_news_summary/", {
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrf.data["token"],
-        },
-      })
-      .then((res) => {
-        return res;
-      });
-  },
-};
+//   async fetchXAIImpFeatFourMonthResult() {
+
+//     let csrf = await instance.get("mobile/get_csrf/");
+//     return instance
+//       .post("dtenter/db_invest_dt_xai_imp_feat/", {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+
+//   //Get DT-XAI  Long Short important features of four months
+
+//   async fetchXAILongShortImportanceResult(selectedDate) {
+//     let body = JSON.stringify({
+//       selectedDate: selectedDate,
+//     });
+
+//     let csrf = await instance.get("mobile/get_csrf/");
+//     return instance
+//       .post("dtenter/db_invest_dt_long_short_imp/", body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+
+
+//   //LIME result
+//   async getLimeResult(selectedDate) {
+//     let body = JSON.stringify({
+//       selectedDate: selectedDate,
+//     });
+//     let csrf = await instance.get("mobile/get_csrf/");
+//     return instance
+//       .post("dtenter/db_invest_lime/", body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+
+//   async getDBChartData() {
+//     let csrf = await instance.get("mobile/get_csrf/");
+//     return instance
+//       .post("dtenter/db_invest_cumpv/", {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+
+
+//   async getDBInvestCurrentData(currentYear) {
+//     let body = JSON.stringify({
+//       year: currentYear
+//     });
+//     let csrf = await instance.get("mobile/get_csrf/");
+
+//     return instance
+//       .post(`dtenter/db_invest_current_signal/`, body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+
+//   //DB 금융투자 시그널 불러오는 api
+//   async getDBInvestData(company_name, currentYear) {
+//     let body = JSON.stringify({
+//       company: company_name,
+//       year: currentYear
+//     });
+//     let csrf = await instance.get("mobile/get_csrf/");
+
+//     return instance
+//       .post(`dtenter/db_invest_signal/`, body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+
+//   //get Related news
+
+//   async getRelatedNews({ ticker, contains_stock_name }) {
+//     let body = JSON.stringify({
+//       ticker: ticker,
+//       contains_stock_name: contains_stock_name,
+//     });
+//     let csrf = await instance.get("mobile/get_csrf/");
+
+//     return instance
+//       .post(`mobile/related/`, body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+//   async fetchDtData(company_name, currentSelectedDate) {
+//     let body = JSON.stringify({
+//       company: company_name,
+//       date: currentSelectedDate,
+//       test: false,
+//     });
+//     let csrf = await instance.get("mobile/get_csrf/");
+
+//     return instance
+//       .post(`dtenter/dt_service/`, body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+//   async getDTStockInfo(id) {
+//     let body = JSON.stringify({
+//       id,
+//     });
+//     let csrf = await instance.get("mobile/get_csrf/");
+
+//     return instance
+//       .post(`dtenter/get_dt_stock_info/`, body, {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+
+//   //get the stock price
+
+//   async getNewsSummary() {
+//     let csrf = await instance.get("mobile/get_csrf/");
+//     return instance
+//       .get("mobile/get_news_summary/", {
+//         headers: {
+//           "Content-Type": "application/json",
+//           "X-CSRFToken": csrf.data["token"],
+//         },
+//       })
+//       .then((res) => {
+//         return res;
+//       });
+//   },
+// };
 
 // export const getDtData = {
 //   async fetchDtData(company_name, modelType, currentSelectedDate) {

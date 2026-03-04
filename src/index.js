@@ -16,7 +16,6 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import EnterprisesLogin from "./pages/Enterprises/LoginPage/EnterprisesLogin";
-import EnterprisesService from "./pages/Enterprises/Service/EnterprisesService";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
@@ -30,7 +29,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import persistedReducers from "./redux/store";
+import rootReducers from "./redux/store";
 import { VerifyAuth } from "./routing/VerifyAuth";
 import authRoles from "./routing/authRoles";
 import EnterpriseServiceTest from "./pages/Enterprises/Service/EnterpriseServiceTest";
@@ -41,9 +40,10 @@ import EMP from "./pages/Solution/SubPages/EMP";
 import RiskManagement from "./pages/Solution/SubPages/RiskManagement";
 import NoticeBoardDetails from "./pages/NoticeBoard/NoticeBoardDetails";
 import SimulationHome from "./pages/Enterprises/ModelSimulation/SimulationHome";
+import { ToastContainer } from "react-toastify";
 
-const store = configureStore({
-  reducer: persistedReducers,
+export const store = configureStore({
+  reducer: rootReducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -51,65 +51,52 @@ const store = configureStore({
       },
     }),
 });
-const persistor = persistStore(store);
+
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <React.StrictMode>
-        <Router>
-          <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="eugene" element={<Eugene />} />
-            <Route path="spop" element={<Spop />} />
-            <Route path="stockportfolio" element={<StockPortfolio />} />
-            <Route path="emp" element={<EMP />} />
-            <Route path="riskmanagement" element={<RiskManagement />} />
-            <Route path="xpct_privacy_policy" element={<PrivacyPolicy />} />
-            <Route path="unsub_email" element={<Unsubscribe />} />
-            <Route path="xpercent" element={<XpercentApp />} />
-            <Route path="portfolio_list" element={<PortfolioList />} />
-            <Route path="rebalancing_status" element={<RebalancingStatus />} />
-            <Route path="survey" element={<Survey />} />
-            <Route path="noticedetails/:id" element={<NoticeBoardDetails/>} />
-            <Route
-              path="enterprise"
-              exact={true}
-              element={<EnterprisesLogin />}
-            />
-            <Route
-              path="test"
-              element={<TestPage />}
-            />
-            <Route
-              path="danger"
-              element={<TestPage2 />}
-            />
-             <Route
-              path="enterprise/simulation"
-              exact={true}
-              element={
-                <VerifyAuth
-                  authRoles={authRoles}
-                  component={SimulationHome}
-                />
-              }
-            />
-            <Route
-              path="enterprise/service"
-              exact={true}
-              element={
-                <VerifyAuth
-                  authRoles={authRoles}
-                  component={EnterprisesService}
-                />
-              }
-            />
-           
-          </Routes>
-        </Router>
-      </React.StrictMode>{" "}
-    </PersistGate>
+    <React.StrictMode>
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="eugene" element={<Eugene />} />
+          <Route path="spop" element={<Spop />} />
+          <Route path="stockportfolio" element={<StockPortfolio />} />
+          <Route path="emp" element={<EMP />} />
+          <Route path="riskmanagement" element={<RiskManagement />} />
+          <Route path="xpct_privacy_policy" element={<PrivacyPolicy />} />
+          <Route path="unsub_email" element={<Unsubscribe />} />
+          <Route path="xpercent" element={<XpercentApp />} />
+          <Route path="portfolio_list" element={<PortfolioList />} />
+          <Route path="rebalancing_status" element={<RebalancingStatus />} />
+          <Route path="survey" element={<Survey />} />
+          <Route path="noticedetails/:id" element={<NoticeBoardDetails />} />
+          <Route
+            path="enterprise"
+            exact={true}
+            element={<EnterprisesLogin />}
+          />
+          <Route
+            path="test"
+            element={<TestPage />}
+          />
+          <Route
+            path="danger"
+            element={<TestPage2 />}
+          />
+          <Route
+            path="enterprise/simulation"
+            exact={true}
+            element={
+              <VerifyAuth
+                authRoles={authRoles}
+                component={SimulationHome}
+              />
+            }
+          />
+        </Routes>
+      </Router>
+    </React.StrictMode>{" "}
   </Provider>,
   document.getElementById("root")
 );

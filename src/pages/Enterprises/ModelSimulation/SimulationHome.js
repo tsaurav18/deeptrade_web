@@ -5,8 +5,10 @@ import { resetState } from "../../../redux/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { shinyongAPI } from "../../../api";
+import { loginAPI, shinyongAPI } from "../../../api";
 import { Oval } from "react-loader-spinner";
+import TokenTester from "../../components/TokenTester";
+import { logout } from "../../../redux/slices/authSlice";
 
 
 
@@ -163,6 +165,8 @@ function SimulationHome() {
 
   const onLogout = () => {
     dispatch(resetState());
+    dispatch(logout());
+    loginAPI.dtLogout();
     navigate("/enterprise", { replace: true });
   };
 
