@@ -15,10 +15,10 @@ import { logout } from "../../../redux/slices/authSlice";
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center h-full w-full">
     <Oval
-      
+
       height={20}
       width={20}
-      color="#3b82f6" 
+      color="#3b82f6"
       visible={true}
       ariaLabel="oval-loading"
       secondaryColor="#93c5fd"
@@ -35,58 +35,7 @@ function SimulationHome() {
   const [logContent, setLogContent] = useState("");
   const [userIP, setUserIP] = useState("");
   // Initialize with some tickers; user can change these later.
-  const [tickers, setTickers] = useState([
-    "AAPL",
-    "MSFT",
-    "NVDA",
-    "AMZN",
-    "GOOGL",
-    "META",
-    "TSLA",
-    "AVGO",
-    "LLY",
-    "JPM",
-    "WMT",
-    "V",
-    "MA",
-    "ORCL",
-    "XOM",
-    "UNH",
-    "COST",
-    "NFLX",
-    "PG",
-    "JNJ",
-    "HD",
-    "ABBV",
-    "BAC",
-    "KO",
-    "PLTR",
-    "CRM",
-    "CVX",
-    "TMUS",
-    "CSCO",
-    "ACN",
-    "WFC",
-    "IBM",
-    "ABT",
-    "MRK",
-    "PM",
-    "AXP",
-    "MCD",
-    "GE",
-    "LIN",
-    "MS",
-    "NOW",
-    "ISRG",
-    "TMO",
-    "DIS",
-    "PEP",
-    "QCOM",
-    "GS",
-    "T",
-    "AMD",
-    "MU"
-  ]);
+  const [tickers, setTickers] = useState([]);
   const [selectedTickers, setSelectedTickers] = useState([]);
   const selectedTickersRef = useRef(selectedTickers);
   useEffect(() => {
@@ -198,46 +147,46 @@ function SimulationHome() {
   }, []);
 
 
-const collapseTqdmLines = (log) => {
-  const progressRegex = /^\s*\d+%.*\]$/;
-  const finalMarkerRegex = /신영\s*SNP.*\.xlsx\s*저장\s*완료/;
-  const lines = log.split("\n");
-  const newLines = [];
-  let lastProgressLine = null;
+  const collapseTqdmLines = (log) => {
+    const progressRegex = /^\s*\d+%.*\]$/;
+    const finalMarkerRegex = /신영\s*SNP.*\.xlsx\s*저장\s*완료/;
+    const lines = log.split("\n");
+    const newLines = [];
+    let lastProgressLine = null;
 
-  for (const line of lines) {
-    if (progressRegex.test(line)) {
-      // If it's a progress line, check the percentage
-      const progressMatch = line.match(/(\d+)%/);
-      const progressPercentage = progressMatch ? parseInt(progressMatch[1]) : null;
+    for (const line of lines) {
+      if (progressRegex.test(line)) {
+        // If it's a progress line, check the percentage
+        const progressMatch = line.match(/(\d+)%/);
+        const progressPercentage = progressMatch ? parseInt(progressMatch[1]) : null;
 
-      if (progressPercentage === 100) {
-        // If it's 100%, push the completed line and stop overwriting it
-        newLines.push(line); // Append the 100% progress line
-        lastProgressLine = null;
+        if (progressPercentage === 100) {
+          // If it's 100%, push the completed line and stop overwriting it
+          newLines.push(line); // Append the 100% progress line
+          lastProgressLine = null;
+        } else {
+          // Otherwise, keep overwriting the progress line
+          lastProgressLine = line;
+        }
       } else {
-        // Otherwise, keep overwriting the progress line
-        lastProgressLine = line;
+        // If it's not a progress line, push it immediately
+        newLines.push(line);
       }
-    } else {
-      // If it's not a progress line, push it immediately
-      newLines.push(line);
     }
-  }
 
-  // If no final marker was found and there's a partial progress line, add it.
-  if (!newLines.some(line => finalMarkerRegex.test(line)) && lastProgressLine) {
-    newLines.push(lastProgressLine);
-  }
-  // if (lastProgressLine) {
-  //   newLines.push(lastProgressLine);
-  // }
+    // If no final marker was found and there's a partial progress line, add it.
+    if (!newLines.some(line => finalMarkerRegex.test(line)) && lastProgressLine) {
+      newLines.push(lastProgressLine);
+    }
+    // if (lastProgressLine) {
+    //   newLines.push(lastProgressLine);
+    // }
 
-  return newLines.join("\n");
-};
+    return newLines.join("\n");
+  };
 
-  
-  
+
+
   const handleSubmit = async () => {
     toastShownRef.current = false;
     // Validate input fields
@@ -266,7 +215,7 @@ const collapseTqdmLines = (log) => {
         sellFee: parseFloat(sellFee) / 100,
         tickers: [selectedTickers],
       };
-      
+
       const res = await shinyongAPI.runShinyongProcess(body);
       // console.log("Simulation response:", res);
       if (res.status !== 200) {
@@ -288,7 +237,7 @@ const collapseTqdmLines = (log) => {
           const logData = await shinyongAPI.getLog(serverData);
           const cleanedLog = collapseTqdmLines(logData);
           setLogContent(cleanedLog);
-      
+
           // Updated regex to match the file name with alphanumeric characters and hyphens
           const regex = /SNP20_ReDay\d+_ID[\w-]+\.xlsx/;
           const match = logData.match(regex);
@@ -300,13 +249,13 @@ const collapseTqdmLines = (log) => {
             setStatus("done");
             setIsLoading(false);
             setDownloadFileName(match[0]); // Save filename for download
-      
+
             if (!toastShownRef.current) {
               toast.success("프로그램 실행이 완료되었습니다.");
               toastShownRef.current = true;
             }
           }
-      
+
           if (logData.includes("Traceback") || logData.includes("ModuleNotFoundError")) {
             clearInterval(pollIntervalRef.current);
             pollIntervalRef.current = null;
@@ -422,31 +371,55 @@ const collapseTqdmLines = (log) => {
   };
 
   useEffect(() => {
-    
-    
-    const fetchSY20  = async () => {
-    try {
-      const res = await shinyongAPI.getSY_SNP_20();
-      console.log("SY_SNP_20 response:", res);
-      if (res.length >= 0) {
-        const data = res[0];
-        const stockValues20 = Object.keys(data)
-          .filter(key => key !== "date")  // Remove the date key
-          .map(key => data[key]);
-          setSy20List(stockValues20)
-          setSelectedTickers(stockValues20);
-      }
+    const fetchSYAlpha = async () => {
+      try {
+        const res = await shinyongAPI.getSY_SNP_ALPHA();
+        if (res.length >= 0) {
+          const resTickers = res.map(el => el.ticker);
+          setTickers(resTickers);
+          console.log("sy 50")
+        }
 
-  } catch (error) {     
-    console.error("Error setting up beforeunload event:", error);
-  }
-   }
-   fetchSY20()
+      } catch (error) {
+        console.error("Error setting up beforeunload event:", error);
+      }
+    }
+    fetchSYAlpha()
 
     return () => {
-      
+
     }
   }, [])
+
+  useEffect(() => {
+    const fetchSY20 = async () => {
+      try {
+        const res = await shinyongAPI.getSY_SNP_20();
+        if (res.length >= 0) {
+          const data = res[0];
+          const stockValues20 = Object.keys(data)
+            .filter(key => key !== "date")  // Remove the date key
+            .map(key => data[key]);
+          setSy20List(stockValues20)
+        }
+
+      } catch (error) {
+        console.error("Error setting up beforeunload event:", error);
+      }
+    }
+    fetchSY20()
+
+    return () => {
+
+    }
+  }, [])
+
+  useEffect(() => {
+    if (tickers.length === 0) return;
+    if (sy20List.length === 0) return;
+    setSelectedTickers(sy20List);
+  }, [tickers, sy20List])
+
   console.log(server)
   return (
     <div className="tw-flex tw-flex-col tw-min-h-screen tw-bg-gray-50 tw-text-sm">
@@ -464,155 +437,150 @@ const collapseTqdmLines = (log) => {
       </header>
 
       <main className="tw-flex-1 tw-w-full tw-max-w-7xl tw-mx-auto tw-p-4">
-  <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-4">
+        <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-space-x-4">
 
 
           <section className="tw-order-2 md:tw-order-1 md:tw-w-3/5 tw-bg-white tw-rounded-md tw-shadow tw-p-4 sm:tw-my-4 tw-my-2 mx-2">
-         
+
             <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-1 tw-gap-1">
               <h3 className="tw-font-semibold tw-text-base tw-mb-2 tw-px-2">
                 서버 상태
               </h3>
-              {serverLoadingStatus ?   <div className="w-full flex items-center justify-center py-4">  <LoadingSpinner/></div>:<>
-              {serverStatus && serverStatus.length > 0 ? (
-                serverStatus.map((server, index) => (
-                  <div
-                    key={index}
-                    className="tw-border tw-rounded tw-py-2 tw-px-2 tw-mb-2 tw-flex tw-justify-between tw-items-center"
-                  >
-                    <span className="tw-font-semibold tw-text-base">
-                      서버 네임: {server.name}
-                    </span>
-                    <span className="tw-font-semibold tw-text-base">
-                      CPU: {server.cpu_percent}%
-                    </span>
-                    <span className="tw-font-semibold tw-text-base">
-                      MEM: {server.memory_percent}%
-                    </span>
-                    <span className="tw-font-semibold tw-text-base">
-                      DISK: {server.disk_percent}%
-                    </span>
-                    <span className="tw-flex tw-items-center">
-                      <span
-                        className={`tw-w-3 tw-h-3 tw-rounded-full tw-inline-block tw-mr-1  ${
-                          server.status === "online"
+              {serverLoadingStatus ? <div className="w-full flex items-center justify-center py-4">  <LoadingSpinner /></div> : <>
+                {serverStatus && serverStatus.length > 0 ? (
+                  serverStatus.map((server, index) => (
+                    <div
+                      key={index}
+                      className="tw-border tw-rounded tw-py-2 tw-px-2 tw-mb-2 tw-flex tw-justify-between tw-items-center"
+                    >
+                      <span className="tw-font-semibold tw-text-base">
+                        서버 네임: {server.name}
+                      </span>
+                      <span className="tw-font-semibold tw-text-base">
+                        CPU: {server.cpu_percent}%
+                      </span>
+                      <span className="tw-font-semibold tw-text-base">
+                        MEM: {server.memory_percent}%
+                      </span>
+                      <span className="tw-font-semibold tw-text-base">
+                        DISK: {server.disk_percent}%
+                      </span>
+                      <span className="tw-flex tw-items-center">
+                        <span
+                          className={`tw-w-3 tw-h-3 tw-rounded-full tw-inline-block tw-mr-1  ${server.status === "online"
                             ? "tw-bg-green-500"
                             : "tw-bg-red-500"
-                        }`}
-                      ></span>
-                      <span className="tw-font-semibold tw-text-base">
-                        {" "}
-                        상태:{" "}
-                        {server.status === "online" ? "온라인" : "오프라인"}
+                            }`}
+                        ></span>
+                        <span className="tw-font-semibold tw-text-base">
+                          {" "}
+                          상태:{" "}
+                          {server.status === "online" ? "온라인" : "오프라인"}
+                        </span>
                       </span>
-                    </span>
-                  </div>
-                ))
-              ) : (
-                <p className="tw-text-gray-500 tw-px-2">No server status available.</p>
-              )}
+                    </div>
+                  ))
+                ) : (
+                  <p className="tw-text-gray-500 tw-px-2">No server status available.</p>
+                )}
               </>}
             </div>
 
-            
+
             <div className="tw-w-full tw-h-px tw-bg-gray-300 tw-my-2"></div>
 
-            
+
             <div className=" tw-mt-4">
-            <h3 className="tw-font-semibold tw-text-base tw-mb-4 tw-px-2">
+              <h3 className="tw-font-semibold tw-text-base tw-mb-4 tw-px-2">
                 데이터베이스 상태
               </h3>
-              {dbLoadingStatus ? <div className="w-full flex items-center justify-center py-4"> <LoadingSpinner/></div>:<>
-              {dBStatus && dBStatus.length > 0 ? (
-                <>
-                  <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-mb-5">
-                    <div className="tw-flex tw-items-center tw-space-x-2">
-                      <span className="tw-w-3 tw-h-3 tw-rounded-full tw-bg-green-500"></span>
-                      <span className="tw-font-semibold tw-text-base">
-                        상태:
-                      </span>
-                      <span className="tw-text-green-600 tw-font-semibold tw-text-base">
-                        정상
-                      </span>
-                    </div>
+              {dbLoadingStatus ? <div className="w-full flex items-center justify-center py-4"> <LoadingSpinner /></div> : <>
+                {dBStatus && dBStatus.length > 0 ? (
+                  <>
+                    <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-mb-5">
+                      <div className="tw-flex tw-items-center tw-space-x-2">
+                        <span className="tw-w-3 tw-h-3 tw-rounded-full tw-bg-green-500"></span>
+                        <span className="tw-font-semibold tw-text-base">
+                          상태:
+                        </span>
+                        <span className="tw-text-green-600 tw-font-semibold tw-text-base">
+                          정상
+                        </span>
+                      </div>
 
-                    <div className="tw-flex tw-items-center tw-space-x-2">
-                      <span
-                        className={`tw-w-3 tw-h-3 tw-rounded-full ${
-                          dBStatus?.find((d) => d.data === "crawl")?.status ===
-                          1
+                      <div className="tw-flex tw-items-center tw-space-x-2">
+                        <span
+                          className={`tw-w-3 tw-h-3 tw-rounded-full ${dBStatus?.find((d) => d.data === "crawl")?.status ===
+                            1
                             ? "tw-bg-green-500"
                             : "tw-bg-red-500"
-                        }`}
-                      ></span>
-                      <span className="tw-font-semibold tw-text-base">
-                        수집 상태:
-                      </span>
-                      <span
-                        className={`tw-font-semibold tw-text-base ${
-                          dBStatus?.find((d) => d.data === "crawl")?.status ===
-                          1
+                            }`}
+                        ></span>
+                        <span className="tw-font-semibold tw-text-base">
+                          수집 상태:
+                        </span>
+                        <span
+                          className={`tw-font-semibold tw-text-base ${dBStatus?.find((d) => d.data === "crawl")?.status ===
+                            1
                             ? "tw-text-green-600"
                             : "tw-text-red-500"
-                        }`}
-                      >
-                        {dBStatus?.find((d) => d.data === "crawl")?.status === 1
-                          ? "정상"
-                          : "연결되지 않음"}
-                      </span>
-                    </div>
+                            }`}
+                        >
+                          {dBStatus?.find((d) => d.data === "crawl")?.status === 1
+                            ? "정상"
+                            : "연결되지 않음"}
+                        </span>
+                      </div>
 
-                    {/* 오류 수정 */}
-                    <div className="tw-flex tw-items-center tw-space-x-2">
-                      <span
-                        className={`tw-w-3 tw-h-3 tw-rounded-full ${
-                          dBStatus?.find((d) => d.data === "error")?.status ===
-                          1
+                      {/* 오류 수정 */}
+                      <div className="tw-flex tw-items-center tw-space-x-2">
+                        <span
+                          className={`tw-w-3 tw-h-3 tw-rounded-full ${dBStatus?.find((d) => d.data === "error")?.status ===
+                            1
                             ? "tw-bg-green-500"
                             : "tw-bg-yellow-500"
-                        }`}
-                      ></span>
-                      <span className="tw-font-semibold tw-text-base">
-                        데이터 오류 수정:
-                      </span>
-                      <span
-                        className={`tw-font-semibold tw-text-base ${
-                          dBStatus?.find((d) => d.data === "error")?.status ===
-                          1
+                            }`}
+                        ></span>
+                        <span className="tw-font-semibold tw-text-base">
+                          데이터 오류 수정:
+                        </span>
+                        <span
+                          className={`tw-font-semibold tw-text-base ${dBStatus?.find((d) => d.data === "error")?.status ===
+                            1
                             ? "tw-text-green-600"
                             : "tw-text-yellow-600"
-                        }`}
-                      >
-                        {dBStatus?.find((d) => d.data === "error")?.status === 1
-                          ? "정상"
-                          : "오류 발생"}
-                      </span>
+                            }`}
+                        >
+                          {dBStatus?.find((d) => d.data === "error")?.status === 1
+                            ? "정상"
+                            : "오류 발생"}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
-                    <p className="tw-font-semibold tw-text-base">
-                      최근 수집 날짜:{" "}
-                      {dBStatus
-                        ?.find((d) => d.data === "crawl")
-                        ?.filing_date?.split("T")[0] || "N/A"}
-                    </p>
-                    <p className="tw-font-semibold tw-text-base">
-                      최신 데이터 날짜:{" "}
-                      {dBStatus
-                        ?.find((d) => d.data === "final")
-                        ?.filing_date?.split("T")[0] || "N/A"}
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <p className="tw-text-gray-500 tw-px-2">
-                  No database status available.
-                </p>
-              )}
+                    <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-4">
+                      <p className="tw-font-semibold tw-text-base">
+                        최근 수집 날짜:{" "}
+                        {dBStatus
+                          ?.find((d) => d.data === "crawl")
+                          ?.filing_date?.split("T")[0] || "N/A"}
+                      </p>
+                      <p className="tw-font-semibold tw-text-base">
+                        최신 데이터 날짜:{" "}
+                        {dBStatus
+                          ?.find((d) => d.data === "final")
+                          ?.filing_date?.split("T")[0] || "N/A"}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <p className="tw-text-gray-500 tw-px-2">
+                    No database status available.
+                  </p>
+                )}
               </>
               }
-            
+
             </div>
           </section>
 
@@ -639,7 +607,7 @@ const collapseTqdmLines = (log) => {
             </div>
           </section>
         </div>
-      
+
 
       </main>
       {/* MAIN CONTENT */}
@@ -774,16 +742,15 @@ const collapseTqdmLines = (log) => {
                   selectedTickers.length < 20 ||
                   isLoading
                 }
-                className={`tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-border-0 ${
-                  !targetDate ||
+                className={`tw-bg-blue-600 tw-text-white tw-px-4 tw-py-2 tw-rounded-md tw-border-0 ${!targetDate ||
                   !buyFee ||
                   !server ||
                   !sellFee ||
                   isLoading ||
                   selectedTickers.length < 20
-                    ? "tw-opacity-50 tw-cursor-not-allowed"
-                    : "tw-hover:tw-bg-blue-700"
-                }`}
+                  ? "tw-opacity-50 tw-cursor-not-allowed"
+                  : "tw-hover:tw-bg-blue-700"
+                  }`}
               >
                 실행하기
               </button>
@@ -814,8 +781,8 @@ const collapseTqdmLines = (log) => {
                   {status === "done"
                     ? "리셋"
                     : status === "error"
-                    ? "리셋"
-                    : "진행 중"}
+                      ? "리셋"
+                      : "진행 중"}
                 </button>
               )}
               {status === "done" && (

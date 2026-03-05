@@ -6,10 +6,10 @@ import { toast } from "react-toastify";
 // const T2Url = "http://127.0.0.1:9001"
 const T1Url = 'https://shinyoung.t1.deeptrade.co'
 const T3Url = 'https://shinyoung.t3.deeptrade.co';
-// const localUrl = "http://localhost:8000";
+const localUrl = "http://localhost:8000";
 
 const refreshClient = axios.create({
-  baseURL: T1Url,
+  baseURL: localUrl,
   withCredentials: true,
 });
 
@@ -34,7 +34,7 @@ function handleSessionExpiredOnce() {
 }
 
 export const T1Instance = axios.create({
-  baseURL: T1Url,
+  baseURL: localUrl,
   withCredentials: true, // refresh 쿠키 자동 전송
 });
 
@@ -95,7 +95,7 @@ T1Instance.interceptors.response.use(
 );
 
 export const T3Instance = axios.create({
-  baseURL: T1Url,
+  baseURL: T3Url,
   withCredentials: true, // refresh 쿠키 자동 전송
 });
 
@@ -172,7 +172,7 @@ export const shinyongAPI = {
           headers: {
             "Content-Type": "application/json"
           },
-          withCredentials: false
+          withCredentials: true
         });
         return res
       } else {
@@ -181,7 +181,7 @@ export const shinyongAPI = {
           headers: {
             "Content-Type": "application/json"
           },
-          withCredentials: false
+          withCredentials: true
         });
         return res
       }
@@ -197,7 +197,7 @@ export const shinyongAPI = {
           headers: {
             "Content-Type": "application/json"
           },
-          withCredentials: false
+          withCredentials: true
         });
         return res.data;
       } else {
@@ -205,7 +205,7 @@ export const shinyongAPI = {
           headers: {
             "Content-Type": "application/json"
           },
-          withCredentials: false
+          withCredentials: true
         });
         return res.data;
       }
@@ -220,7 +220,7 @@ export const shinyongAPI = {
         headers: {
           "Content-Type": "application/json"
         },
-        withCredentials: false
+        withCredentials: true
       });
       return res.data;
     } catch (error) {
@@ -234,7 +234,7 @@ export const shinyongAPI = {
         headers: {
           "Content-Type": "application/json"
         },
-        withCredentials: false
+        withCredentials: true
       });
       return res.data;
     } catch (error) {
@@ -248,11 +248,26 @@ export const shinyongAPI = {
         headers: {
           "Content-Type": "application/json"
         },
-        withCredentials: false
+        withCredentials: true
       });
       return res.data;
     } catch (error) {
       console.error("Error in getSY_SNP_40", error);
+      throw error;
+    }
+  },
+
+  async getSY_SNP_ALPHA() {
+    try {
+      const res = await T1Instance.get("protected/get_snp_alpha", {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        withCredentials: true
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Error in getSY_SNP_ALPHA", error);
       throw error;
     }
   },
@@ -264,7 +279,7 @@ export const shinyongAPI = {
         headers: {
           "Content-Type": "application/json"
         },
-        withCredentials: false
+        withCredentials: true
       });
       return res.data;
     } catch (error) {
@@ -286,7 +301,7 @@ export const shinyongAPI = {
 
           },
           responseType: 'blob',
-          withCredentials: false
+          withCredentials: true
         });
         return res;
       } else {
@@ -296,7 +311,7 @@ export const shinyongAPI = {
 
           },
           responseType: 'blob',
-          withCredentials: false
+          withCredentials: true
         });
         return res;
       }
