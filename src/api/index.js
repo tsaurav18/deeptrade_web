@@ -6,10 +6,10 @@ import { toast } from "react-toastify";
 // const T2Url = "http://127.0.0.1:9001"
 const T1Url = 'https://shinyoung.t1.deeptrade.co'
 const T3Url = 'https://shinyoung.t3.deeptrade.co';
-const localUrl = "http://localhost:8000";
+// const localUrl = "http://localhost:8000";
 
 const refreshClient = axios.create({
-  baseURL: localUrl,
+  baseURL: T1Url,
   withCredentials: true,
 });
 
@@ -34,7 +34,7 @@ function handleSessionExpiredOnce() {
 }
 
 export const T1Instance = axios.create({
-  baseURL: localUrl,
+  baseURL: T1Url,
   withCredentials: true, // refresh 쿠키 자동 전송
 });
 
